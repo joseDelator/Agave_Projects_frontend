@@ -24,7 +24,7 @@ const ExpenseTable = (Params) => {
             const reponse = await api.request(reqOptions);
             const timecard_data = reponse.data;
            setExpense_data(timecard_data)
-           }
+            }
       
         fetch_somethe();
     }, [])
