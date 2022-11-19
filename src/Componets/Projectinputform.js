@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { BiError, BiPlanet } from 'react-icons/bi';
+import { BiError, BiPlanet, BiSave, BiEraser} from 'react-icons/bi';
 import ResponcePopup from './ResponcePopup';
 import '../Styles/Projectinput.css'
 import api from '../api';
@@ -39,6 +39,9 @@ const Projectinputform = () => {
            }
            api.request(reqOptions).then(function (response) {
                if (response.data === 'Added Successfully') {
+                  setTotal_Budget("")
+                  setZIP("")
+                  setProjectData(...setProjectData)
                    setFailed(false)
                }
                else{
@@ -55,28 +58,28 @@ const Projectinputform = () => {
     <h1>Create Project</h1>
     <ul>
       <li>
-        <input type="Number" value={Total_Budget}  placeholder="Total Budget" 
+        <input type="Number" value={Total_Budget} placeholder="Total Budget" 
         onChange={(e) => setTotal_Budget(parseInt( e.target.value))} required/>
       </li>
       <li>
         <div className="grid grid-2">
-          <input type="text" placeholder="Name" 
+          <input type="text" placeholder="Name" value={ProjectData.Client_First_Name}
           onChange={(e) => setProjectData({...ProjectData, Client_First_Name: e.target.value})} required/>  
-          <input type="text" placeholder="Surname" 
+          <input type="text" placeholder="Surname" value={ProjectData.Client_Last_Name}
           onChange={(e) => setProjectData({...ProjectData, Client_Last_Name: e.target.value})} required/>
         </div>
       </li>
       <li>
         <div className="grid grid-2">
-          <input type="text" placeholder="Street Adress" 
+          <input type="text" placeholder="Street Adress" value={ProjectData.Street_Address}
           onChange={(e) => setProjectData({...ProjectData, Street_Address: e.target.value})} required/>  
-          <input type="text" placeholder="City" 
+          <input type="text" placeholder="City" value={ProjectData.City}
           onChange={(e) => setProjectData({...ProjectData, City: e.target.value})} required/>
         </div>
       </li>    
       <li>
       <div className="grid grid-2">
-          <input type="Number" placeholder="ZIP" 
+          <input type="Number" placeholder="ZIP" value={ZIP}
           onChange={(e) => setZIP(parseInt(e.target.value))} required/>  
         </div>
       </li>   
@@ -85,13 +88,14 @@ const Projectinputform = () => {
           <div className="required-msg">REQUIRED FIELDS</div>
           <button className="btn-grid" type="submit" >
             <span className="back">
-              <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/162656/email-icon.svg" alt=""/>
+
+              <BiSave size={32}/>
             </span>
             <span className="front">SUBMIT</span>
           </button>
           <button className="btn-grid" type="reset" >
             <span className="back">
-              <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/162656/eraser-icon.svg" alt=""/>
+              <BiEraser  size={32}/>
             </span>
             <span className="front">RESET</span>
           </button> 

@@ -59,10 +59,8 @@ export const TimeTable = (Params) => {
            }
            else{
            }
-       })
-       
+       }) 
     };
-
    const openedit =(timecard_entree)=>{
       settimeEntree(timecard_entree);
       setisEditOpen(true)

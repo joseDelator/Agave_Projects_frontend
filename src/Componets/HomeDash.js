@@ -42,7 +42,7 @@ function HomeDash() {
     <div className="main-overview">
       <div className="overviewcard">
         <div className="overviewcard__icon">Total Bugget</div>
-        <div className="overviewcard__info">${Project_data.Total_Buget}</div>
+        <div className="overviewcard__info">${Project_data.Total_Buget.toString().replace(/[^0-9 \,]/, '')}</div>
       </div>
       <div className="overviewcard">
         <div className="overviewcard__icon">Expense</div>

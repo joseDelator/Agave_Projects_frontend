@@ -54,7 +54,10 @@ const TimecardEnter = () => {
         <GiTimeBomb size={40} className="Time_Icon"/>
         <form onSubmit={Add_Time}>
           <div className="user-box">
-            <input type="text"   onChange={(e) => setName(e.target.value)} required />
+            <input type="text" 
+            value={Name}
+            onChange={(e) => setName(e.target.value)} 
+            required />
             <label>Name</label>
           </div>
           <div className="user-box">

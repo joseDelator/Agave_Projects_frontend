@@ -13,13 +13,10 @@ class  Nava extends Component {
 
     <nav>
     <div className="logo">
-        <h2></h2>
-    </div>
-    <div className="homebutton">
-        <Link to="/" id="homelink">Home</Link>
+        <h2>AGL Projects</h2>
     </div>
     <ul className= {this.state.active ? "links" : "links nav-active" }>
-        <li><Link to="/" onClick = {() => this.setState({active:true})} > Enter New Project</Link></li>
+        <li><Link to="/" onClick = {() => this.setState({active:true})} >New Project</Link></li>
         <li><Link to="/timecard" onClick = {() => this.setState({active:true})}>Time Card</Link></li>
     </ul>
     <div className="burger" onClick = {() => this.setState({active: !this.state.active})}>

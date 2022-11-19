@@ -51,7 +51,6 @@ select:-moz-focusring {
   color: transparent !important;
   text-shadow: 0 0 0 var(--white);
 }
-
 textarea {
   resize: none;
 }
@@ -59,14 +58,11 @@ textarea {
 ul {
   list-style: none;
 }
-
 .container-project{
   max-width: 800px;
   margin: 0 auto;
   padding: 0 1.5rem;
 }
-
-
 /* FORM ELEMENTS
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 .my-form h1 {
