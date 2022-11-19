@@ -62,7 +62,7 @@ const TimecardEnter = () => {
             <label>Job Number</label>
           </div>
           <div className="user-box">
-            <input type="" name="" value={Total_Time} pattern="[0-9]" onChange={(e) => setTotal_Time(e.target.value)} required />
+            <input type="Number" name="" value={Total_Time} pattern="[0-9]" onChange={(e) => setTotal_Time(e.target.value)} required />
             <label>Total Time</label>
           </div>
           <div className="user-box">

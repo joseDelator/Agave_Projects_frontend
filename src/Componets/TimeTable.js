@@ -70,7 +70,7 @@ export const TimeTable = (Params) => {
     const Tablerows = Time_data.map((timecard_entree)=>{
         return  <li className="table-row" key={timecard_entree.TimeCard_ID}>
         <div className="col col-1" data-label="Time:">{timecard_entree.Total_Time}</div>
-        <div className="col col-2" data-label="Employee Name:">{timecard_entree.Employee_Name}</div>
+        <div className="col col-2" data-label=" Name:">{timecard_entree.Employee_Name}</div>
         <div className="col col-3" data-label="Date:">{timecard_entree.Date}</div>
         <div className="col col-4" data-label="Payed:">
           <div className="button r" id="button-1">

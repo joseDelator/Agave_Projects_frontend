@@ -51,7 +51,7 @@ const Projectinputform = () => {
     return (
         <div>
   <form className="my-form" onSubmit={Add_New_Project}>
-  <div className="container">
+  <div className="container-project">
     <h1>Create Project</h1>
     <ul>
       <li>

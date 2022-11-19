@@ -57,9 +57,6 @@ nav {
 }
 .links a:hover{
 	color:var(--navtextcolorhover);
-	background: var(--navtextcolorBGhover);
-	padding: 15px; 
-	border-radius: 2px  
 }
 .burger{
 	display: none;
