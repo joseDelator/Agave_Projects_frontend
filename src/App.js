@@ -1,23 +1,25 @@
-import logo from './logo.svg';
+
 import './App.css';
+
+import React from 'react';
+import TimecardEnter from './Componets/Timecard_Enter';
+import Nava from './Componets/Nava';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import HomeDash from './Componets/HomeDash';
+import Projectinputform from './Componets/Projectinputform';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <BrowserRouter>
+       <Routes>
+            <Route path="/" element={<Nava/>}>
+              <Route index  element={<Projectinputform/>}/>
+              <Route  exact path="/details/projects/:id" element={<HomeDash/>}/>
+              <Route path="TimeCard" element={<TimecardEnter/>} />
+            </Route>
+          </Routes>
+    </BrowserRouter>
     </div>
   );
 }
