@@ -12,6 +12,7 @@ body {
   
   .main-header {
     display: grid;
+    position: relative;
     justify-content: space-between;
     margin: 20px;
     padding: 20px;
@@ -20,6 +21,12 @@ body {
     box-sizing: border-box;
     border-radius: 10px;
   }
+ .main-header #edit_button{
+   position: absolute;
+   right: 0;
+  
+   top: 0;
+ }
   
   .main-overview {
     display: grid;

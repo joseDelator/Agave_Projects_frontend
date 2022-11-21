@@ -1,7 +1,8 @@
 import React, {useEffect, useState} from 'react'
 import '../Styles/homedash.scss'
 import { TimeTable } from './TimeTable'
-import { useParams } from 'react-router-dom'
+import { AiFillEdit} from 'react-icons/ai'
+import { Link, useParams } from 'react-router-dom'
 import Spiner from './Spiner'
 import ExpenseTable from './ExpenseTable'
 import api from '../api'
@@ -31,9 +32,9 @@ function HomeDash() {
     }else{
     return (
        <div className="grid-container" key={Params.id}>
-
   <main className="main" >
     <div className="main-header">
+    <Link id="edit_button" to={"/project/edit/"+Params.id}><AiFillEdit size={32}/></Link>
       <div className="main-header__heading">Address:{Project_data.Street_Adress}, {Project_data.City}</div>
       <div className="main-header__updates">Client:{Project_data.Client_Last_Name}, {Project_data.Client_First_Name}</div>
       <div>Project Number:{Params.id}</div>
@@ -54,11 +55,12 @@ function HomeDash() {
       </div>
       <div className="overviewcard">
         <div className="overviewcard__icon"> Remaining</div>
-        <div className="overviewcard__info">${Project_data.Budget_Remianing}</div>
+        <div className="overviewcard__info">${Project_data.Budget_Remianing}
+        /{Math.round(Project_data.Budget_Remianing/70)}Hrs</div>
       </div>
     </div>
 
-    <div className="main-cards">
+    <div className="main-cards">emigrations
       <div className="card"><TimeTable props ={Params.id}/></div>
       <div className="card"><ExpenseTable props={Params.id}/></div>
     </div>
