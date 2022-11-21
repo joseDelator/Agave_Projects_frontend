@@ -60,7 +60,7 @@ function HomeDash() {
       </div>
     </div>
 
-    <div className="main-cards">emigrations
+    <div className="main-cards">
       <div className="card"><TimeTable props ={Params.id}/></div>
       <div className="card"><ExpenseTable props={Params.id}/></div>
     </div>
