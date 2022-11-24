@@ -21,7 +21,7 @@ export const TimeTable = (Params) => {
             "Content-Type": "application/json" 
            }
            let reqOptions = {
-             url: "TimeCard/"+Params.props,
+             url: Params.prefix+Params.props,
              method: "GET",
              headers: headersList,             
            }
@@ -46,10 +46,9 @@ export const TimeTable = (Params) => {
          data:JSON.stringify({
           "TimeCard_ID": Time_Entree.TimeCard_ID,
             "Project_Number_ID_Time" : Time_Entree.Project_Number_ID_Time,
-            "Employee_Name" : Time_Entree.Name,
+            "Employee_ID": Time_Entree.Employee_ID,
             "Date" : Time_Entree.Date,
             "Total_Time" : Time_Entree.Total_Time,
-            "Labor_salary" : Time_Entree.Labor_salary, 
             "Been_Payed": Time_Entree.Been_Payed
         }),
        }
@@ -68,7 +67,7 @@ export const TimeTable = (Params) => {
     const Tablerows = Time_data.map((timecard_entree)=>{
         return  <li className="table-row" key={timecard_entree.TimeCard_ID}>
         <div className="col col-1" data-label="Time:">{timecard_entree.Total_Time}</div>
-        <div className="col col-2" data-label=" Name:">{timecard_entree.Employee_Name}</div>
+        <div className="col col-2" data-label=" Name:">{timecard_entree.Employee_info}</div>
         <div className="col col-3" data-label="Date:">{timecard_entree.Date}</div>
         <div className="col col-4" data-label="Payed:">
           <div className="button r" id="button-1">

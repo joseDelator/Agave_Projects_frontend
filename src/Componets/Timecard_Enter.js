@@ -1,9 +1,12 @@
-import {Fragment, React, useState} from 'react'
+import {Fragment, React, useState, useEffect} from 'react'
 import '../Styles/Time_Card.css'
+import '../Styles/dropDown.scss'
 import {GiTimeBomb} from 'react-icons/gi'
 import {BiError,BiPlanet} from 'react-icons/bi'
 import ResponcePopup from './ResponcePopup'
 import api from '../api'
+import Dropdrownemployee from './dropdrownemployee'
+
 
 const TimecardEnter = () => {
     const [Name, setName] = useState("");
@@ -11,10 +14,29 @@ const TimecardEnter = () => {
     const [Total_Time, setTotal_Time] = useState("")
     const [Date, setDate] = useState('')
     const [isOpen, setIsOpen] = useState(false);
-    const [Failed, setFailed] = useState(true)
+    const [Failed, setFailed] = useState(true);
+    const [Employeelist, setEmployeelist] = useState([]);
+    const [Employee_Id, setEmployee_Id] = useState("")
   const togglePopup = () => {
     setIsOpen(!isOpen);
   }  
+  useEffect (() => {
+    let headersList = {       
+        "Content-Type": "application/json" 
+       }
+       let reqOptions = {
+         url: "Employee",
+         method: "GET",
+         headers: headersList,             
+       }
+       const fetch_somethe= async()=>{
+        const reponse = await api.request(reqOptions);
+        const Employeedata = reponse.data;
+       setEmployeelist(Employeedata)
+       }
+  
+    fetch_somethe();
+}, [])
     function Add_Time (e){
         e.preventDefault();
         let headersList = {         
@@ -26,10 +48,9 @@ const TimecardEnter = () => {
              headers: headersList,
              data:JSON.stringify({
                 "Project_Number_ID_Time" : Agave_green_Project_Number,
-                "Employee_Name" : Name,
+                "Employee_ID": Employee_Id,
                 "Date" : Date,
                 "Total_Time" : Total_Time,
-                "Labor_salary" : 20
             }),
            }
            api.request(reqOptions).then(function (response) {
@@ -47,19 +68,19 @@ const TimecardEnter = () => {
            })
            togglePopup()
            }
+           const dropdownrows = Employeelist.map((Employee)=>{
+            return  <option value={Employee.Employee_ID}>{Employee.Employee_First_Name}</option>
+        })
     return (
-        <Fragment>
+        <Fragment> 
         <div className="login-box">
         <h2>Time Card</h2>
         <GiTimeBomb size={40} className="Time_Icon"/>
         <form onSubmit={Add_Time}>
-          <div className="user-box">
-            <input type="text" 
-            value={Name}
-            onChange={(e) => setName(e.target.value)} 
-            required />
-            <label>Name</label>
-          </div>
+        <select onChange={e=> setEmployee_Id(e.target.value)}>
+        <option  value="0">select Empoyee</option>
+        {Employeelist&&dropdownrows}
+        </select>
           <div className="user-box">
             <input type="Number" name="" pattern="[0-9]"  value={Agave_green_Project_Number} onChange={(e) => setAgave_green_Project_Number(e.target.value)}required  />
             <label>Job Number</label>

@@ -59,14 +59,11 @@ function HomeDash() {
         /{Math.round(Project_data.Budget_Remianing/70)}Hrs</div>
       </div>
     </div>
-
     <div className="main-cards">
-      <div className="card"><TimeTable props ={Params.id}/></div>
+      <div className="card"><TimeTable props ={Params.id} prefix={"TimeCard/"}/></div>
       <div className="card"><ExpenseTable props={Params.id}/></div>
     </div>
   </main>
-
-
 </div>
     )}
 }
