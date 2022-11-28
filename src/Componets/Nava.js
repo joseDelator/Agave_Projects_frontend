@@ -18,6 +18,7 @@ class  Nava extends Component {
     <ul className= {this.state.active ? "links" : "links nav-active" }>
         <li><Link to="/" onClick = {() => this.setState({active:true})} >New Project</Link></li>
         <li><Link to="/timecard" onClick = {() => this.setState({active:true})}>Time Card</Link></li>
+        <li><Link to="/details/employee" onClick = {() => this.setState({active:true})}>Employee</Link></li>
     </ul>
     <div className="burger" onClick = {() => this.setState({active: !this.state.active})}>
         <div className={this.state.active ? "line1" : " toggle1 line1 " }></div>
