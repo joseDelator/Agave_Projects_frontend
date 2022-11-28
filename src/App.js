@@ -8,6 +8,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import HomeDash from './Componets/HomeDash';
 import Projectinputform from './Componets/Projectinputform';
 import ProjectEdit from './Componets/Project_Edit';
+import EmployeeDash from './Componets/Employeedash';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
               <Route  exact path="/details/projects/:id" element={<HomeDash/>}/>
               <Route  exact path="/project/edit/:id" element={<ProjectEdit/>}/>
               <Route path="TimeCard" element={<TimecardEnter/>} />
+              <Route path="/details/employee" element={<EmployeeDash/>} />
             </Route>
           </Routes>
     </BrowserRouter>
