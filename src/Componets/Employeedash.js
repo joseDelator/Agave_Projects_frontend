@@ -1,10 +1,8 @@
 import React, {useEffect, useState} from 'react'
 import '../Styles/homedash.scss'
 import { TimeTable } from './TimeTable'
-import { AiFillEdit} from 'react-icons/ai'
 import { Link, useParams } from 'react-router-dom'
 import Spiner from './Spiner'
-import ExpenseTable from './ExpenseTable'
 import api from '../api'
 import Dropdrownemployee from './dropdrownemployee'
 function EmployeeDash() {
@@ -28,7 +26,7 @@ function EmployeeDash() {
     }, [Employee_ID])
     const changeState = (newState) => {
       console.log(newState)
-      setEmployee_ID(oldState => newState);
+      setEmployee_ID(newState);
   };
     if(Project_data.length === 0){
             
@@ -36,12 +34,11 @@ function EmployeeDash() {
         ; 
     }else{
     return (
-       <div className="grid-container" key={Employee_ID}>
+       <div className="grid-container" >
   <main className="main" >
     <Dropdrownemployee  parentState={Employee_ID} 
     changeParentState={changeState} />
-    <div className="main-header">
-    <Link id="edit_button" to={"/project/edit/"+Params.id}><AiFillEdit size={32}/></Link>
+    <div className="main-header" >
       <div className="main-header__heading">Address:{Project_data.Employee_First_Name}</div>
       <div className="main-header__updates">Name:{Project_data.Employee_First_Name},{Project_data.Employee_Last_Name}</div>
       <div>Employee ID:{Employee_ID}</div>
@@ -54,20 +51,16 @@ function EmployeeDash() {
       </div>
       <div className="overviewcard">
         <div className="overviewcard__icon">Total Owe</div>
-        <div className="overviewcard__info"key={Params.id}>${Project_data.Total_Unpaid_Amount}</div>
+        <div className="overviewcard__info"key={Employee_ID}>${Project_data.Total_Unpaid_Amount}</div>
       </div>
       <div className="overviewcard">
-        <div className="overviewcard__icon">Labor Cost</div>
-        <div className="overviewcard__info">${Project_data.Total_Labor_Cost}</div>
+        <div className="overviewcard__icon">Total Hours</div>
+        <div className="overviewcard__info">{Project_data.Total_hours_Worked}</div>
       </div>
-      <div className="overviewcard">
-        <div className="overviewcard__icon"> Remaining</div>
-        <div className="overviewcard__info">${Project_data.Budget_Remianing}
-        /{Math.round(Project_data.Budget_Remianing/70)}Hrs</div>
-      </div>
+      
     </div>
-    <div className="main-cards">
-      <div className="card"><TimeTable props ={Project_data.Employee_ID} prefix={"Employeetimecard/"}/></div>
+    <div className="main-cards" key={Employee_ID}>
+      <div className="card"><TimeTable props={Employee_ID} prefix={"Employeetimecard/"}/></div>
       <div className="card"></div>
     </div>
   </main>
