@@ -40,7 +40,7 @@ let loginUser = async(e)=>{
     }
 
     let updateToken = async ()=> {
-        let response = await fetch('http://127.0.0.1:8000/api/token/refresh/', {
+        let response = await fetch('https://agaveprojectmangement-production.up.railway.app/api/token/refresh/', {
             method:'POST',
             headers:{
                 'Content-Type':'application/json'
