@@ -1,7 +1,7 @@
 import {React,useState, useEffect} from 'react'
 import '../Styles/dropDown.scss'
 import api from '../api'
-const Dropdrownemployee = ({changeState}) => {
+const Dropdrownemployee = ({changeParentState}) => {
     const [Employeelist, setEmployeelist] = useState([])
   useEffect (() => {
     let headersList = {       
@@ -26,7 +26,7 @@ const Dropdrownemployee = ({changeState}) => {
     return (
         <div>
         <select onChange={(e) => {
-        changeState(e.target.value);
+        changeParentState(e.target.value);
         }}>
         <option  value="0" onChange>select Employee</option>
         {Employeelist&&dropdownrows}
