@@ -1,29 +1,35 @@
-
 import './App.css';
-
-import React from 'react';
+import {React} from 'react';
+import PrivateRoute from './Functions/PrivateRoute'
 import TimecardEnter from './Componets/Timecard_Enter';
 import Nava from './Componets/Nava';
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route} from "react-router-dom";
 import HomeDash from './Componets/HomeDash';
-import Projectinputform from './Componets/Projectinputform';
 import ProjectEdit from './Componets/Project_Edit';
 import EmployeeDash from './Componets/Employeedash';
-
+import { DataProvider} from './Context/datacontext';
+import Login from './Componets/Login';
+import Projectinputform from './Componets/Projectinputform';
 function App() {
   return (
-    <div className="App">
-      <BrowserRouter>
+    <div className="App"> 
+      <Router>
+      <DataProvider>
        <Routes>
-            <Route path="/" element={<Nava/>}>
-              <Route index  element={<Projectinputform/>}/>
-              <Route  exact path="/details/projects/:id" element={<HomeDash/>}/>
-              <Route  exact path="/project/edit/:id" element={<ProjectEdit/>}/>
+              <Route element={<Nava/>}>
+              <Route expact path="/" element={<PrivateRoute> <Projectinputform/> </PrivateRoute>} />
+              <Route exact path="login" element={<Login/>}/>
+              <Route  exact path="/details/projects/:id" element={<PrivateRoute><HomeDash/></PrivateRoute>}/>
+              <Route  exact path="/project/edit/:id" 
+              element={<PrivateRoute><ProjectEdit/>
+              </PrivateRoute>}></Route>
               <Route path="TimeCard" element={<TimecardEnter/>} />
-              <Route path="/details/employee" element={<EmployeeDash/>} />
-            </Route>
-          </Routes>
-    </BrowserRouter>
+              <Route path="/details/employee" element={<PrivateRoute><EmployeeDash/></PrivateRoute>} />
+              </Route>
+        </Routes>
+        </DataProvider>
+      </Router>
+    
     </div>
   );
 }

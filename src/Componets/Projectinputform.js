@@ -7,12 +7,13 @@ const Projectinputform = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [Failed, setFailed] = useState(true)
     const [Total_Budget, setTotal_Budget] = useState("")
-    const [ZIP, setZIP] = useState("")
+    const [Phone, setPhone] = useState("")
     const [ProjectData, setProjectData] = useState({
         Client_First_Name:'',
         Client_Last_Name:'', 
         Street_Address:'',
         City:'',
+        Client_Email:""
     })
     const togglePopup = () => {
         setIsOpen(!isOpen);
@@ -30,18 +31,15 @@ const Projectinputform = () => {
              data:JSON.stringify({
                 "Street_Adress": ProjectData.Street_Address,
                 "City": ProjectData.City,
-                "Zip": parseInt(ZIP),
                 "Client_First_Name": ProjectData.Client_First_Name,
                 "Client_Last_Name": ProjectData.Client_Last_Name,
                 "Total_Buget": parseInt(Total_Budget),
-                "Total_Expenses" : 0.00
-            }),
+                "Client_Phone": Phone,
+                "Client_Email": ProjectData.Client_Email,
+          }),
            }
            api.request(reqOptions).then(function (response) {
                if (response.data === 'Added Successfully') {
-                  setTotal_Budget("")
-                  setZIP("")
-                  setProjectData(...setProjectData)
                    setFailed(false)
                }
                else{
@@ -79,8 +77,10 @@ const Projectinputform = () => {
       </li>    
       <li>
       <div className="grid grid-2">
-          <input type="Number" placeholder="ZIP" value={ZIP}
-          onChange={(e) => setZIP(parseInt(e.target.value))} required/>  
+          <input type="tel" placeholder="Phone Number" value={Phone}
+          onChange={(e) => setPhone(parseInt(e.target.value))} required/> 
+          <input type="email" placeholder="Email" value={ProjectData.Client_Email}
+          onChange={(e) => setProjectData({...ProjectData, Client_Email: e.target.value})} required/>  
         </div>
       </li>   
       <li>
@@ -88,7 +88,6 @@ const Projectinputform = () => {
           <div className="required-msg">REQUIRED FIELDS</div>
           <button className="btn-grid" type="submit" >
             <span className="back">
-
               <BiSave size={32}/>
             </span>
             <span className="front">SUBMIT</span>

@@ -6,6 +6,7 @@ import { Link, useParams } from 'react-router-dom'
 import Spiner from './Spiner'
 import ExpenseTable from './ExpenseTable'
 import api from '../api'
+import GaugeChart from 'react-gauge-chart'
 function HomeDash() {
     const [Project_data, setProject_data] = useState([])
     const Params = useParams()
@@ -37,13 +38,14 @@ function HomeDash() {
     <Link id="edit_button" to={"/project/edit/"+Params.id}><AiFillEdit size={32}/></Link>
       <div className="main-header__heading">Address:{Project_data.Street_Adress}, {Project_data.City}</div>
       <div className="main-header__updates">Client:{Project_data.Client_Last_Name}, {Project_data.Client_First_Name}</div>
+      <div className="main-header__updates">Client Email:{Project_data.Client_Email}</div>
+      <div className="main-header__updates">Client Phone:{Project_data.Client_Phone}</div>
       <div>Project Number:{Params.id}</div>
     </div>
-
     <div className="main-overview">
       <div className="overviewcard">
         <div className="overviewcard__icon">Total Bugget</div>
-        <div className="overviewcard__info">${Project_data.Total_Buget.toString().replace(/[^0-9 \,]/, '')}</div>
+        <div className="overviewcard__info">${Project_data.Total_Buget}</div>
       </div>
       <div className="overviewcard">
         <div className="overviewcard__icon">Expense</div>
