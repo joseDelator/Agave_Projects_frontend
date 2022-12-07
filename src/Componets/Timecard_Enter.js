@@ -55,7 +55,7 @@ const changeState = (newState) => {
         <GiTimeBomb size={40} className="Time_Icon"/>
         <form onSubmit={Add_Time}>
         <Dropdrownemployee  parentState={Employee_Id} 
-    changeState={changeState}  />
+    changeParentState={changeState}  />
           <div className="user-box">
             <input type="Number" name="" pattern="[0-9]"  value={Agave_green_Project_Number} 
             onChange={(e) => setAgave_green_Project_Number(e.target.value)}required  />
