@@ -5,34 +5,19 @@ import {GiTimeBomb} from 'react-icons/gi'
 import {BiError,BiPlanet} from 'react-icons/bi'
 import ResponcePopup from './ResponcePopup'
 import api from '../api'
+import Dropdrownemployee from './dropdrownemployee'
 const TimePopup = (props) => {
-    const [Name, setName] = useState("");
     const [Total_Time, setTotal_Time] = useState("")
     const [Date, setDate] = useState('')
     const [isOpen, setIsOpen] = useState(false);
     const [Failed, setFailed] = useState(true);
-    const [Employeelist, setEmployeelist] = useState([]);
     const [Employee_Id, setEmployee_Id] = useState("")
+    const changeState = (newState) => {
+      setEmployee_Id(newState);
+    };
   const togglePopup = () => {
     setIsOpen(!isOpen);
   }  
-  useEffect (() => {
-    let headersList = {       
-        "Content-Type": "application/json" 
-       }
-       let reqOptions = {
-         url: "Employee",
-         method: "GET",
-         headers: headersList,             
-       }
-       const fetch_somethe= async()=>{
-        const reponse = await api.request(reqOptions);
-        const Employeedata = reponse.data;
-       setEmployeelist(Employeedata)
-       }
-  
-    fetch_somethe();
-}, [])
     function Add_Time (e){
         e.preventDefault();
         let headersList = {         
@@ -61,9 +46,7 @@ const TimePopup = (props) => {
              console.log(response.data);
            })
            }
-           const dropdownrows = Employeelist.map((Employee)=>{
-            return  <option   key={Employee.Employee_ID} value={Employee.Employee_ID}>{Employee.Employee_First_Name}</option>
-        })
+        
     return (
         <div className="popup-box">
           <Fragment>
@@ -71,10 +54,8 @@ const TimePopup = (props) => {
         <h2>Time Card</h2>
         <GiTimeBomb size={40} className="Time_Icon"/>
         <form onSubmit={Add_Time}>
-        <select onChange={e=> setEmployee_Id(e.target.value)}>
-        <option  value="0">select Empoyee</option>
-        {Employeelist&&dropdownrows}
-        </select>
+        <Dropdrownemployee  parentState={Employee_Id} 
+    changeParentState={changeState}  />
           <div className="user-box">
             <input type="number" pattern="[0-9]" value={Total_Time} onChange={(e) => setTotal_Time(e.target.value)} required />
             <label>Total Time</label>

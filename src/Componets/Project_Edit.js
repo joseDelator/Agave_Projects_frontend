@@ -6,16 +6,17 @@ import Spiner from './Spiner'
 import '../Styles/Projectinput.css';
 import api from '../api';
 const ProjectEdit = () => {
-    const [isOpen, setIsOpen] = useState(false);
-    const [Failed, setFailed] = useState(true);
-    const [Total_Budget, setTotal_Budget] = useState("");
-    const [ZIP, setZIP] = useState("");
+  const [isOpen, setIsOpen] = useState(false);
+    const [Failed, setFailed] = useState(true)
+    const [Total_Budget, setTotal_Budget] = useState("")
+    const [Phone, setPhone] = useState("")
     const [ProjectData, setProjectData] = useState({
         Client_First_Name:'',
         Client_Last_Name:'', 
         Street_Address:'',
         City:'',
-    });
+        Client_Email:""
+    })
     const Params = useParams()
     useEffect (() => {
         let headersList = {           
@@ -29,12 +30,15 @@ const ProjectEdit = () => {
            const fetch_somethe= async () =>{
             const reponse = await api.request(reqOptions);
             setTotal_Budget(reponse.data.Total_Buget)
-            setZIP(reponse.data.Zip)
+            setPhone(reponse.data.Client_Phone)
             setProjectData({...ProjectData, 
                 City: reponse.data.City, 
                 Client_First_Name: reponse.data.Client_First_Name,
                 Client_Last_Name: reponse.data.Client_Last_Name,
-                Street_Address: reponse.data.Street_Adress})
+                Street_Address: reponse.data.Street_Adress,
+                Client_Email: reponse.data.Client_Email
+
+              })
            }
         fetch_somethe();
     }, [Params.id])
@@ -52,14 +56,14 @@ const ProjectEdit = () => {
              method: "PUT",
              headers: headersList,
              data:JSON.stringify({
-                "Project_Number_ID": Params.id,
-                "Street_Adress": ProjectData.Street_Address,
-                "City": ProjectData.City,
-                "Zip": parseInt(ZIP),
-                "Client_First_Name": ProjectData.Client_First_Name,
-                "Client_Last_Name": ProjectData.Client_Last_Name,
-                "Total_Buget": parseInt(Total_Budget),
-                "Total_Expenses" : 0.00
+               "Project_Number_ID": Params.id,
+              "Street_Adress": ProjectData.Street_Address,
+              "City": ProjectData.City,
+              "Client_First_Name": ProjectData.Client_First_Name,
+              "Client_Last_Name": ProjectData.Client_Last_Name,
+              "Total_Buget": parseInt(Total_Budget),
+              "Client_Phone": Phone,
+              "Client_Email": ProjectData.Client_Email,
             }),
            }
            api.request(reqOptions).then(function (response) {
@@ -100,7 +104,7 @@ const ProjectEdit = () => {
       </li>
       <li>
         <div className="grid grid-2">
-          <input type="text" placeholder="Street Address" value={ProjectData.Street_Address}
+          <input type="text" placeholder="Street Adress" value={ProjectData.Street_Address}
           onChange={(e) => setProjectData({...ProjectData, Street_Address: e.target.value})} required/>  
           <input type="text" placeholder="City" value={ProjectData.City}
           onChange={(e) => setProjectData({...ProjectData, City: e.target.value})} required/>
@@ -108,8 +112,10 @@ const ProjectEdit = () => {
       </li>    
       <li>
       <div className="grid grid-2">
-          <input type="Number" placeholder="ZIP" value={ZIP}
-          onChange={(e) => setZIP(parseInt(e.target.value))} required/>  
+          <input type="tel" placeholder="Phone Number" value={Phone}
+          onChange={(e) => setPhone(e.target.value)} required/> 
+          <input type="email" placeholder="Email" value={ProjectData.Client_Email}
+          onChange={(e) => setProjectData({...ProjectData, Client_Email: e.target.value})} required/>  
         </div>
       </li>   
       <li>
@@ -117,7 +123,6 @@ const ProjectEdit = () => {
           <div className="required-msg">REQUIRED FIELDS</div>
           <button className="btn-grid" type="submit" >
             <span className="back">
-
               <BiSave size={32}/>
             </span>
             <span className="front">SUBMIT</span>

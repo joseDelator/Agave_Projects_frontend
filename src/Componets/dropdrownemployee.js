@@ -1,7 +1,7 @@
 import {React,useState, useEffect} from 'react'
 import '../Styles/dropDown.scss'
 import api from '../api'
-const Dropdrownemployee = ({ changeParentState}) => {
+const Dropdrownemployee = ({changeState}) => {
     const [Employeelist, setEmployeelist] = useState([])
   useEffect (() => {
     let headersList = {       
@@ -20,13 +20,13 @@ const Dropdrownemployee = ({ changeParentState}) => {
         fetch_somethe();
     }, [])
     const dropdownrows = Employeelist.map((Employee)=>{
-        return  <option key={Employee.Employee_ID}value={Employee.Employee_ID}>
+        return <option key={Employee.Employee_ID}value={Employee.Employee_ID}>
           {Employee.Employee_First_Name}</option>
     })
     return (
         <div>
         <select onChange={(e) => {
-        changeParentState(e.target.value);
+        changeState(e.target.value);
         }}>
         <option  value="0" onChange>select Employee</option>
         {Employeelist&&dropdownrows}
@@ -34,5 +34,4 @@ const Dropdrownemployee = ({ changeParentState}) => {
         </div>
     )
 }
-
 export default Dropdrownemployee

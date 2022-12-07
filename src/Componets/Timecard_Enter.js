@@ -1,42 +1,23 @@
-import {Fragment, React, useState, useEffect} from 'react'
+import {Fragment, React, useState} from 'react'
 import '../Styles/Time_Card.css'
-import '../Styles/dropDown.scss'
 import {GiTimeBomb} from 'react-icons/gi'
 import {BiError,BiPlanet} from 'react-icons/bi'
 import ResponcePopup from './ResponcePopup'
 import api from '../api'
 import Dropdrownemployee from './dropdrownemployee'
-
-
 const TimecardEnter = () => {
-    const [Name, setName] = useState("");
     const [Agave_green_Project_Number, setAgave_green_Project_Number] = useState('')
     const [Total_Time, setTotal_Time] = useState("")
     const [Date, setDate] = useState('')
     const [isOpen, setIsOpen] = useState(false);
     const [Failed, setFailed] = useState(true);
-    const [Employeelist, setEmployeelist] = useState([]);
     const [Employee_Id, setEmployee_Id] = useState("")
   const togglePopup = () => {
     setIsOpen(!isOpen);
   }  
-  useEffect (() => {
-    let headersList = {       
-        "Content-Type": "application/json" 
-       }
-       let reqOptions = {
-         url: "Employee",
-         method: "GET",
-         headers: headersList,             
-       }
-       const fetch_somethe= async()=>{
-        const reponse = await api.request(reqOptions);
-        const Employeedata = reponse.data;
-       setEmployeelist(Employeedata)
-       }
-  
-    fetch_somethe();
-}, [])
+const changeState = (newState) => {
+  setEmployee_Id(newState);
+};
     function Add_Time (e){
         e.preventDefault();
         let headersList = {         
@@ -59,7 +40,6 @@ const TimecardEnter = () => {
                    setAgave_green_Project_Number("")
                    setDate("")
                    setTotal_Time("")
-                   setName("")
                }
                else{
                  setFailed(true)
@@ -68,21 +48,17 @@ const TimecardEnter = () => {
            })
            togglePopup()
            }
-           const dropdownrows = Employeelist.map((Employee)=>{
-            return  <option value={Employee.Employee_ID}>{Employee.Employee_First_Name}</option>
-        })
     return (
         <Fragment> 
         <div className="login-box">
         <h2>Time Card</h2>
         <GiTimeBomb size={40} className="Time_Icon"/>
         <form onSubmit={Add_Time}>
-        <select onChange={e=> setEmployee_Id(e.target.value)}>
-        <option  value="0">select Empoyee</option>
-        {Employeelist&&dropdownrows}
-        </select>
+        <Dropdrownemployee  parentState={Employee_Id} 
+    changeState={changeState}  />
           <div className="user-box">
-            <input type="Number" name="" pattern="[0-9]"  value={Agave_green_Project_Number} onChange={(e) => setAgave_green_Project_Number(e.target.value)}required  />
+            <input type="Number" name="" pattern="[0-9]"  value={Agave_green_Project_Number} 
+            onChange={(e) => setAgave_green_Project_Number(e.target.value)}required  />
             <label>Job Number</label>
           </div>
           <div className="user-box">

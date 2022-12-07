@@ -7,6 +7,19 @@ html {
     font-family: monospace;
     background:  #243b55;
   }
+  input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+    -webkit-text-fill-color: #fff;
+
+    transition: background-color 5000s ease-in-out 0s;
+}
   
   #Delete_Button{
     background-color: red;
@@ -155,6 +168,26 @@ html {
     animation: btn-anim2 1s linear infinite;
     animation-delay: .25s
   }
+
+  fieldset {
+    border-radius: 5px;
+    width: max-content;
+    display: inline-block;
+    color: white;
+    }
+     
+    .in_put{
+    background-color: rgba(255, 255, 255, 0.3);
+    display: inline-flex;
+    color: #fff;
+    width :48%;
+    padding: 0px 0;
+    border:.5px;
+    border-color: turquoise;
+    border-radius: 2px;
+    margin-bottom: 10px;
+    font-size: 20px;
+    }    
   
   @keyframes btn-anim2 {
     0% {

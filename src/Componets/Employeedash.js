@@ -25,9 +25,8 @@ function EmployeeDash() {
         fetch_somethe();
     }, [Employee_ID])
     const changeState = (newState) => {
-      console.log(newState)
       setEmployee_ID(newState);
-  };
+    };
     if(Project_data.length === 0){
             
         return <Spiner/>
@@ -43,7 +42,6 @@ function EmployeeDash() {
       <div className="main-header__updates">Name:{Project_data.Employee_First_Name},{Project_data.Employee_Last_Name}</div>
       <div>Employee ID:{Employee_ID}</div>
     </div>
-
     <div className="main-overview">
       <div className="overviewcard">
         <div className="overviewcard__icon">Salary</div>
