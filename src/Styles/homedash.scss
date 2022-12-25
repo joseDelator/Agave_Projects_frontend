@@ -77,13 +77,7 @@ body {
   }
   
   /* Force varying heights to simulate dynamic content */
-  .card:first-child {
-    height: 485px;
-  }
-  
-  .card:nth-child(2) {
-    height: 485px;
-  }
+
 
   
 
@@ -103,7 +97,7 @@ body {
   }
   
   /* Medium screens breakpoint (1050px) */
-  @media only screen and (min-width: 65.625em) {
+  @media only screen and (min-width: 70.625em) {
     /* Break out main cards into two columns */
     .main-cards {
       column-count: 2;
