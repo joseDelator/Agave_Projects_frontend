@@ -50,6 +50,7 @@ select:-webkit-autofill:focus {
     justify-content: center;
     align-items: center;
     text-align: center;
+    justify-items: center;
     z-index: 10;
     margin-top: 12vh;
   }
@@ -63,7 +64,9 @@ select:-webkit-autofill:focus {
   .login-box .Time_Icon {
     color: #03e9f4;
     opacity: .5;
+    width: 100%;
     justify-self: center;
+    align-self: center;
     
   }
   
@@ -174,6 +177,9 @@ select:-webkit-autofill:focus {
     width: max-content;
     display: inline-block;
     color: white;
+    }
+    h2{
+      font-size: large;
     }
      
     .in_put{

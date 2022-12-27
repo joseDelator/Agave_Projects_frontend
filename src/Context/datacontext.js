@@ -40,43 +40,43 @@ let loginUser = async(e)=>{
     }
 
     let updateToken = async ()=> {
-        let response = await fetch('https://agaveprojectmangement-production.up.railway.app/api/token/refresh/', {
-            method:'POST',
-            headers:{
-                'Content-Type':'application/json'
-            },
-            body:JSON.stringify({'refresh':authTokens?.refresh})
-        })
+        let headersList = {         
+            "Content-Type": "application/json" 
+           }
+           let reqOptions = {
+             url: "api/token/refresh/",
+             method: "POST",
+             headers: headersList,
+             data:JSON.stringify({
+                'refresh':authTokens?.refresh
+            }),
+           }
 
-        let data = await response.json()
-        
-        if (response.status === 200){
-            setAuthTokens(data)
-            setUser(jwt_decode(data.access))
-            localStorage.setItem('authTokens', JSON.stringify(data))
-        }else{
-            logoutUser()
-        }
 
-        if(loading){
-            setLoading(false)
-        }
+           api.request(reqOptions).then(function (response) {  
+             if (response.status === 200){
+                setAuthTokens(response.data)
+                setUser(jwt_decode(response.data.access))
+                localStorage.setItem('authTokens', JSON.stringify(response.data))
+                }else{
+                 logoutUser()
+                }
+                if(loading){
+                    setLoading(false)
+                }
+           })
     }
     let contexData = {
         user:user,
         authTokens:authTokens,
         loginUser:loginUser,
         logoutUser:logoutUser,
-    
     }
     useEffect(()=> {
-
         if(loading){
             updateToken()
         }
-
         let fourMinutes = 1000 * 60 * 4
-
         let interval =  setInterval(()=> {
             if(authTokens){
                 updateToken()

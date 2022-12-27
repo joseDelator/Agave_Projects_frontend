@@ -1,4 +1,4 @@
-import {Fragment, React, useState, useContext} from 'react'
+import {Fragment, React,useContext} from 'react'
 import '../Styles/Time_Card.css'
 import {BiLogIn} from 'react-icons/bi'
 import DataContext from '../Context/datacontext'
@@ -7,7 +7,7 @@ const Login = () => {
     return (
         <Fragment> 
         <div className="login-box">
-        <h2>Login</h2>
+        <h2 className="H2">Login</h2>
         <BiLogIn size={40} className="Time_Icon"/>
         <form onSubmit={loginUser}>
           <div className="user-box">

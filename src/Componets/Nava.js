@@ -1,5 +1,5 @@
 import React, { Component} from 'react';
-import '../Styles/stylenavbar.css'
+import "../Styles/Navabar.css"
 import { Outlet, Link } from "react-router-dom";
 import SearchBar from './SearchBar';
 class  Nava extends Component {
@@ -13,7 +13,7 @@ class  Nava extends Component {
 
     <nav>
     <div className="logo">
-        <h2>AGL Projects</h2>
+        <h2 className="H2">AGL Projects</h2>
     </div>
     <ul className= {this.state.active ? "links" : "links nav-active" }>
         <li><Link to="/" onClick = {() => this.setState({active:true})} >New Project</Link></li>

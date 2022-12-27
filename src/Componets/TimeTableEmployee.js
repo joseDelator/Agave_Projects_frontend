@@ -4,11 +4,20 @@ import TimePopup from './Time_Card_Popup'
 import '../Styles/timetable.scss'
 import TimeEditPopup from './Time_Card_Edit_Popup'
 import api from '../api'
-export const TimeTable = (Params) => {
+import Datepicker from "react-tailwindcss-datepicker";
+import "../Styles/taill.css"
+export const TimeTableEmployee = (Params) => {
     const [Time_data, setTime_data] = useState([])
     const [timeEntree, settimeEntree] = useState([])
     const [isOpen, setisOpen] = useState(false)
+    const Today= new Date()
+    const Lastmonth= new Date().setDate(Today.getDate()-30)
     const [isEditOpen, setisEditOpen] = useState(false)
+    const options = { year: 'numeric', month: 'numeric', day: 'numeric' };
+    const [DateRange, setDateRange] = useState({
+      startDate: new Date(Lastmonth).toLocaleDateString('en-CA', options),
+      endDate: new Date().toLocaleDateString('en-CA', options)
+  });
 
     const togglePopup = () => {
       setisOpen(!isOpen);
@@ -16,14 +25,23 @@ export const TimeTable = (Params) => {
     const toggeledit =() =>{
       setisEditOpen(!isEditOpen)
     }
+    const changeState = (newState) => {
+      setDateRange(newState);
+    };
+   
     useEffect (() => {
         let headersList = {       
             "Content-Type": "application/json" 
            }
+           console.log(DateRange.endDate, DateRange.startDate)
            let reqOptions = {
              url: Params.prefix+Params.props,
-             method: "GET",
-             headers: headersList,             
+             method: "POST",
+             headers: headersList,
+             data:JSON.stringify({
+              "Start": DateRange.startDate,
+              "End":DateRange.endDate
+            }),             
            }
            const fetch_somethe= async()=>{
             const reponse = await api.request(reqOptions);
@@ -31,7 +49,7 @@ export const TimeTable = (Params) => {
            setTime_data(timecard_data)
            }
         fetch_somethe();
-    }, [ Params.prefix,Params.props])
+    }, [ Params.prefix,Params.props, DateRange])
    
     function Payed_employee (Time_Entree,e){
       Time_Entree.Been_Payed = !Time_Entree.Been_Payed
@@ -66,7 +84,7 @@ export const TimeTable = (Params) => {
     const Tablerows = Time_data.map((timecard_entree)=>{
         return  <li className="table-row" key={timecard_entree.TimeCard_ID}>
         <div className="col col-1" data-label="Time:">{timecard_entree.Total_Time}</div>
-        <div className="col col-2" data-label=" Name:">{timecard_entree.Employee_info}</div>
+        <div className="col col-2" data-label=" Project#:">{timecard_entree.Project_Number_ID_Time}</div>
         <div className="col col-3" data-label="Date:">{timecard_entree.Date}</div>
         <div className="col col-4" data-label="Payed:">
         <div className="flex ">
@@ -78,11 +96,7 @@ export const TimeTable = (Params) => {
                         onChange={e => Payed_employee(timecard_entree,e)} 
                     />
                     <div 
-                        className="w-11 h-6 bg-gray-200 rounded-full peer  
-                        peer-focus:ring-green-300  peer-checked:after:translate-x-full 
-                        peer-checked:after:border-white after:content-[''] after:absolute 
-                        after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border 
-                        after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-green-600"
+                        className="w-11 h-6 bg-gray-200 rounded-full peer  peer-focus:ring-green-300  peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-green-600"
                     ></div>
                     
                 </label>
@@ -94,13 +108,22 @@ export const TimeTable = (Params) => {
         </li>
     })
     return (
+      
     <div  className='container'>
-    <AiFillPlusCircle id="Add_Icon" size={40} onClick={togglePopup}/>
+                <Datepicker
+                inputClassName="text-base" 
+                primaryColor={"cyan"}
+                useRange={false} 
+                separator={":"} 
+                showShortcuts={true} 
+                value={DateRange}
+                onChange={changeState}
+            />
         <h2 className="H2">Work Hours </h2>
             <ul className="responsive-table">
               <li className="table-header">
                 <div className="col col-1">Hours</div>
-                <div className="col col-2"> Name</div>
+                <div className="col col-2"> Project #</div>
                 <div className="col col-3">Date</div>
                 <div className="col col-4">Payed</div>
                 <div className="col col-5">Edit</div> 

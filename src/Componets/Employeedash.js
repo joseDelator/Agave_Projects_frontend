@@ -1,14 +1,19 @@
 import React, {useEffect, useState} from 'react'
 import '../Styles/homedash.scss'
-import { TimeTable } from './TimeTable'
-import { Link, useParams } from 'react-router-dom'
 import Spiner from './Spiner'
 import api from '../api'
+import { AiFillPlusCircle} from 'react-icons/ai'
+import NewEmployee from './NewEmployeePopup'
 import Dropdrownemployee from './dropdrownemployee'
+import { TimeTableEmployee } from './TimeTableEmployee'
+
 function EmployeeDash() {
     const [Project_data, setProject_data] = useState([])
     const [Employee_ID, setEmployee_ID] = useState("1")
-    const Params = useParams()
+    const [isOpen, setisOpen] = useState(false)
+    const togglePopup = () => {
+      setisOpen(!isOpen);
+    }
     useEffect (() => {
         let headersList = {           
             "Content-Type": "application/json" 
@@ -20,15 +25,14 @@ function EmployeeDash() {
            }
            const fetch_somethe= async () =>{
             const reponse = await api.request(reqOptions);
-           setProject_data( reponse.data)
+            setProject_data( reponse.data)
            }
         fetch_somethe();
     }, [Employee_ID])
     const changeState = (newState) => {
       setEmployee_ID(newState);
     };
-    if(Project_data.length === 0){
-            
+    if(Project_data.length === 0){  
         return <Spiner/>
         ; 
     }else{
@@ -41,6 +45,10 @@ function EmployeeDash() {
       <div className="main-header__heading">Address:{Project_data.Employee_First_Name}</div>
       <div className="main-header__updates">Name:{Project_data.Employee_First_Name},{Project_data.Employee_Last_Name}</div>
       <div>Employee ID:{Employee_ID}</div>
+      <AiFillPlusCircle id="Add_Icon" size={40} onClick={togglePopup}/> 
+            {isOpen && <NewEmployee
+                handleClose={togglePopup}
+            />}   
     </div>
     <div className="main-overview">
       <div className="overviewcard">
@@ -54,16 +62,19 @@ function EmployeeDash() {
       <div className="overviewcard">
         <div className="overviewcard__icon">Total Hours</div>
         <div className="overviewcard__info">{Project_data.Total_hours_Worked}</div>
-      </div>
-      
+      </div>   
     </div>
     <div className="main-cards" key={Employee_ID}>
-      <div className="card"><TimeTable props={Employee_ID} prefix={"Employeetimecard/"}/></div>
+      <div className="card">
+        <TimeTableEmployee 
+        props={Employee_ID}  
+        prefix={"Employeetimecard/"} 
+        />
+        </div>
       <div className="card"></div>
     </div>
   </main>
 </div>
     )}
 }
-
 export default EmployeeDash

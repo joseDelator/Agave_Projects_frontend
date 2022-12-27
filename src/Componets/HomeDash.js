@@ -6,7 +6,6 @@ import { Link, useParams } from 'react-router-dom'
 import Spiner from './Spiner'
 import ExpenseTable from './ExpenseTable'
 import api from '../api'
-import GaugeChart from 'react-gauge-chart'
 function HomeDash() {
     const [Project_data, setProject_data] = useState([])
     const Params = useParams()
@@ -41,6 +40,7 @@ function HomeDash() {
       <div className="main-header__updates">Client Email:{Project_data.Client_Email}</div>
       <div className="main-header__updates">Client Phone:{Project_data.Client_Phone}</div>
       <div>Project Number:{Params.id}</div>
+     
     </div>
     <div className="main-overview">
       <div className="overviewcard">
@@ -62,6 +62,7 @@ function HomeDash() {
       </div>
     </div>
     <div className="main-cards">
+
       <div className="card"><TimeTable props ={Params.id} prefix={"TimeCard/"}/></div>
       <div className="card"><ExpenseTable props={Params.id}/></div>
     </div>

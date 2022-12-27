@@ -1,37 +1,29 @@
 import React, {useState, Fragment}from 'react'
 import {AiFillCloseSquare} from 'react-icons/ai'
 import '../Styles/Time_Card.css'
-import {GiTimeBomb} from 'react-icons/gi'
+import {GiPerson} from 'react-icons/gi'
 import {BiError,BiPlanet} from 'react-icons/bi'
 import ResponcePopup from './ResponcePopup'
 import api from '../api'
-import Dropdrownemployee from './dropdrownemployee'
-const TimePopup = (props) => {
-    const [Total_Time, setTotal_Time] = useState("")
-    const [Date, setDate] = useState('')
+const NewEmployee = (props) => {
     const [isOpen, setIsOpen] = useState(false);
     const [Failed, setFailed] = useState(true);
-    const [Employee_Id, setEmployee_Id] = useState("")
-    const changeState = (newState) => {
-      setEmployee_Id(newState);
-    };
-  const togglePopup = () => {
+    const togglePopup = () => {
     setIsOpen(!isOpen);
   }  
-    function Add_Time (e){
+    function Add_Employee(e){
         e.preventDefault();
         let headersList = {         
             "Content-Type": "application/json" 
            }
            let reqOptions = {
-             url: "TimeCard",
+             url: "Employee",
              method: "POST",
              headers: headersList,
              data:JSON.stringify({
-                "Project_Number_ID_Time" : props.content,
-                "Employee_ID": Employee_Id,
-                "Date" : Date,
-                "Total_Time" : Total_Time,
+              "Salary": e.target.Salary.value,
+              "Employee_First_Name": e.target.Firstname.value,
+              "Employee_Last_Name": e.target.Lastname.value,
             }),
            }
            api.request(reqOptions).then(function (response) {
@@ -51,18 +43,20 @@ const TimePopup = (props) => {
         <div className="popup-box">
           <Fragment>
         <div className="login-box">
-        <h2 className="H2">Time Card</h2>
-        <GiTimeBomb size={40} className="Time_Icon"/>
-        <form onSubmit={Add_Time}>
-        <Dropdrownemployee  parentState={Employee_Id} 
-    changeParentState={changeState}  />
+        <h2 className="H2">Add Employee</h2>
+        <GiPerson size={40} className="Time_Icon"/>
+        <form onSubmit={Add_Employee}>
           <div className="user-box">
-            <input type="number" pattern="[0-9]" value={Total_Time} onChange={(e) => setTotal_Time(e.target.value)} required />
-            <label>Total Time</label>
+            <input type="number" name="Salary" pattern="[0-9]" required />
+            <label>Salary</label>
           </div>
           <div className="user-box">
-            <input type="date" name=""  value={Date} onChange={(e) => setDate(e.target.value)} />
-            <label>Date</label>
+            <input type="text" name="Firstname"  required />
+            <label>First Name</label>
+          </div>
+          <div className="user-box">
+            <input type="text" name="Lastname"  required/>
+            <label>Last Name</label>
           </div>
           <button className='button'>
             <span></span>
@@ -80,7 +74,7 @@ const TimePopup = (props) => {
         <h1>Error Please Try Again</h1>
       </>:<> 
        <BiPlanet className="Sucess_Icon" size= {45}/>
-        <h1>Your Time has Sucessfully Been added</h1>
+        <h1>Your Employee has Sucessfully Been added</h1>
       </>}
       handleClose={togglePopup}
     />}
@@ -89,5 +83,4 @@ const TimePopup = (props) => {
       </div>
     )
 }
-
-export default TimePopup
+export default NewEmployee

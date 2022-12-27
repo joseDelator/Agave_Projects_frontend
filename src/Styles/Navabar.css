@@ -22,7 +22,6 @@ nav {
 	min-height: var(--navbarheight);
 	background: var(--navcolor);
 	z-index: 9999; 
-
 }
 
 .logo {
@@ -133,7 +132,7 @@ nav {
 		 transform: rotate(45deg) translate(-5px, -6px);
 		
 	 }
-@media  (max-width: 1100px) {
+@media  (max-width: 1300px) {
 	body{
 		overflow-x: hidden;
 	}

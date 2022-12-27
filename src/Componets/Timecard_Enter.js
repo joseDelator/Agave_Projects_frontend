@@ -15,7 +15,8 @@ const TimecardEnter = () => {
   const togglePopup = () => {
     setIsOpen(!isOpen);
   }  
-const changeState = (newState) => {
+const changeParentState = (newState) => {
+  console.log(newState)
   setEmployee_Id(newState);
 };
     function Add_Time (e){
@@ -51,22 +52,23 @@ const changeState = (newState) => {
     return (
         <Fragment> 
         <div className="login-box">
-        <h2>Time Card</h2>
+        <h2 className="H2">Time Card</h2>
+      
         <GiTimeBomb size={40} className="Time_Icon"/>
         <form onSubmit={Add_Time}>
         <Dropdrownemployee  parentState={Employee_Id} 
-    changeParentState={changeState}  />
+    changeParentState={changeParentState}  />
           <div className="user-box">
-            <input type="Number" name="" pattern="[0-9]"  value={Agave_green_Project_Number} 
+            <input type="Number" name="JobNumber" pattern="[0-9]"  value={Agave_green_Project_Number} 
             onChange={(e) => setAgave_green_Project_Number(e.target.value)}required  />
             <label>Job Number</label>
           </div>
           <div className="user-box">
-            <input type="Number" name="" value={Total_Time} pattern="[0-9]" onChange={(e) => setTotal_Time(e.target.value)} required />
+            <input type="Number" name="Total Time" value={Total_Time} pattern="[0-9]" onChange={(e) => setTotal_Time(e.target.value)} required />
             <label>Total Time</label>
           </div>
           <div className="user-box">
-            <input type="date" name=""  value={Date} onChange={(e) => setDate(e.target.value)} />
+            <input type="date" name="date"  value={Date} onChange={(e) => setDate(e.target.value)} />
             <label>Date</label>
           </div>
           <button className='button'>

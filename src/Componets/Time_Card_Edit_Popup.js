@@ -1,4 +1,4 @@
-import React, {useState, Fragment, useEffect}from 'react'
+import React, {useState, Fragment}from 'react'
 import {AiFillCloseSquare} from 'react-icons/ai'
 import Dropdrownemployee from './dropdrownemployee'
 import '../Styles/Time_Card.css'
@@ -67,8 +67,7 @@ const TimeEditPopup = (props) => {
                      togglePopup()
                    }
                })
-               }
-             
+               } 
     return (
         <div className="popup-box">
           <Fragment>
@@ -77,7 +76,7 @@ const TimeEditPopup = (props) => {
         <GiTimeBomb size={40} className="Time_Icon"/>
         <form onSubmit={Add_Time}>
         <Dropdrownemployee  parentState={Employee_Id} 
-    changeParentState={changeState}  />
+            changeParentState={changeState}  />
           <div className="user-box">
             <input type="number" pattern="[0-9]" value={Total_Time} onChange={(e) => setTotal_Time(e.target.value)} required />
             <label>Total Time</label>
@@ -96,7 +95,13 @@ const TimeEditPopup = (props) => {
           
           <AiFillCloseSquare className="close-icon-timecard" onClick={props.handleClose}/>
         </form>
-        <button id="Delete_Button" onClick={Delete_Time}>
+        <button className="inline-block px-6 py-2.5 bg-red-600 text-white font-medium text-xs 
+                leading-tight uppercase m-2
+                rounded shadow-md hover:bg-red-700 hover:shadow-lg 
+                focus:bg-red-700 focus:shadow-lg focus:outline-none 
+                focus:ring-0 active:bg-red-800 active:shadow-lg 
+                transition duration-150 ease-in-out"
+                onClick={Delete_Time}>
             Delete
           </button>
       </div>

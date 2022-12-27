@@ -56,7 +56,7 @@ const ExpensePopup = (props) => {
         <div className="popup-box">
           <Fragment>
         <div className="login-box">
-        <h2>Enter Expense</h2>
+        <h2 className="H2">Enter Expense</h2>
         <RiMoneyDollarCircleLine size={40} className="Time_Icon"/>
         <form onSubmit={Add_Expense}>
           <div className="user-box">

@@ -78,9 +78,9 @@ const Projectinputform = () => {
       <li>
       <div className="grid grid-2">
           <input type="tel" placeholder="Phone Number" value={Phone}
-          onChange={(e) => setPhone(parseInt(e.target.value))} required/> 
+          onChange={(e) => setPhone(parseInt(e.target.value))} /> 
           <input type="email" placeholder="Email" value={ProjectData.Client_Email}
-          onChange={(e) => setProjectData({...ProjectData, Client_Email: e.target.value})} required/>  
+          onChange={(e) => setProjectData({...ProjectData, Client_Email: e.target.value})}/>  
         </div>
       </li>   
       <li>

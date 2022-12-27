@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 
 import '../Styles/Searchbar.scss'
-import { Link, redirect } from 'react-router-dom'
+import { Link} from 'react-router-dom'
 import api from '../api'
 const SearchBar = () => {
     const [Search_Data, setSearch_Data] = useState([])
