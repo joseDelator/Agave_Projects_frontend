@@ -15,7 +15,8 @@ const ProjectEdit = () => {
         Client_Last_Name:'', 
         Street_Address:'',
         City:'',
-        Client_Email:""
+        Client_Email:"",
+        Project_Status:""
     })
     const Params = useParams()
     useEffect (() => {
@@ -36,8 +37,8 @@ const ProjectEdit = () => {
                 Client_First_Name: reponse.data.Client_First_Name,
                 Client_Last_Name: reponse.data.Client_Last_Name,
                 Street_Address: reponse.data.Street_Adress,
-                Client_Email: reponse.data.Client_Email
-
+                Client_Email: reponse.data.Client_Email,
+                Project_Status: reponse.data.Project_Status
               })
            }
         fetch_somethe();
@@ -64,6 +65,7 @@ const ProjectEdit = () => {
               "Total_Buget": parseInt(Total_Budget),
               "Client_Phone": Phone,
               "Client_Email": ProjectData.Client_Email,
+              "Project_Status":ProjectData.Project_Status
             }),
            }
            api.request(reqOptions).then(function (response) {
@@ -116,7 +118,19 @@ const ProjectEdit = () => {
           onChange={(e) => setPhone(e.target.value)} /> 
           <input type="email" placeholder="Email" value={ProjectData.Client_Email}
           onChange={(e) => setProjectData({...ProjectData, Client_Email: e.target.value})} />  
-        </div>
+      </div>
+      <div className="grid grid-2">
+      <select className="Select"  value={ProjectData.Project_Status} select
+      onChange={(e) => setProjectData({...ProjectData, Project_Status: e.target.value})}>
+        <option  value="0" onChange>Select Status</option>
+        <option value={"Tracking"}>
+          Tracking</option>
+        <option value={"Completed"}>
+          Completed</option>
+          <option value={"Active"}>
+          Active</option>
+        </select> 
+      </div>
       </li>   
       <li>
         <div className="grid grid-3">
@@ -142,10 +156,10 @@ const ProjectEdit = () => {
     
     content={ Failed ?<> 
     <BiError className="Error_Icon" size= {45}/>
-     <h1>Error Please Try Again</h1>
+     <h1 className="H2">Error Please Try Again</h1>
    </>:<> 
     <BiPlanet className="Sucess_Icon" size= {45}/>
-     <h1>Your Project has Sucessfully Been updated</h1>
+     <h1 className="H2">Your Project has Sucessfully Been updated</h1>
    </>}
    handleClose={togglePopup}
  />}

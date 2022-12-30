@@ -52,7 +52,6 @@ const ExpenseTable = (Params) => {
          >
           <AiFillDelete size={25} onClick={e => openedit(Expense_entree, e)}/>
           </div>
-       
       </li>
     })
     return (

@@ -108,10 +108,10 @@ const TimeEditPopup = (props) => {
       {isOpen && <ResponcePopup
        content={ Failed ?<> 
        <BiError className="Error_Icon" size= {45}/>
-        <h1>Error Please Try Again</h1>
+        <h1 className="H2">Error Please Try Again</h1>
       </>:<> 
        <BiPlanet className="Sucess_Icon" size= {45}/>
-        <h1>Your Time has Sucessfully Been Edit</h1>
+        <h1 className="H2">Your Time has Sucessfully Been Edit</h1>
       </>}
       handleClose={togglePopup}
     />}

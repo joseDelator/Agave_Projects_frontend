@@ -16,7 +16,6 @@ const TimecardEnter = () => {
     setIsOpen(!isOpen);
   }  
 const changeParentState = (newState) => {
-  console.log(newState)
   setEmployee_Id(newState);
 };
     function Add_Time (e){
@@ -45,7 +44,6 @@ const changeParentState = (newState) => {
                else{
                  setFailed(true)
                }
-             console.log(response.data);
            })
            togglePopup()
            }
@@ -84,10 +82,10 @@ const changeParentState = (newState) => {
     
        content={ Failed ?<> 
        <BiError className="Error_Icon" size= {45}/>
-        <h1>Error Please Try Again</h1>
+        <h1 className="H2">Error Please Try Again</h1>
       </>:<> 
        <BiPlanet className="Sucess_Icon" size= {45}/>
-        <h1>Your Time has Sucessfully Been added</h1>
+        <h1 className="H2">Your Time has Sucessfully Been added</h1>
       </>}
       handleClose={togglePopup}
     />}

@@ -1,14 +1,23 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  corePlugins: {
-    
-   },
   content: [
     "./src/**/*.{js,jsx,ts,tsx}",
     "./node_modules/react-tailwindcss-datepicker/dist/index.esm.js",
   ],
   theme: {
     extend: {},
+    margin:{
+      "10v": "10vh",
+			"20v": "20vh",
+			"30v": "30vh",
+			"40v": "40vh",
+			"50v": "50vh",
+			"60v": "60vh",
+			"70v": "70vh",
+			"80v": "80vh",
+			"90v": "90vh",
+			"100v": "100vh",
+    }
   },
   plugins: [],
 }
