@@ -1,5 +1,4 @@
 import {React,useState, useEffect} from 'react'
-import '../Styles/dropDown.scss'
 import api from '../api'
 const Dropdrownemployee = ({changeParentState ,parentState}) => {
     const [Employeelist, setEmployeelist] = useState([])
@@ -25,9 +24,8 @@ const Dropdrownemployee = ({changeParentState ,parentState}) => {
     })
     return (
         <div>
-        <select className="Select" value= {parentState} select onChange={(e) => {
-        changeParentState(e.target.value);
-        }}>
+        <select className="select select-primary w-full  text-secondary mt-5 max-w-md" value= {parentState} select 
+        onChange={(e) => changeParentState(e.target.value)}>
         <option  value="0" onChange>select Employee</option>
         {Employeelist&&dropdownrows}
         </select>

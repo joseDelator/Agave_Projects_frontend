@@ -1,37 +1,30 @@
-import React from 'react'
-import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
-import { Doughnut } from 'react-chartjs-2';
-ChartJS.register(ArcElement, Tooltip, Legend);
-export const data = {
-    labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-    datasets: [
-      {
-        label: '# of Votes',
-        data: [12, 19, 3, 5, 2, 3],
-        backgroundColor: [
-          'rgba(255, 99, 132, 0.2)',
-          'rgba(54, 162, 235, 0.2)',
-          'rgba(255, 206, 86, 0.2)',
-          'rgba(75, 192, 192, 0.2)',
-          'rgba(153, 102, 255, 0.2)',
-          'rgba(255, 159, 64, 0.2)',
-        ],
-        borderColor: [
-          'rgba(255, 99, 132, 1)',
-          'rgba(54, 162, 235, 1)',
-          'rgba(255, 206, 86, 1)',
-          'rgba(75, 192, 192, 1)',
-          'rgba(153, 102, 255, 1)',
-          'rgba(255, 159, 64, 1)',
-        ],
-        borderWidth: 1,
-      },
-    ],
-  };
-const PieGraph = () => {
+import React, {useState, useEffect}from 'react'
+const PieGraph = ({TotalYearly}) => {
+  const [Precent, setPrecent] = useState(Math.round((TotalYearly/250000)*100))
+  const dollars = new Intl.NumberFormat(`en-US`, {
+    currency: `USD`,
+    style: 'currency',
+});
+  function StatusStyling() {
+    if(Precent<40){
+      return "radial-progress text-error"
+    }
+    if(Precent<70 && Precent>=40){
+      return "radial-progress text-warning"
+    }
+    if(Precent>=70){
+      return "radial-progress text-primary"
+    }
+}
+
     return (
-        <div>
-            <Doughnut data={data} />
+        <div className="stats w-full h-full bg-transparent">
+          <div className="stat  place-items-center ">
+          <div className="stat-title  mb-6">Road to 250K</div>
+          <div className={StatusStyling()} 
+          style={{ "--value": Precent, "--size": "10rem", "--thickness": "1.5rem" }}>{Precent}%</div>
+           <div className="stat-desc mt-6"> {dollars.format(TotalYearly)} for the year </div>
+         </div>
         </div>
     )
 }

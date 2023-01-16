@@ -1,4 +1,3 @@
-// The DataContext.js component
 import { createContext, useState, useEffect } from "react";
 import api from "../api";
 import { useNavigate } from 'react-router-dom'
@@ -72,6 +71,7 @@ let loginUser = async(e)=>{
         loginUser:loginUser,
         logoutUser:logoutUser,
     }
+
     useEffect(()=> {
         if(loading){
             updateToken()

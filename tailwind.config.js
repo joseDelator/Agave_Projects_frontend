@@ -6,19 +6,34 @@ module.exports = {
   ],
   theme: {
     extend: {},
-    margin:{
-      "10v": "10vh",
-			"20v": "20vh",
-			"30v": "30vh",
-			"40v": "40vh",
-			"50v": "50vh",
-			"60v": "60vh",
-			"70v": "70vh",
-			"80v": "80vh",
-			"90v": "90vh",
-			"100v": "100vh",
-    }
+
   },
-  plugins: [],
+  plugins: [require("daisyui")],
+  daisyui: {
+    themes: [
+      {
+        mytheme: {
+          
+          "primary": "#84cc16",
+                   
+          "secondary": "#d9f99d",
+                   
+          "accent": "#1FB2A6",
+                   
+          "neutral": "#191D24",
+                   
+          "base-100": "#2A303C",
+                   
+          "info": "#3ABFF8",
+                   
+          "success": "#36D399",
+                   
+          "warning": "#FBBD23",
+                   
+          "error": "#F87272",
+                   },
+      }
+    ],
+  },
 }
 

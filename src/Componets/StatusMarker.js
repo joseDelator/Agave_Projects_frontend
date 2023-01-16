@@ -5,11 +5,11 @@ const StatusMarker = ({Status}) => {
     
             switch (Status) {
                 case 'Completed':
-                    return 'absolute top-3 right-5 p-2 rounded-full border-solid border-2 text-red-600 border-red-600';
+                    return 'badge badge-error badge-lg badge-outline';
                 case 'Tracking':
-                    return 'absolute top-1 right-1 p-2 rounded-full border-solid border-2 text-yellow-400  border-yellow-400'
+                    return 'badge badge-warning badge-lg badge-outline'
                 case 'Active':
-                    return 'absolute top-1 right-1 p-2 rounded-full border-solid border-2 text-green-400  border-green-400'
+                    return 'badge badge-primary badge-lg badge-outline'
                 default:
                     break;
             }
