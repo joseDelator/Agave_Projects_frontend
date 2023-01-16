@@ -13,6 +13,9 @@ export const TimeTableEmployee = (Params) => {
     const [isOpen, setisOpen] = useState(false)
     const [isEditOpen, setisEditOpen] = useState(false)
     //setting starting date
+    const datef = new  Intl.DateTimeFormat("us-en",{
+      dateStyle:"short"
+    })
     const Today= new Date()
     const Lastmonth= new Date().setDate(Today.getDate()-30)
     const options = { year: 'numeric', month: 'numeric', day: 'numeric' };
@@ -86,7 +89,7 @@ export const TimeTableEmployee = (Params) => {
       return  <tr key={timecard_entree.TimeCard_ID}>
       <th >{timecard_entree.Project_Number_ID_Time}</th>
       <td >{timecard_entree.Total_Time}</td>
-      <td>{timecard_entree.Date}</td>
+      <td>{datef.format(new Date(timecard_entree.Date))}</td>
       <td>
                   <input
                       type="checkbox"
@@ -108,13 +111,12 @@ export const TimeTableEmployee = (Params) => {
       
     <div  className='container'>
                 <Datepicker
-                inputClassName="font-normal bg-base-100 dark:bg-base-100 dark:placeholder:text-secondary" 
+                inputClassName="font-normal bg-base-100 text-lg dark:bg-base-100 dark:placeholder:text-secondary" 
                 primaryColor={"lime"}
                 useRange={false}  
                 showShortcuts={true} 
                 value={DateRange}
                 className="bg-green z-20"
-
                 onChange={changeState}
             />
         <h2 className="H2">Work Hours </h2>

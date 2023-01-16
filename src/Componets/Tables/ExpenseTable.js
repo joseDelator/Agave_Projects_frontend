@@ -9,6 +9,9 @@ const ExpenseTable = (Params) => {
     const togglePopup = () => {
       setisOpen(!isOpen);
     }
+    const datef = new  Intl.DateTimeFormat("us-en",{
+      dateStyle:"short"
+    })
     const dollars = new Intl.NumberFormat(`en-US`, {
       currency: `USD`,
       style: 'currency',
@@ -53,7 +56,7 @@ const ExpenseTable = (Params) => {
         <th>{Expense_entree.Seller_Name}</th>
         <td>{ dollars.format(Expense_entree.Cost)}</td>
         <td>{ Expense_entree.Description}</td>
-        <td>{Expense_entree.Date}</td>
+        <td>{datef.format( new Date(Expense_entree.Date))}</td>
         <td>
         <a className="btn  btn-primary btn-outline"
         href={Expense_entree.Image_Location}>

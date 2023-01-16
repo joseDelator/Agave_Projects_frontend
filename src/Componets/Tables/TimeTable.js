@@ -3,12 +3,15 @@ import { AiFillPlusCircle, AiFillEdit} from 'react-icons/ai'
 import TimePopup from '../PopUps/Time_Card_Popup'
 import TimeEditPopup from '../PopUps/Time_Card_Edit_Popup'
 import api from '../../api'
+import { intlFormat } from 'date-fns'
 export const TimeTable = (Params) => {
     const [Time_data, setTime_data] = useState([])
     const [timeEntree, settimeEntree] = useState([])
     const [isOpen, setisOpen] = useState(false)
     const [isEditOpen, setisEditOpen] = useState(false)
-
+    const datef = new  Intl.DateTimeFormat("us-en",{
+      dateStyle:"short"
+    })
     const togglePopup = () => {
       setisOpen(!isOpen);
     }
@@ -68,7 +71,7 @@ export const TimeTable = (Params) => {
         return  <tr key={timecard_entree.TimeCard_ID}>
         <th >{timecard_entree.Employee_info}</th>
         <td >{timecard_entree.Total_Time}</td>
-        <td>{timecard_entree.Date}</td>
+        <td>{ datef.format(new Date(timecard_entree.Date))}</td>
         <td>
           <input
             type="checkbox"
