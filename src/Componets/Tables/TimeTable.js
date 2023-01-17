@@ -64,7 +64,6 @@ export const TimeTable = (Params) => {
 
    const openedit =(timecard_entree)=>{
       settimeEntree(timecard_entree);
-      console.log(timeEntree)
       setisEditOpen(true)
     }
     const Tablerows = Time_data.map((timecard_entree)=>{

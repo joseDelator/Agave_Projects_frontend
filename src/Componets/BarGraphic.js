@@ -38,10 +38,10 @@ import api from '../api';
            height={40}
           data={Employeelist}
         >
-          <XAxis dataKey="Employee_First_Name" stroke="#d9f99d" />
-          <YAxis  stroke="#d9f99d"/>
+          <XAxis dataKey="Employee_First_Name" stroke="#6b7280" />
+          <YAxis  stroke="#6b7280"/>
          <Tooltip content={<CustomTooltip />} cursor={{fill:"#2A303C" }}/>
-          <Bar dataKey="Total_hours_Worked" fill="#84cc16"     />
+          <Bar dataKey="Total_hours_Worked" fill="#84cc16" />
         </BarChart>
       </ResponsiveContainer>
     );

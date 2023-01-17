@@ -112,12 +112,12 @@ const ProjectEdit = () => {
           </li>    
           <li>
           <div className="grid grid-2">
-              <input type="tel" placeholder="Phone Number" value={Phone}
-              className="input input-bordered input-primary" onChange={(e) => setPhone(parseInt(e.target.value))} /> 
+              <input type="tel" placeholder="Phone Number" value={Phone} pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+              className="input input-bordered input-primary" onChange={(e) => setPhone(e.target.value)} required /> 
               <input type="email" placeholder="Email" value={ProjectData.Client_Email}
-              className="input input-bordered input-primary" onChange={(e) => setProjectData({...ProjectData, Client_Email: e.target.value})}/>  
+              className="input input-bordered input-primary" onChange={(e) => setProjectData({...ProjectData, Client_Email: e.target.value})} required/>  
               <select className="select select-primary w-full " 
-              value={ProjectData.Project_Status} onChange={(e)=>setProjectData({...ProjectData, Project_Status: e.target.value})}>
+              value={ProjectData.Project_Status} onChange={(e)=>setProjectData({...ProjectData, Project_Status: e.target.value})} required>
                       <option value={"Active"} className="text-primary">
                     Active</option>
                     <option value={"Tracking"}>

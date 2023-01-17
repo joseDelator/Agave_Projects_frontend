@@ -41,7 +41,7 @@ const ProjectTable = (Params) => {
     <div className="container">
         <select className="select select-primary w-full   " 
                     onChange={(e)=>setProjectStatus( e.target.value)}>
-                      <option value={"Active"} className="text-primary">
+                      <option value={"Active"}>
                     Active</option>
                     <option value={"Tracking"}>
                     Tracking</option>
