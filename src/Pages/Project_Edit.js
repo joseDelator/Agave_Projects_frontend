@@ -112,7 +112,7 @@ const ProjectEdit = () => {
           </li>    
           <li>
           <div className="grid grid-2">
-              <input type="tel" placeholder="Phone Number" value={Phone} pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+              <input type="tel" placeholder="Phone Number" value={Phone} 
               className="input input-bordered input-primary" onChange={(e) => setPhone(e.target.value)} required /> 
               <input type="email" placeholder="Email" value={ProjectData.Client_Email}
               className="input input-bordered input-primary" onChange={(e) => setProjectData({...ProjectData, Client_Email: e.target.value})} required/>  
