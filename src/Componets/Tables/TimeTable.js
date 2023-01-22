@@ -3,7 +3,6 @@ import { AiFillPlusCircle, AiFillEdit} from 'react-icons/ai'
 import TimePopup from '../PopUps/Time_Card_Popup'
 import TimeEditPopup from '../PopUps/Time_Card_Edit_Popup'
 import api from '../../api'
-import { intlFormat } from 'date-fns'
 export const TimeTable = (Params) => {
     const [Time_data, setTime_data] = useState([])
     const [timeEntree, settimeEntree] = useState([])

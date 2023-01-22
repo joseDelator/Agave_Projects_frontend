@@ -40,7 +40,6 @@ const changeParentState = (newState) => {
                    togglePopup()
                }
                else{
-                 console.log("hi")
                  setFailed(true)
                }
            })
@@ -52,7 +51,7 @@ const changeParentState = (newState) => {
   <div className="hero-overlay "></div>
   <div className="hero-content text-center text-neutral-content w-full">
     <div className="max-w-md w-full">
-    <div className="card w-full max-w-sm shadow-2xl bg-base-100"> 
+    <div className="card w-full max-w-sm shadow-xl "> 
       <form className="card-body "htmlFor="my-modal-6" onSubmit={Add_Time}>
       <div className=" flex w-full items-center justify-center">      
       <GiTimeBomb size={40} className="text-primary justify-self-center "/>
@@ -70,7 +69,7 @@ const changeParentState = (newState) => {
           <label className="label">
             <span className="label-text">date</span>
           </label>
-          <input type="date" value={Date} onChange={(e) => setDate(e.target.value)} required className="input input-bordered input-primary " />
+          <input type="date" value={Date} onChange={(e) => setDate(e.target.value)} required className="input input-bordered input-primary" />
           <label className="label">
           </label>
         </div>

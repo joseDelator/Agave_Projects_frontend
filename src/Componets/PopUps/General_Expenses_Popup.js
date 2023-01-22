@@ -5,28 +5,30 @@ import { useForm } from "react-hook-form";
 import Spiner from '../Spiner'
 
 
-const ExpensePopup = (props) => {
+const GeneralExpensePopup = (props) => {
     const [Photo, setPhoto] = useState('')
     const [Cost, setCost] = useState("")
     const [Name, setName] = useState("")
     const [Date, setDate] = useState('')
+    const [Expensetype, setExpensetype] = useState('Gas')
     const [Desription, setDesription] = useState("")
     const [Failed, setFailed] = useState(false)
     const { handleSubmit, formState } = useForm();
     const { isSubmitting } = formState;
+   
  function Add_Expense(){
         let headersList = {
           "Accept": "*/*",
          }
          let formdata = new FormData();
          formdata.append("Image_Location", Photo);
-         formdata.append("Project_Number_ID_Expense", props.content);
+         formdata.append("Expense_Type", Expensetype);
          formdata.append("Seller_Name", Name);
          formdata.append("Description", Desription);
          formdata.append("Date", Date);
          formdata.append("Cost", Cost);
                   let reqOptions = {
-                    url:  "Expenses",
+                    url:  "GeneralExpenses",
                     method: "POST",
                     headers: headersList,
                     data:formdata,
@@ -37,6 +39,7 @@ const ExpensePopup = (props) => {
                         window.location.reload(false);
                     }
                     else{
+                      console.log(response.data)
                       setFailed(true)
                     }
                 })
@@ -48,10 +51,28 @@ const ExpensePopup = (props) => {
         <div className="modal">
           <div className="modal-box relative">
             <label onClick={props.handleClose} className="btn btn-sm btn-circle absolute right-2 top-2" >✕</label>
-            <form className="card-body " onSubmit={ handleSubmit(Add_Expense)}>
+            <form className="card-body " onSubmit={handleSubmit(Add_Expense)}>
               <div className=" flex w-full items-center justify-center">      
               <RiMoneyDollarCircleLine size={40} className="text-primary justify-self-center "/>
               </div>
+              <div className="form-control">
+              <label className="label">
+                    <span className="label-text">Category</span>
+                  </label>
+                <select className="select select-primary w-full" value={Expensetype}
+                      onChange={(e)=> setExpensetype( e.target.value)}>
+                        <option value={"Gas"}>
+                        Gas</option>
+                      <option value={"Insurance"}>
+                      Insurance</option>
+                      <option value={"Food"}>
+                      Food</option>
+                      <option value={"Tools"}>
+                      Tools</option>
+                      <option value={"Office Supplies"}>
+                      Office Supplies</option>
+                </select>
+               </div>
                 <div className="form-control">
                   <label className="label">
                     <span className="label-text">Seller</span>
@@ -120,4 +141,4 @@ const ExpensePopup = (props) => {
     )
 }
 
-export default ExpensePopup
+export default GeneralExpensePopup

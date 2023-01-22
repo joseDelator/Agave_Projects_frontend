@@ -12,6 +12,7 @@ import Projectinputform from './Pages/Projectinputform';
 import HomeDash from './Pages/HomeDash';
 import Nava from './Componets/OnAllPages/Nava'
 import Footer from './Componets/OnAllPages/Footer';
+import GeneralExpenseEnter from './Pages/Genarl_Expense_Enter';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
               <Route element={<Nava/> }>
               <Route expact path="/" element={<PrivateRoute> <HomeDash/> </PrivateRoute>} />
               <Route expact path="/Projectinput" element={<PrivateRoute> <Projectinputform/> </PrivateRoute>} />
+              <Route expact path="/GeneralExpense" element={<PrivateRoute> <GeneralExpenseEnter/> </PrivateRoute>} />
               <Route exact path="/login" element={<Login/>}/>
               <Route  exact path="/details/projects/:id" element={<PrivateRoute><ProjectDash/></PrivateRoute>}/>
               <Route  exact path="/project/edit/:id" 

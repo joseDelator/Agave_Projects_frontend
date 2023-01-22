@@ -14,9 +14,6 @@ const Projectinputform = () => {
         City:'',
         Client_Email:""
     })
-    const togglePopup = () => {
-        setIsOpen(!isOpen);
-      }  
     function Add_New_Project (e){
         e.preventDefault();
         let headersList = {         
@@ -46,7 +43,7 @@ const Projectinputform = () => {
                }
              console.log(response.data);
            })
-           togglePopup()
+    
            }
     return (
         <div className=" min-h-screen items-center">

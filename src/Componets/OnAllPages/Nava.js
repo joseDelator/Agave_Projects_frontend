@@ -16,6 +16,7 @@ class  Nava extends Component {
         <li><Link to="/timecard">Time Card</Link></li>
         <li><Link to="/Projectinput" >New Project</Link></li>
         <li><Link to="/details/employee">Employee</Link></li>
+        <li><Link to="/GeneralExpense">Expense</Link></li>
       </ul>
     </div>
     <GiAgave className="text-primary" size={24}/> 
@@ -27,6 +28,7 @@ class  Nava extends Component {
         <li><Link to="/Projectinput" >New Project</Link></li>
         <li><Link to="/timecard" >Time Card</Link></li>
         <li><Link to="/details/employee">Employee</Link></li>
+        <li><Link to="/GeneralExpense">Expense</Link></li>
     </ul>
   </div>
   <div className="navbar-end">
