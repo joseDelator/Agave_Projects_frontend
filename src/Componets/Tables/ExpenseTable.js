@@ -63,7 +63,7 @@ const ExpenseTable = (Params) => {
         <AiFillCamera size={25}/></a>
         </td>
         <td  >
-          <label  onClick={e=>setnumbertodelete(Expense_entree.Expense_ID)} htmlFor="my-modal-6"
+          <label  onClick={e=>setnumbertodelete(Expense_entree.Expense_ID.replace(/-/g, '\/'))} htmlFor="my-modal-6"
           className="btn  btn-error btn-outline">Delete</label>
           </td>
       </tr>

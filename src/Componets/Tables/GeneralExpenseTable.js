@@ -73,7 +73,7 @@ const GeneralExpenseTable = (Params) => {
         <td>{ dollars.format(Expense_entree.Cost)}</td>
         <td>{ Expense_entree.Description}</td>
         <td>{Expense_entree.Expense_Type}</td>
-        <td>{datef.format( new Date(Expense_entree.Date))}</td>
+        <td>{datef.format( new Date(Expense_entree.Date.replace(/-/g, '\/')))}</td>
         <td>
         <a className="btn  btn-primary btn-outline"
         href={Expense_entree.Image_Location}>
@@ -89,7 +89,7 @@ const GeneralExpenseTable = (Params) => {
       
     <div className="w-full">
     
-      <AiFillPlusCircle className=" text-secondary m-2 place-self-end" size={40} onClick={togglePopup}/> 
+      <AiFillPlusCircle className=" text-secondary m-2 self" size={40} onClick={togglePopup}/> 
 
       <Datepicker
                 inputClassName="font-normal bg-base-100 text-lg dark:bg-base-100 dark:placeholder:text-secondary" 

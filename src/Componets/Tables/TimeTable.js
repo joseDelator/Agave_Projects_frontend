@@ -69,7 +69,7 @@ export const TimeTable = (Params) => {
         return  <tr key={timecard_entree.TimeCard_ID}>
         <th >{timecard_entree.Employee_info}</th>
         <td >{timecard_entree.Total_Time}</td>
-        <td>{ datef.format(new Date(timecard_entree.Date))}</td>
+        <td>{ datef.format(new Date(timecard_entree.Date.replace(/-/g, '\/')))}</td>
         <td>
           <input
             type="checkbox"
