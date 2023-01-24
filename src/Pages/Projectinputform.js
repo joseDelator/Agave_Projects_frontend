@@ -37,6 +37,7 @@ const Projectinputform = () => {
            api.request(reqOptions).then(function (response) {
                if (response.data === 'Added Successfully') {
                    setFailed(false)
+                   setIsOpen(true)
                }
                else{
                  setFailed(true)
@@ -107,7 +108,7 @@ const Projectinputform = () => {
 <div className="modal modal-bottom sm:modal-middle">
   <div className="modal-box">
     <h3 className="font-bold text-lg text-primary">success!!!</h3>
-    <p className="py-4">yor time has be added</p>
+    <p className="py-4"> The Project has be added</p>
     <div className="modal-action">
       <label  className="btn btn-primary" onClick={(e) =>setIsOpen(false)}>ok</label>
     </div>
