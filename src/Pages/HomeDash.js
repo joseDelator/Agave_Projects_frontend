@@ -8,7 +8,7 @@ import RadarGraph from '../Componets/RadarGraph'
 const HomeDash = () => {
     return (
       <div className=" max-w-full gap-1 m-2 lg:grid-cols-3 lg:grid ">
-          <div className="lg:col-span-2 card h-96" >
+          <div className="lg:col-span-2 card min-h-96" >
             <BarGraphic/>
           </div>
           <div className="card">
