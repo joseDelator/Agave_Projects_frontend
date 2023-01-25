@@ -18,7 +18,7 @@ const PieGraph = ({TotalYearly}) => {
 }
 
     return (
-        <div className="stats w-full h-full bg-transparent">
+        <div className="">
           <div className="stat  place-items-center ">
           <div className="stat-title  mb-6">Road to 250K</div>
           <div className={StatusStyling()} 
