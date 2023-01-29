@@ -5,12 +5,10 @@ const TimeaddContext = createContext({});
 
 export const TimeaddProvider = ({ children }) => {
  
-    function Add_Time (e){
-        
-           }
+    const [Totalowed, setTotalowed] = useState(initialState)
 
     let contexData = {
-        Add_Time:Add_Time
+        Totalowed:Totalowed
     }
   return (
     <TimeaddContext.Provider

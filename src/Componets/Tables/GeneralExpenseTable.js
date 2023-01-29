@@ -1,13 +1,16 @@
-import React, {useState, useEffect}from 'react'
+import React, {useState, useEffect, useContext}from 'react'
 import { AiFillPlusCircle, AiFillCamera} from 'react-icons/ai'
-import ExpensePopup from '../PopUps/Expenses_Popup'
 import api from '../../api';
 import Datepicker from 'react-tailwindcss-datepicker';
 import GeneralExpensePopup from '../PopUps/General_Expenses_Popup';
+import { dollars, datef } from '../../Functions/DateandDollarFormate';
+import DataContext from '../../Context/datacontext'
 const GeneralExpenseTable = (Params) => {
     const [Expense_data, setExpense_data] = useState([])
     const [isOpen, setisOpen] = useState(false)
     const [numbertodelete, setnumbertodelete] = useState("")
+    const {Totalowed, setTotalowed} = useContext(DataContext) 
+    //date range starting state
     const Today= new Date()
     const Lastmonth= new Date().setDate(Today.getDate()-30)
     const options = { year: 'numeric', month: 'numeric', day: 'numeric' };
@@ -21,13 +24,6 @@ const GeneralExpenseTable = (Params) => {
     const changeState = (newState) => {
       setDateRange(newState);
     };
-    const datef = new  Intl.DateTimeFormat("us-en",{
-      dateStyle:"short"
-    })
-    const dollars = new Intl.NumberFormat(`en-US`, {
-      currency: `USD`,
-      style: 'currency',
-  });
     function Delete_Expense (){
       let headersList = {         
           "Content-Type": "application/json" 
@@ -73,7 +69,7 @@ const GeneralExpenseTable = (Params) => {
         <td>{ dollars.format(Expense_entree.Cost)}</td>
         <td>{ Expense_entree.Description}</td>
         <td>{Expense_entree.Expense_Type}</td>
-        <td>{datef.format( new Date(Expense_entree.Date.replace(/-/g, '\/')))}</td>
+        <td>{datef.format( new Date(Expense_entree.Date.replace(/-/g, '/')))}</td>
         <td>
         <a className="btn  btn-primary btn-outline"
         href={Expense_entree.Image_Location}>
@@ -86,11 +82,8 @@ const GeneralExpenseTable = (Params) => {
       </tr>
     })
     return (
-      
     <div className="w-full">
-    
       <AiFillPlusCircle className=" text-secondary m-2 self" size={40} onClick={togglePopup}/> 
-
       <Datepicker
                 inputClassName="font-normal bg-base-100 text-lg dark:bg-base-100 dark:placeholder:text-secondary" 
                 primaryColor={"lime"}
@@ -130,7 +123,7 @@ const GeneralExpenseTable = (Params) => {
                 <h3 className="font-bold text-lg">Delete?</h3>
                 <p className="py-4">Are you Sure you Want Delete this entree</p>
                 <div className="modal-action">
-                  <label className="btn btn-error" onClick={Delete_Expense }>Delete</label>
+                  <label className="btn btn-error" onClick={Delete_Expense}>Delete</label>
                   <label className="btn btn-sm btn-circle absolute right-2 top-2" htmlFor="my-modal-6">x</label>
                 </div>
               </div>

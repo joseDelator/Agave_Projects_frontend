@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
-import api from '../api';
+import api from '../../api';
   
  const BarGraphic= ()=>{
     const [Employeelist, setEmployeelist] = useState([])

@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, {useContext, useEffect, useState} from 'react'
 import '../Styles/homedash.scss'
 import Spiner from '../Componets/Spiner'
 import api from '../api'
@@ -7,16 +7,15 @@ import NewEmployee from '../Componets/PopUps/NewEmployeePopup'
 import Dropdrownemployee from '../Componets/dropdrownemployee'
 import { TimeTableEmployee } from '../Componets/Tables/TimeTableEmployee'
 import EditEmployee from '../Componets/PopUps/EditEmployeePopup'
-
+import { dollars } from '../Functions/DateandDollarFormate'
+import DataContext from '../Context/datacontext'
 function EmployeeDash() {
     const [Project_data, setProject_data] = useState([])
     const [Employee_ID, setEmployee_ID] = useState("1")
     const [isOpen, setisOpen] = useState(false)
     const [isEditOpen, setisEditOpen] = useState(false)
-    const dollars = new Intl.NumberFormat(`en-US`, {
-      currency: `USD`,
-      style: 'currency',
-  });
+    const {Totalowed, setTotalowed} = useContext(DataContext) 
+    const {Salary, setSalary} = useContext(DataContext)
     const togglePopup = () => {
       setisOpen(!isOpen);
     }
@@ -35,6 +34,8 @@ function EmployeeDash() {
            const fetch_somethe= async () =>{
             const reponse = await api.request(reqOptions);
             setProject_data( reponse.data)
+            setTotalowed(reponse.data.Total_Unpaid_Amount)
+            setSalary(reponse.data.Salary)
            }
         fetch_somethe();
     }, [Employee_ID])
@@ -103,7 +104,7 @@ function EmployeeDash() {
         <div className="stats shadow w-full">
           <div className="stat bg-neutral place-items-center">
             <div className="stat-titleb text-primary ">Total Owed</div>
-            <div className="stat-value text-error">{dollars.format(Project_data.Total_Unpaid_Amount)}</div>
+            <div className="stat-value text-error">{dollars.format(Totalowed)}</div>
             <div className="stat-desc">{"thats "+Math.round(Project_data.Total_Unpaid_Amount/2.29)+" cokes bottels"}</div>
           </div>
         </div>

@@ -7,13 +7,10 @@ import Spiner from '../Componets/Spiner'
 import ExpenseTable from '../Componets/Tables/ExpenseTable'
 import api from '../api'
 import StatusMarker from '../Componets/StatusMarker'
+import { dollars } from '../Functions/DateandDollarFormate'
 function ProjectDash() {
     const [Project_data, setProject_data] = useState([])
     const Params = useParams()
-    const dollars = new Intl.NumberFormat(`en-US`, {
-      currency: `USD`,
-      style: 'currency',
-  });
     useEffect (() => {
         let headersList = {           
             "Content-Type": "application/json" 

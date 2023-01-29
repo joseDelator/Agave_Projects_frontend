@@ -1,8 +1,8 @@
 import React from 'react'
-
+// Status Marker on Porject page that shows if project is active completed or tracking
 const StatusMarker = ({Status}) => {
+    //switch for different styling pending project status
     function StatusStyling(props) {
-    
             switch (Status) {
                 case 'Completed':
                     return 'badge badge-error badge-lg badge-outline';

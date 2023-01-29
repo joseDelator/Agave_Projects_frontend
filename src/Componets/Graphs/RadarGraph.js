@@ -1,7 +1,7 @@
 import React, {useState, useEffect}from 'react'
 import {Cell, ResponsiveContainer } from 'recharts';
 import { PieChart, Pie, Tooltip} from 'recharts';
-import api from '../api';
+import api from '../../api';
 
 const RadarGraph = () => {
     const [data, setdata] = useState([])

@@ -1,9 +1,9 @@
 import React from 'react'
-import PieGraph from '../Componets/PieGraph'
+import PieGraph from '../Componets/Graphs/PieGraph'
 import ProjectTable from '../Componets/Tables/Projectlist'
-import BarGraphic from '../Componets/BarGraphic'
+import BarGraphic from '../Componets/Graphs/BarGraphic'
 import GeneralExpenseTable from '../Componets/Tables/GeneralExpenseTable'
-import RadarGraph from '../Componets/RadarGraph'
+import RadarGraph from '../Componets/Graphs/RadarGraph'
 
 const HomeDash = () => {
     return (

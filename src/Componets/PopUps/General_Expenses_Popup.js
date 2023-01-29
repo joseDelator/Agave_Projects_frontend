@@ -3,8 +3,6 @@ import {RiMoneyDollarCircleLine} from 'react-icons/ri'
 import api from '../../api'
 import { useForm } from "react-hook-form";
 import Spiner from '../Spiner'
-
-
 const GeneralExpensePopup = (props) => {
     const [Photo, setPhoto] = useState('')
     const [Cost, setCost] = useState("")
@@ -20,13 +18,14 @@ const GeneralExpensePopup = (props) => {
         let headersList = {
           "Accept": "*/*",
          }
-         let formdata = new FormData();
-         formdata.append("Image_Location", Photo);
-         formdata.append("Expense_Type", Expensetype);
-         formdata.append("Seller_Name", Name);
-         formdata.append("Description", Desription);
-         formdata.append("Date", Date);
-         formdata.append("Cost", Cost);
+  
+            let formdata = new FormData();
+                formdata.append("Image_Location", Photo);
+                formdata.append("Expense_Type", Expensetype);
+                formdata.append("Seller_Name", Name);
+                formdata.append("Description", Desription);
+                formdata.append("Date", Date);
+                formdata.append("Cost", Cost);
                   let reqOptions = {
                     url:  "GeneralExpenses",
                     method: "POST",
@@ -43,6 +42,7 @@ const GeneralExpensePopup = (props) => {
                       setFailed(true)
                     }
                 })
+       
                 
            }
     return (
@@ -140,5 +140,4 @@ const GeneralExpensePopup = (props) => {
       </div>
     )
 }
-
 export default GeneralExpensePopup

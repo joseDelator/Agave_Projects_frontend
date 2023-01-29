@@ -97,27 +97,34 @@ const ProjectEdit = () => {
           <li>
             <div className="grid grid-2">
               <input type="text" placeholder="Name" value={ProjectData.Client_First_Name}
-              className="input input-bordered input-primary" onChange={(e) => setProjectData({...ProjectData, Client_First_Name: e.target.value})} required/>  
+              className="input input-bordered input-primary" 
+              onChange={(e) => setProjectData({...ProjectData, Client_First_Name: e.target.value})} required/>  
               <input type="text" placeholder="Surname" value={ProjectData.Client_Last_Name}
-             className="input input-bordered input-primary" onChange={(e) => setProjectData({...ProjectData, Client_Last_Name: e.target.value})} required/>
+             className="input input-bordered input-primary" 
+             onChange={(e) => setProjectData({...ProjectData, Client_Last_Name: e.target.value})} required/>
             </div>
           </li>
           <li>
             <div className="grid grid-2">
               <input type="text" placeholder="Street Adress" value={ProjectData.Street_Address}
-             className="input input-bordered input-primary" onChange={(e) => setProjectData({...ProjectData, Street_Address: e.target.value})} required/>  
+             className="input input-bordered input-primary" 
+             onChange={(e) => setProjectData({...ProjectData, Street_Address: e.target.value})} required/>  
               <input type="text" placeholder="City" value={ProjectData.City}
-             className="input input-bordered input-primary" onChange={(e) => setProjectData({...ProjectData, City: e.target.value})} required/>
+             className="input input-bordered input-primary" 
+             onChange={(e) => setProjectData({...ProjectData, City: e.target.value})} required/>
             </div>
           </li>    
           <li>
           <div className="grid grid-2">
               <input type="tel" placeholder="Phone Number" value={Phone} 
-              className="input input-bordered input-primary" onChange={(e) => setPhone(e.target.value)} required /> 
+              className="input input-bordered input-primary" 
+              onChange={(e) => setPhone(e.target.value)} required /> 
               <input type="email" placeholder="Email" value={ProjectData.Client_Email}
-              className="input input-bordered input-primary" onChange={(e) => setProjectData({...ProjectData, Client_Email: e.target.value})} required/>  
+              className="input input-bordered input-primary" 
+              onChange={(e) => setProjectData({...ProjectData, Client_Email: e.target.value})} required/>  
               <select className="select select-primary w-full " 
-              value={ProjectData.Project_Status} onChange={(e)=>setProjectData({...ProjectData, Project_Status: e.target.value})} required>
+              value={ProjectData.Project_Status} 
+              onChange={(e)=>setProjectData({...ProjectData, Project_Status: e.target.value})} required>
                       <option value={"Active"} className="text-primary">
                     Active</option>
                     <option value={"Tracking"}>
@@ -133,9 +140,6 @@ const ProjectEdit = () => {
               <button className="btn btn-primary" type="submit" >
                 SUBMIT
               </button>
-              <button className="btn btn-warning" type="reset" >
-                RESET
-              </button> 
             </div>
           </li>    
         </ul>

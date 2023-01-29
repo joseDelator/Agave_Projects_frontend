@@ -1,6 +1,6 @@
-import React, {useState, useEffect}from 'react'
+import React, {useState}from 'react'
 const PieGraph = ({TotalYearly}) => {
-  const [Precent, setPrecent] = useState(Math.round((TotalYearly/250000)*100))
+  const [Precent] = useState(Math.round((TotalYearly/250000)*100))
   const dollars = new Intl.NumberFormat(`en-US`, {
     currency: `USD`,
     style: 'currency',

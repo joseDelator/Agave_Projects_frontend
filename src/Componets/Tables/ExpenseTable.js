@@ -2,6 +2,7 @@ import React, {useState, useEffect}from 'react'
 import { AiFillPlusCircle, AiFillCamera} from 'react-icons/ai'
 import ExpensePopup from '../PopUps/Expenses_Popup'
 import api from '../../api';
+import { datef,dollars } from '../../Functions/DateandDollarFormate';
 const ExpenseTable = (Params) => {
     const [Expense_data, setExpense_data] = useState([])
     const [isOpen, setisOpen] = useState(false)
@@ -9,13 +10,6 @@ const ExpenseTable = (Params) => {
     const togglePopup = () => {
       setisOpen(!isOpen);
     }
-    const datef = new  Intl.DateTimeFormat("us-en",{
-      dateStyle:"short"
-    })
-    const dollars = new Intl.NumberFormat(`en-US`, {
-      currency: `USD`,
-      style: 'currency',
-  });
     function Delete_Expense (){
       let headersList = {         
           "Content-Type": "application/json" 
@@ -56,7 +50,7 @@ const ExpenseTable = (Params) => {
         <th>{Expense_entree.Seller_Name}</th>
         <td>{ dollars.format(Expense_entree.Cost)}</td>
         <td>{ Expense_entree.Description}</td>
-        <td>{datef.format( new Date(Expense_entree.Date))}</td>
+        <td>{datef.format( new Date(Expense_entree.Date.replace(/-/g, '/')))}</td>
         <td>
         <a className="btn  btn-primary btn-outline"
         href={Expense_entree.Image_Location}>

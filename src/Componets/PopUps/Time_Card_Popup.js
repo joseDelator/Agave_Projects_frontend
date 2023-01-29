@@ -1,47 +1,27 @@
 import React, {useState}from 'react'
 import {GiTimeBomb} from 'react-icons/gi'
-import api from '../../api'
 import Dropdrownemployee from '../dropdrownemployee'
+import { AddingTime } from '../../Functions/Addttime'
 const TimePopup = (props) => {
     const [Total_Time, setTotal_Time] = useState("")
     const [Date, setDate] = useState('')
-    const [isOpen, setIsOpen] = useState(false);
     const [Failed, setFailed] = useState(false);
     const [Employee_Id, setEmployee_Id] = useState("")
-   
-  const togglePopup = () => {
-    setIsOpen(!isOpen);
-  }  
   const changeParentState = (newState) => {
     setEmployee_Id(newState);
   };
     function Add_Time (e){
         e.preventDefault();
-        let headersList = {         
-            "Content-Type": "application/json" 
-           }
-           let reqOptions = {
-             url: "TimeCard",
-             method: "POST",
-             headers: headersList,
-             data:JSON.stringify({
-                "Project_Number_ID_Time" : props.content,
-                "Employee_ID": Employee_Id,
-                "Date" : Date,
-                "Total_Time" : Total_Time,
-            }),
-           }
-           api.request(reqOptions).then(function (response) {
-               if (response.data === 'Added Successfully') {
-                   setFailed(false)
-                    window.location.reload(false);
-               }
-               else{
-                 setFailed(true)
-                 togglePopup()
-               }
-             console.log(response.data);
-           })
+           //input new time card entree and responce with popup
+           AddingTime(Date, props.content,Employee_Id,Total_Time).then( function(responce){
+            console.log(responce)
+            if ( responce.data === "Added Successfully") {
+              window.location.reload(false);
+          }
+          else{
+            setFailed(true)
+          }
+          })  
            }
         
     return (
@@ -79,7 +59,10 @@ const TimePopup = (props) => {
           </div>
        
       </div>
-      <input type="checkbox" className="modal-toggle" checked={Failed} readOnly/>
+
+{/* error popuo */}    
+      
+<input type="checkbox" className="modal-toggle" checked={Failed} readOnly/>
 <div className="modal modal-bottom sm:modal-middle">
   <div className="modal-box">
     <h3 className="font-bold text-lg text-error">Error!!!</h3>

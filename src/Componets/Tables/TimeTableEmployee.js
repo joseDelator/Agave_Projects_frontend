@@ -1,21 +1,23 @@
-import React, {useState, useEffect}from 'react'
+import React, {useState, useEffect, useContext}from 'react'
 import TimePopup from '../PopUps/Time_Card_Popup'
 import TimeEditPopup from '../PopUps/Time_Card_Edit_Popup'
 import api from '../../api'
 import { AiFillEdit } from 'react-icons/ai'
 import Datepicker from "react-tailwindcss-datepicker";
+import { datef } from '../../Functions/DateandDollarFormate'
+import DataContext from '../../Context/datacontext'
+
 export const TimeTableEmployee = (Params) => {
     // all time card data for tiem range
     const [Time_data, setTime_data] = useState([])
+    const {Totalowed, setTotalowed} = useContext(DataContext)
+    const {Salary, setSalary} = useContext(DataContext) 
     // selected time entree for edite popup
     const [timeEntree, settimeEntree] = useState([])
     //popup toggles
     const [isOpen, setisOpen] = useState(false)
     const [isEditOpen, setisEditOpen] = useState(false)
     //setting starting date
-    const datef = new  Intl.DateTimeFormat("us-en",{
-      dateStyle:"short"
-    })
     const Today= new Date()
     const Lastmonth= new Date().setDate(Today.getDate()-30)
     const options = { year: 'numeric', month: 'numeric', day: 'numeric' };
@@ -76,9 +78,14 @@ export const TimeTableEmployee = (Params) => {
        api.request(reqOptions).then(function (response) {
            if (response.data === 'Updated Successfully') {
             e.target.checked=Time_Entree.Been_Payed
-           }
+            if(Time_Entree.Been_Payed){
+              setTotalowed(Totalowed-(Salary*Time_Entree.Total_Time))
+            }
+            
            else{
+            setTotalowed(Totalowed+(Salary*Time_Entree.Total_Time))
            }
+          }
        }) 
     };
    const openedit =(timecard_entree)=>{
@@ -87,16 +94,16 @@ export const TimeTableEmployee = (Params) => {
     }
     const Tablerows = Time_data.map((timecard_entree)=>{
       return  <tr key={timecard_entree.TimeCard_ID}>
-      <th >{timecard_entree.Project_Number_ID_Time}</th>
-      <td >{timecard_entree.Total_Time}</td>
-      <td>{datef.format(new Date(timecard_entree.Date.replace(/-/g, '\/')))}</td>
+      <th>{timecard_entree.Project_Number_ID_Time}</th>
+      <td>{timecard_entree.Total_Time}</td>
+      <td>{datef.format(new Date(timecard_entree.Date.replace(/-/g, '/')))}</td>
       <td>
-                  <input
-                      type="checkbox"
-                      className="toggle toggle-primary"
-                      checked={timecard_entree.Been_Payed}
-                      onChange={e => Payed_employee(timecard_entree,e)} 
-                  />     
+        <input
+          type="checkbox"
+          className="toggle toggle-primary"
+          checked={timecard_entree.Been_Payed}
+          onChange={e => Payed_employee(timecard_entree,e)} 
+        />     
      </td>
      <td >
           <div className="btn  btn-warning btn-outline" onClick={e => openedit(timecard_entree, e)}>
@@ -133,7 +140,6 @@ export const TimeTableEmployee = (Params) => {
             </thead>
             <tbody>
                 {Time_data&&Tablerows}
-  
             </tbody> 
             </table>
             </div>
