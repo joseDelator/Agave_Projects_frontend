@@ -84,13 +84,14 @@ const ExpenseTable = (Params) => {
       {Expense_data&&Tablerows}
     </tbody>
   </table>
-        <div className="btn-group grid grid-cols-2 m-5">
+        
+  </div>
+  <div className="btn-group grid grid-cols-2 m-5">
           <button className={gendata.previous === null ?"btn btn-outline btn-disabled":"btn btn-outline btn-primary "} 
           onClick={e=> setpage(page-1)} >Previous page</button>
           <button className={gendata.next === null ?"btn btn-outline btn-disabled":"btn btn-outline btn-primary "} 
           onClick={e=> setpage(page+1)}>Next</button>
         </div>
-  </div>
         <AiFillPlusCircle className="absolute top-1 right-1 text-secondary" size={40} onClick={togglePopup}/> 
           <input type="checkbox" htmlFor="my-modal-6" id="my-modal-6" className="modal-toggle"  />
             <div htmlFor="my-modal-6" className="modal modal-bottom sm:modal-middle">

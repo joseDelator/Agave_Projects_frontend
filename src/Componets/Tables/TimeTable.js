@@ -121,11 +121,12 @@ export const TimeTable = (Params) => {
           Opened = {isEditOpen}
          />
         }
-        <div className="btn-group grid grid-cols-2 m-5">
+        
+            </div>
+            <div className="btn-group grid grid-cols-2 m-5">
           <button className={gendata.previous === null ?"btn btn-outline btn-disabled":"btn btn-outline btn-primary "} onClick={e=> setpage(page-1)} >Previous page</button>
           <button className={gendata.next === null ?"btn btn-outline btn-disabled":"btn btn-outline btn-primary "} onClick={e=> setpage(page+1)}>Next</button>
         </div>
-            </div>
              <TimePopup
               content={Params.props}
               handleClose={togglePopup}
