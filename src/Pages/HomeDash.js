@@ -9,6 +9,7 @@ const HomeDash = () => {
     return (
       <div className=" max-w-full gap-1 m-2 lg:grid-cols-3 lg:grid ">
           <div className="lg:col-span-2 card h-96" >
+            <h1>Total Owed to Employees</h1>
             <BarGraphic/>
           </div>
           <div className="card">
@@ -18,6 +19,7 @@ const HomeDash = () => {
           <ProjectTable/>
           </div>
           <div className=" card lg:col-span-2   ">
+    
           <GeneralExpenseTable/>
           </div>
           <div className=" card h-96">

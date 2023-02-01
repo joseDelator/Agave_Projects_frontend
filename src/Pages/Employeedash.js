@@ -105,7 +105,7 @@ function EmployeeDash() {
           <div className="stat bg-neutral place-items-center">
             <div className="stat-titleb text-primary ">Total Owed</div>
             <div className="stat-value text-error">{dollars.format(Totalowed)}</div>
-            <div className="stat-desc">{"thats "+Math.round(Project_data.Total_Unpaid_Amount/2.29)+" cokes bottels"}</div>
+            <div className="stat-desc">{"thats "+Math.round(Totalowed/2.29)+" cokes bottels"}</div>
           </div>
         </div>
       </div>

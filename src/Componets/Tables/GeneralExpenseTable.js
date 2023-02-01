@@ -9,7 +9,8 @@ const GeneralExpenseTable = (Params) => {
     const [Expense_data, setExpense_data] = useState([])
     const [isOpen, setisOpen] = useState(false)
     const [numbertodelete, setnumbertodelete] = useState("")
-    const {Totalowed, setTotalowed} = useContext(DataContext) 
+    const [gendata, setgendata] = useState([])
+    const [page, setpage] = useState(1)
     //date range starting state
     const Today= new Date()
     const Lastmonth= new Date().setDate(Today.getDate()-30)
@@ -46,7 +47,7 @@ const GeneralExpenseTable = (Params) => {
             "Content-Type": "application/json" 
            }
            let reqOptions = {
-            url: "GeneralExpensesByDate",
+            url: "GeneralExpensesByDateRange"+"?page="+page,
             method: "POST",
             headers: headersList,
             data:JSON.stringify({
@@ -57,11 +58,12 @@ const GeneralExpenseTable = (Params) => {
            const fetch_somethe= async () =>{
             const reponse = await api.request(reqOptions);
             const timecard_data = reponse.data;
-           setExpense_data(timecard_data)
+            setgendata(timecard_data)
+           setExpense_data(timecard_data.results)
             }
 
         fetch_somethe();
-    }, [Params.props, DateRange])
+    }, [Params.props, DateRange, page])
    
     const Tablerows = Expense_data.map((Expense_entree, e)=>{
         return  <tr key={Expense_entree.Expense_ID}>
@@ -111,13 +113,17 @@ const GeneralExpenseTable = (Params) => {
               {Expense_data&&Tablerows}
             </tbody>
           </table>
+          <div className="btn-group grid grid-cols-2 m-5">
+          <button className={gendata.previous === null ?"btn btn-outline btn-disabled":"btn btn-outline btn-primary "} onClick={e=> setpage(page-1)} >Previous page</button>
+          <button className={gendata.next === null ?"btn btn-outline btn-disabled":"btn btn-outline btn-primary "} onClick={e=> setpage(page+1)}>Next</button>
+        </div>
   </div>
   <GeneralExpensePopup
                 content={Params.props}
                 handleClose={togglePopup}
                 Opened = {isOpen}
             />
-          <input type="checkbox" htmlFor="my-modal-6" id="my-modal-6" className="modal-toggle"  />
+          <input type="checkbox" htmlFor="my-modal-6" id="my-modal-6" className="modal-toggle" readOnly  />
             <div htmlFor="my-modal-6" className="modal modal-bottom sm:modal-middle">
               <div className="modal-box">
                 <h3 className="font-bold text-lg">Delete?</h3>

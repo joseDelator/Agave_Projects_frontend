@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
 import api from '../../api';
+import { dollars } from '../../Functions/DateandDollarFormate';
   
  const BarGraphic= ()=>{
     const [Employeelist, setEmployeelist] = useState([])
@@ -24,7 +25,7 @@ import api from '../../api';
         if (active && payload && payload.length) {
           return (
             <div className=" bg-base-100 rounded-md border-none cursor-auto ">
-              <p className="label">{`${label} : ${payload[0].value}`}</p>
+              <p className="label">{`${label} : ${dollars.format(payload[0].value)}`}</p>
             </div>
           );
         }
@@ -41,9 +42,10 @@ import api from '../../api';
           <XAxis dataKey="Employee_First_Name" stroke="#6b7280" />
           <YAxis  stroke="#6b7280"/>
          <Tooltip content={<CustomTooltip />} cursor={{fill:"#2A303C" }}/>
-          <Bar dataKey="Total_hours_Worked" fill="#84cc16" />
+          <Bar dataKey="Total_Unpaid_Amount" fill="#84cc16" />
         </BarChart>
       </ResponsiveContainer>
+
     );
   
 }

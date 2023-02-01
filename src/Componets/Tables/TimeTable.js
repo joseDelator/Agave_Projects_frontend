@@ -1,15 +1,20 @@
-import React, {useState, useEffect}from 'react'
+import React, {useState, useEffect, use}from 'react'
 import { AiFillPlusCircle, AiFillEdit} from 'react-icons/ai'
 import TimePopup from '../PopUps/Time_Card_Popup'
 import TimeEditPopup from '../PopUps/Time_Card_Edit_Popup'
 import api from '../../api'
 import { datef } from '../../Functions/DateandDollarFormate'
+import { getOwnMetadata } from 'core-js/fn/reflect'
 
 export const TimeTable = (Params) => {
     const [Time_data, setTime_data] = useState([])
     const [timeEntree, settimeEntree] = useState([])
     const [isOpen, setisOpen] = useState(false)
+    const [page, setpage] = useState(1)
+    const [gendata, setgendata] = useState([])
     const [isEditOpen, setisEditOpen] = useState(false)
+  
+    
     const togglePopup = () => {
       setisOpen(!isOpen);
     }
@@ -21,17 +26,18 @@ export const TimeTable = (Params) => {
             "Content-Type": "application/json" 
            }
            let reqOptions = {
-             url: Params.prefix+Params.props,
+             url: "TimeCardbyID/"+Params.props+"?page="+page,
              method: "GET",
              headers: headersList,             
            }
            const fetch_somethe= async()=>{
             const reponse = await api.request(reqOptions);
-            const timecard_data = reponse.data;
-           setTime_data(timecard_data)
+            const timecard_data = reponse
+            setgendata(timecard_data.data)
+            setTime_data(timecard_data.data.results)
            }
         fetch_somethe();
-    }, [ Params.prefix,Params.props])
+    }, [ Params.prefix,Params.props, page])
    
     function Payed_employee (Time_Entree,e){
       Time_Entree.Been_Payed = !Time_Entree.Been_Payed
@@ -115,6 +121,10 @@ export const TimeTable = (Params) => {
           Opened = {isEditOpen}
          />
         }
+        <div className="btn-group grid grid-cols-2 m-5">
+          <button className={gendata.previous === null ?"btn btn-outline btn-disabled":"btn btn-outline btn-primary "} onClick={e=> setpage(page-1)} >Previous page</button>
+          <button className={gendata.next === null ?"btn btn-outline btn-disabled":"btn btn-outline btn-primary "} onClick={e=> setpage(page+1)}>Next</button>
+        </div>
             </div>
              <TimePopup
               content={Params.props}

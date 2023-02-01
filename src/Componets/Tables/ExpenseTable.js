@@ -7,6 +7,8 @@ const ExpenseTable = (Params) => {
     const [Expense_data, setExpense_data] = useState([])
     const [isOpen, setisOpen] = useState(false)
     const [numbertodelete, setnumbertodelete] = useState("")
+    const [gendata, setgendata] = useState([])
+    const [page, setpage] = useState(1)
     const togglePopup = () => {
       setisOpen(!isOpen);
     }
@@ -32,18 +34,19 @@ const ExpenseTable = (Params) => {
             "Content-Type": "application/json" 
            }
            let reqOptions = {
-             url: "Expenses/"+Params.props,
+             url: "ExpensebyID/"+Params.props+"?page="+page,
              method: "GET",
              headers: headersList,
              }
            const fetch_somethe= async () =>{
             const reponse = await api.request(reqOptions);
             const timecard_data = reponse.data;
-           setExpense_data(timecard_data)
+            setgendata(timecard_data)
+           setExpense_data(timecard_data.results)
             }
 
         fetch_somethe();
-    }, [Params.props])
+    }, [Params.props, page])
    
     const Tablerows = Expense_data.map((Expense_entree, e)=>{
         return  <tr key={Expense_entree.Expense_ID}>
@@ -81,6 +84,12 @@ const ExpenseTable = (Params) => {
       {Expense_data&&Tablerows}
     </tbody>
   </table>
+        <div className="btn-group grid grid-cols-2 m-5">
+          <button className={gendata.previous === null ?"btn btn-outline btn-disabled":"btn btn-outline btn-primary "} 
+          onClick={e=> setpage(page-1)} >Previous page</button>
+          <button className={gendata.next === null ?"btn btn-outline btn-disabled":"btn btn-outline btn-primary "} 
+          onClick={e=> setpage(page+1)}>Next</button>
+        </div>
   </div>
         <AiFillPlusCircle className="absolute top-1 right-1 text-secondary" size={40} onClick={togglePopup}/> 
           <input type="checkbox" htmlFor="my-modal-6" id="my-modal-6" className="modal-toggle"  />
