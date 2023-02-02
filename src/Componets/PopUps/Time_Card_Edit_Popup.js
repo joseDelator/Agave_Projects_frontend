@@ -80,7 +80,8 @@ const TimeEditPopup = (props) => {
           <label className="label">
             <span className="label-text">Date</span>
           </label>
-          <input type="date" value={Date} onChange={(e) => setDate(e.target.value)} required className="input input-bordered input-primary " />
+          <input type="date" value={Date} onChange={(e) => setDate(e.target.value)} 
+          required className="input input-bordered input-primary appearance-none" />
           <label className="label">
           </label>
         </div>

@@ -50,7 +50,8 @@ const NewEmployee = (props) => {
             <label className="label">
                 <span className="label-text">First Name</span>
             </label>
-              <input type="text" placeholder="First Name" name="Firstname" required className="input input-bordered input-primary" />
+              <input type="text" placeholder="First Name" name="Firstname" required 
+              className="input input-bordered input-primary" />
               <label className="input-group">
             </label>
           </div>
@@ -58,7 +59,8 @@ const NewEmployee = (props) => {
             <label className="label">
                 <span className="label-text">Last Name</span>
             </label>
-              <input type="text" placeholder="First Name" name="Lastname" required className="input input-bordered input-primary" />
+              <input type="text" placeholder="First Name" name="Lastname" required 
+              className="input input-bordered input-primary" />
               <label className="input-group">
             </label>
           </div>
@@ -67,7 +69,8 @@ const NewEmployee = (props) => {
                 <span className="label-text">Salary</span>
             </label>
             <div className="tooltip tooltip-open tooltip-top" data-tip={Salary}>
-            <input type="range" min="10" max="100" name="Salary" value={Salary} onChange={e=>setSalary(e.target.value)} className="range range-secondary" />
+            <input type="range" min="10" max="100" name="Salary" value={Salary} 
+            onChange={e=>setSalary(e.target.value)} className="range range-secondary" />
             </div>
               <label className="input-group">
             </label>
@@ -77,15 +80,14 @@ const NewEmployee = (props) => {
             </div>
         </form>
      </div>
-  
  </div>
- <input type="checkbox" className="modal-toggle" checked={Failed} readOnly/>
-<div className="modal modal-bottom sm:modal-middle">
-<div className="modal-box">
-<h3 className="font-bold text-lg text-error">Error!!!</h3>
-<p className="py-4">Please Try Again</p>
-<div className="modal-action">
- <label  className="btn btn-primary" onClick={(e) =>setFailed(false)}>ok</label>
+      <input type="checkbox" className="modal-toggle" checked={Failed} readOnly/>
+          <div className="modal modal-bottom sm:modal-middle">
+          <div className="modal-box">
+          <h3 className="font-bold text-lg text-error">Error!!!</h3>
+          <p className="py-4">Please Try Again</p>
+          <div className="modal-action">
+      <label  className="btn btn-primary" onClick={(e) =>setFailed(false)}>ok</label>
 </div>
 </div>
 </div>

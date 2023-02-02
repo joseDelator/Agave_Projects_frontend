@@ -56,7 +56,9 @@ function Add_Time(e){
                     <label className="label">
                       <span className="label-text">date</span>
                     </label>
-                    <input type="date" value={Date} onChange={(e) => setDate(e.target.value)} required className="input input-bordered input-primary" />
+                    <input type="Date" value={Date} onChange={(e) => setDate(e.target.value)} 
+                    placeholder="Date"
+                    required className="input appearance-none  input-bordered input-primary" />
                     <label className="label">
                     </label>
                   </div>
@@ -64,7 +66,9 @@ function Add_Time(e){
                   <label className="label">
                       <span className="label-text"> Hours</span>
                   </label>
-                    <input type="number" placeholder="Time" name="Total Time" value={Total_Time} pattern="[0-9]" min=".01" max="24"  step=".01"onChange={(e) => setTotal_Time(e.target.value)} required className="input input-bordered input-primary" />
+                    <input type="number" placeholder="Time" name="Total Time" value={Total_Time} 
+                    pattern="[0-9]" min=".01" max="24"  step=".01"onChange={(e) => setTotal_Time(e.target.value)} 
+                    required className="input input-bordered input-primary" />
                     <label className="input-group">
                   </label>
                 </div>

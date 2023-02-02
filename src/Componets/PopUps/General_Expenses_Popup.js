@@ -85,7 +85,7 @@ const GeneralExpensePopup = (props) => {
                     <span className="label-text">date</span>
                   </label>
                   <input type="date" value={Date} 
-                  onChange={(e) => setDate(e.target.value)} required className="input input-bordered input-primary " />
+                  onChange={(e) => setDate(e.target.value)} required className="input input-bordered input-primary appearance-none" />
                   <label className="label">
                   </label>
                 </div>
