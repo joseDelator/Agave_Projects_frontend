@@ -8,6 +8,7 @@ import ExpenseTable from '../Componets/Tables/ExpenseTable'
 import api from '../api'
 import StatusMarker from '../Componets/StatusMarker'
 import { dollars } from '../Functions/DateandDollarFormate'
+import { PhaseTable } from '../Componets/Tables/PhaseTable'
 function ProjectDash() {
     const [Project_data, setProject_data] = useState([])
     const Params = useParams()
@@ -56,6 +57,7 @@ function ProjectDash() {
         <div className="stat-desc text-secondary">Email: {Project_data.Client_Email}</div>
       </div>
     </div>
+    
     <div className="stats shadow">
       <div className="stat place-items-center ">
         <div className="stat-title">Project Number</div>
@@ -114,6 +116,9 @@ function ProjectDash() {
           </div>
         </div>
       </div>
+    </div>
+    <div className="card">
+      <PhaseTable props={Params.id}></PhaseTable>
     </div>
     <div className="main-cards">
       <div className="card"><TimeTable props ={Params.id} prefix={"TimeCard/"}/></div>

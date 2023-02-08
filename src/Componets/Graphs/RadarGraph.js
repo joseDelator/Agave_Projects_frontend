@@ -2,13 +2,10 @@ import React, {useState, useEffect}from 'react'
 import {Cell, ResponsiveContainer } from 'recharts';
 import { PieChart, Pie, Tooltip} from 'recharts';
 import api from '../../api';
-
+import { dollars } from '../../Functions/DateandDollarFormate';
 const RadarGraph = () => {
+  const COLORS = ['#84cc16', '#1FB2A6', '#FFBB23', '#F87272','#d9f99d' ];
     const [data, setdata] = useState([])
-    const dollars = new Intl.NumberFormat(`en-US`, {
-        currency: `USD`,
-        style: 'currency',
-    });
     useEffect (() => {
         let headersList = {       
             "Content-Type": "application/json" 
@@ -36,7 +33,7 @@ const RadarGraph = () => {
           
             return null;
           };
-          const COLORS = ['#84cc16', '#1FB2A6', '#FFBB23', '#F87272','#d9f99d' ];
+          
     return (
        
         <ResponsiveContainer width="100%" height="100%">
@@ -55,7 +52,7 @@ const RadarGraph = () => {
             paddingAngle={5}
             stroke="none"
           >
-              {data.map((entry, index) => (
+              {data&&data.map((entry, index) => (
             <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
           ))}
           </Pie>

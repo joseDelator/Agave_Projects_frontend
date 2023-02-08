@@ -123,9 +123,9 @@ const ProjectEdit = () => {
               className="input input-bordered input-primary" 
               onChange={(e) => setProjectData({...ProjectData, Client_Email: e.target.value})} required/>  
               <select className="select select-primary w-full " 
-              value={ProjectData.Project_Status} 
-              onChange={(e)=>setProjectData({...ProjectData, Project_Status: e.target.value})} required>
-                      <option value={"Active"} className="text-primary">
+                  value={ProjectData.Project_Status} 
+                  onChange={(e)=>setProjectData({...ProjectData, Project_Status: e.target.value})} required>
+                    <option value={"Active"} className="text-primary">
                     Active</option>
                     <option value={"Tracking"}>
                     Tracking</option>

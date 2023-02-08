@@ -40,7 +40,7 @@ import { dollars } from '../../Functions/DateandDollarFormate';
           data={Employeelist}
         >
           <XAxis dataKey="Employee_First_Name" stroke="#6b7280" />
-          <YAxis  stroke="#6b7280"/>
+          <YAxis  stroke="#6b7280"  />
          <Tooltip content={<CustomTooltip />} cursor={{fill:"#2A303C" }}/>
           <Bar dataKey="Total_Unpaid_Amount" fill="#84cc16" />
         </BarChart>

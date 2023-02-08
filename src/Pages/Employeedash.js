@@ -9,6 +9,7 @@ import { TimeTableEmployee } from '../Componets/Tables/TimeTableEmployee'
 import EditEmployee from '../Componets/PopUps/EditEmployeePopup'
 import { dollars } from '../Functions/DateandDollarFormate'
 import DataContext from '../Context/datacontext'
+  
 function EmployeeDash() {
     const [Project_data, setProject_data] = useState([])
     const [Employee_ID, setEmployee_ID] = useState("1")
@@ -65,12 +66,15 @@ function EmployeeDash() {
         <div className="stat-value">{Employee_ID}</div>
       </div>
     </div>
+
     <div className="stats shadow">
       <div className="stat place-items-center ">
         <div className="stat-title">Edit</div>
-        <div className="stat-value"><div className=" btn btn-secondary btn-outline" onClick={toggleEditPopup}><AiFillEdit size={32}/></div></div>
+        <div className="stat-value"><div className=" btn btn-secondary btn-outline" onClick={toggleEditPopup}><AiFillEdit size={32}/></div>
+        </div>
       </div>
-    </div><div className="stats shadow">
+    </div>
+    <div className="stats shadow">
       <div className="stat place-items-center ">
         <div className="stat-title">New Employee</div>
         <div className="stat-value"><AiFillPlusCircle className="text-primary"

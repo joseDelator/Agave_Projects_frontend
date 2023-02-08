@@ -38,10 +38,10 @@ const TimePopup = (props) => {
           changeParentState={changeParentState} />
         <div className="form-control">
           <label className="label">
-            <span className="label-text">date</span>
+            <span className="label-text">Date</span>
           </label>
           <input type="date" value={Date} onChange={(e) => setDate(e.target.value)} required 
-          className="input input-bordered input-primary appearance-none" />
+          className="input input-bordered input-primary appearance-none"/>
           <label className="label">
           </label>
         </div>

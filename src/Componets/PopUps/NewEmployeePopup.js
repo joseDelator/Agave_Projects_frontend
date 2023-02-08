@@ -2,12 +2,8 @@ import React, {useState}from 'react'
 import {GiPerson} from 'react-icons/gi'
 import api from '../../api'
 const NewEmployee = (props) => {
-    const [isOpen, setIsOpen] = useState(false);
     const [Failed, setFailed] = useState(false);
     const [Salary, setSalary] = useState(10)
-    const togglePopup = () => {
-    setIsOpen(!isOpen);
-  }  
     function Add_Employee(e){
         e.preventDefault();
         let headersList = {         
@@ -30,7 +26,7 @@ const NewEmployee = (props) => {
                }
                else{
                  setFailed(true)
-                 togglePopup()
+                 
                }
              console.log(response.data);
            })

@@ -1,10 +1,10 @@
-import React, {useState, useEffect, useContext}from 'react'
+import React, {useState, useEffect}from 'react'
 import { AiFillPlusCircle, AiFillCamera} from 'react-icons/ai'
 import api from '../../api';
 import Datepicker from 'react-tailwindcss-datepicker';
 import GeneralExpensePopup from '../PopUps/General_Expenses_Popup';
 import { dollars, datef } from '../../Functions/DateandDollarFormate';
-import DataContext from '../../Context/datacontext'
+
 const GeneralExpenseTable = (Params) => {
     const [Expense_data, setExpense_data] = useState([])
     const [isOpen, setisOpen] = useState(false)
