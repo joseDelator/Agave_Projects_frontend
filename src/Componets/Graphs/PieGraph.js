@@ -1,27 +1,42 @@
-import React, {useState}from 'react'
+import React, {useState,useEffect}from 'react'
+import { dollars } from '../../Functions/DateandDollarFormate'
+import api from '../../api'
 const PieGraph = ({TotalYearly}) => {
-  const [Precent] = useState(Math.round((TotalYearly/250000)*100))
-  const dollars = new Intl.NumberFormat(`en-US`, {
-    currency: `USD`,
-    style: 'currency',
-});
+  const [Projects, setProjects] = useState(0)
+  const [Precent] = useState(Math.round((120000/250000)*100))
+
+  useEffect (() => {
+    let headersList = {        
+        "Content-Type": "application/json" 
+       }
+       let reqOptions = {
+         url: "Agave_green",
+         method: "GET",
+         headers: headersList,
+         }
+       const fetch_somethe= async () =>{
+        const reponse = await api.request(reqOptions);
+        const dataf = reponse.data;
+        }
+
+    fetch_somethe();
+}, [])
   function StatusStyling() {
     if(Precent<40){
-      return "radial-progress text-error"
+      return " text-error"
     }
     if(Precent<70 && Precent>=40){
-      return "radial-progress text-warning"
+      return " text-warning"
     }
     if(Precent>=70){
-      return "radial-progress text-primary"
+      return " text-primary"
     }
 }
-
     return (
         <div className="">
           <div className="stat  place-items-center ">
           <div className="stat-title  mb-6">Road to 250K</div>
-          <div className={StatusStyling()} 
+          <div className={"radial-progress"+StatusStyling()} 
           style={{ "--value": Precent, "--size": "10rem", "--thickness": "1.5rem" }}>{Precent}%</div>
            <div className="stat-desc mt-6"> {dollars.format(TotalYearly)} for the year </div>
          </div>

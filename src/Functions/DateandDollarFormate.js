@@ -7,3 +7,6 @@ export const dollars = new Intl.NumberFormat(`en-US`, {
 export const datef = new  Intl.DateTimeFormat("us-en",{
     dateStyle:"short"
   })
+  const Today= new Date()
+  export const Lastmonth= new Date().setDate(Today.getDate()-30)
+  export const options = { year: 'numeric', month: 'numeric', day: 'numeric' };

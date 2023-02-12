@@ -3,24 +3,33 @@ import { AiFillPlusCircle, AiFillCamera} from 'react-icons/ai'
 import api from '../../api';
 import Datepicker from 'react-tailwindcss-datepicker';
 import GeneralExpensePopup from '../PopUps/General_Expenses_Popup';
-import { dollars, datef } from '../../Functions/DateandDollarFormate';
+import { dollars, datef, Lastmonth,options } from '../../Functions/DateandDollarFormate';
+import PhotosPopup from '../PopUps/PhotosPopup';
 
 const GeneralExpenseTable = (Params) => {
     const [Expense_data, setExpense_data] = useState([])
     const [isOpen, setisOpen] = useState(false)
     const [numbertodelete, setnumbertodelete] = useState("")
+    const [Photpopupopen, setPhotpopupopen] = useState(false)
+    const [photourl, setphotourl] = useState("")
     const [gendata, setgendata] = useState([])
     const [page, setpage] = useState(1)
     //date range starting state
-    const Today= new Date()
-    const Lastmonth= new Date().setDate(Today.getDate()-30)
-    const options = { year: 'numeric', month: 'numeric', day: 'numeric' };
     const [DateRange, setDateRange] = useState({
       startDate: new Date(Lastmonth).toLocaleDateString('en-CA', options),
       endDate: new Date().toLocaleDateString('en-CA', options)
   });
     const togglePopup = () => {
       setisOpen(!isOpen);
+    }
+    const togglephotopopup= ()=>{
+      setPhotpopupopen(false)
+
+    }
+    const OpenPhoto =(Expense_entree)=>{
+      setphotourl(Expense_entree.Image_Location)
+      setPhotpopupopen(true)
+     
     }
     const changeState = (newState) => {
       setDateRange(newState);
@@ -73,9 +82,10 @@ const GeneralExpenseTable = (Params) => {
         <td>{Expense_entree.Expense_Type}</td>
         <td>{datef.format( new Date(Expense_entree.Date.replace(/-/g, '/')))}</td>
         <td>
-        <a className="btn  btn-primary btn-outline"
-        href={Expense_entree.Image_Location}>
-        <AiFillCamera size={25}/></a>
+          <button className="btn  btn-primary btn-outline"
+          onClick={e=> OpenPhoto(Expense_entree,e)}>
+          <AiFillCamera size={25} />
+          </button>
         </td>
         <td>
           <label  onClick={e=>setnumbertodelete(Expense_entree.Expense_ID)} htmlFor="my-modal-6"
@@ -115,10 +125,16 @@ const GeneralExpenseTable = (Params) => {
           </table>
           
   </div>
+
   <div className="btn-group grid grid-cols-2 m-5">
           <button className={gendata.previous === null ?"btn btn-outline btn-disabled":"btn btn-outline btn-primary "} onClick={e=> setpage(page-1)} >Previous page</button>
           <button className={gendata.next === null ?"btn btn-outline btn-disabled":"btn btn-outline btn-primary "} onClick={e=> setpage(page+1)}>Next</button>
         </div>
+        <PhotosPopup 
+          handleClose={togglephotopopup}
+          imgurl={photourl}
+          Opened={Photpopupopen}
+          />
   <GeneralExpensePopup
                 content={Params.props}
                 handleClose={togglePopup}

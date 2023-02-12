@@ -2,15 +2,27 @@ import React, {useState, useEffect}from 'react'
 import { AiFillPlusCircle, AiFillCamera} from 'react-icons/ai'
 import ExpensePopup from '../PopUps/Expenses_Popup'
 import api from '../../api';
+import PhotosPopup from '../PopUps/PhotosPopup';
 import { datef,dollars } from '../../Functions/DateandDollarFormate';
 const ExpenseTable = (Params) => {
     const [Expense_data, setExpense_data] = useState([])
     const [isOpen, setisOpen] = useState(false)
     const [numbertodelete, setnumbertodelete] = useState("")
+    const [Photpopupopen, setPhotpopupopen] = useState(false)
+    const [photourl, setphotourl] = useState("")
     const [gendata, setgendata] = useState([])
     const [page, setpage] = useState(1)
     const togglePopup = () => {
       setisOpen(!isOpen);
+    }
+    const togglephotopopup= ()=>{
+      setPhotpopupopen(false)
+
+    }
+    const OpenPhoto =(Expense_entree)=>{
+      setphotourl(Expense_entree.Image_Location)
+      setPhotpopupopen(true)
+     
     }
     function Delete_Expense (){
       let headersList = {         
@@ -55,9 +67,10 @@ const ExpenseTable = (Params) => {
         <td>{ Expense_entree.Description}</td>
         <td>{datef.format( new Date(Expense_entree.Date.replace(/-/g, '/')))}</td>
         <td>
-        <a className="btn  btn-primary btn-outline"
-        href={Expense_entree.Image_Location}>
-        <AiFillCamera size={25}/></a>
+          <button className="btn  btn-primary btn-outline"
+            onClick={e=> OpenPhoto(Expense_entree,e)}>
+            <AiFillCamera size={25} />
+          </button>
         </td>
         <td  >
           <label  onClick={e=>setnumbertodelete(Expense_entree.Expense_ID)} htmlFor="my-modal-6"
@@ -104,6 +117,11 @@ const ExpenseTable = (Params) => {
                 </div>
               </div>
             </div>
+            <PhotosPopup 
+          handleClose={togglephotopopup}
+          imgurl={photourl}
+          Opened={Photpopupopen}
+          />
              <ExpensePopup
                 content={Params.props}
                 handleClose={togglePopup}

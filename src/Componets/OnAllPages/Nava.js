@@ -20,7 +20,7 @@ class  Nava extends Component {
       </ul>
     </div>
     <GiAgave className="text-primary" size={24}/> 
-    <Link Link to="/" className="btn btn-ghost normal-case text-xl text-secondary">Agave Green</Link>
+    <Link to="/" className="btn btn-ghost normal-case text-xl text-secondary">Agave Green</Link>
   </div>
   <div className="navbar-center hidden lg:flex">
     <ul className="menu menu-horizontal px-1">

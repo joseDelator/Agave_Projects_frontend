@@ -45,7 +45,25 @@ const ProjectEdit = () => {
     const togglePopup = () => {
         setIsOpen(!isOpen);
       }  
-    function Add_New_Project (e){
+      const handlePhoneChange = event => {
+        const rawValue = event.target.value;
+        const formattedValue = formatPhoneNumber(rawValue);
+        setPhone(formattedValue);
+      };
+    
+      const formatPhoneNumber = rawValue => {
+        const digitsOnly = rawValue.replace(/\D/g, '');
+        if (digitsOnly.length <= 3) {
+          return digitsOnly;
+        }
+        if (digitsOnly.length <= 6) {
+          return `${digitsOnly.slice(0, 3)}-${digitsOnly.slice(3)}`;
+        }
+        return `(${digitsOnly.slice(0, 3)}) ${digitsOnly.slice(3, 6)}-${digitsOnly.slice(
+          6
+        )}`;
+      };
+    function submiteditProject (e){
         e.preventDefault();
         let headersList = {         
             "Content-Type": "application/json" 
@@ -86,7 +104,7 @@ const ProjectEdit = () => {
         }else{
     return (
       <div className=" min-h-screen items-center">
-      <form className="my-form m-5" onSubmit={Add_New_Project}>
+      <form className="my-form m-5" onSubmit={submiteditProject}>
       <div className="container-project bg-neutral rounded-lg  p-5">
         <h1>Create Project</h1>
         <ul>
@@ -116,9 +134,9 @@ const ProjectEdit = () => {
           </li>    
           <li>
           <div className="grid grid-2">
-              <input type="tel" placeholder="Phone Number" value={Phone} 
+              <input type="tel" placeholder="Phone Number" value={Phone}
               className="input input-bordered input-primary" 
-              onChange={(e) => setPhone(e.target.value)} required /> 
+              onChange={handlePhoneChange} required /> 
               <input type="email" placeholder="Email" value={ProjectData.Client_Email}
               className="input input-bordered input-primary" 
               onChange={(e) => setProjectData({...ProjectData, Client_Email: e.target.value})} required/>  
@@ -145,7 +163,7 @@ const ProjectEdit = () => {
         </ul>
       </div>
     </form>
-    <input type="checkbox" className="modal-toggle" checked={Failed} />
+    <input type="checkbox" className="modal-toggle" checked={Failed} readOnly />
 <div className="modal modal-bottom sm:modal-middle">
   <div className="modal-box">
     <h3 className="font-bold text-lg text-error">Error!!!</h3>

@@ -123,7 +123,7 @@ const GeneralExpensePopup = (props) => {
               </form>
           </div>
         </div>
-        <input type="checkbox" id="my-modal" className="modal-toggle"  checked={isSubmitting} />
+        <input type="checkbox" id="my-modal" className="modal-toggle"  checked={isSubmitting} readOnly />
 <div className="modal">
    <Spiner/>
 </div>

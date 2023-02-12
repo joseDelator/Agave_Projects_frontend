@@ -1,10 +1,9 @@
-import React, {useState, useEffect, use}from 'react'
+import React, {useState, useEffect}from 'react'
 import { AiFillPlusCircle, AiFillEdit} from 'react-icons/ai'
 import TimePopup from '../PopUps/Time_Card_Popup'
 import TimeEditPopup from '../PopUps/Time_Card_Edit_Popup'
 import api from '../../api'
 import { datef } from '../../Functions/DateandDollarFormate'
-import { getOwnMetadata } from 'core-js/fn/reflect'
 
 export const TimeTable = (Params) => {
     const [Time_data, setTime_data] = useState([])
@@ -13,8 +12,6 @@ export const TimeTable = (Params) => {
     const [page, setpage] = useState(1)
     const [gendata, setgendata] = useState([])
     const [isEditOpen, setisEditOpen] = useState(false)
-  
-    
     const togglePopup = () => {
       setisOpen(!isOpen);
     }

@@ -14,6 +14,24 @@ const Projectinputform = () => {
         City:'',
         Client_Email:""
     })
+    const handlePhoneChange = event => {
+      const rawValue = event.target.value;
+      const formattedValue = formatPhoneNumber(rawValue);
+      setPhone(formattedValue);
+    };
+  
+    const formatPhoneNumber = rawValue => {
+      const digitsOnly = rawValue.replace(/\D/g, '');
+      if (digitsOnly.length <= 3) {
+        return digitsOnly;
+      }
+      if (digitsOnly.length <= 6) {
+        return `${digitsOnly.slice(0, 3)}-${digitsOnly.slice(3)}`;
+      }
+      return `(${digitsOnly.slice(0, 3)}) ${digitsOnly.slice(3, 6)}-${digitsOnly.slice(
+        6
+      )}`;
+    };
     function Add_New_Project (e){
         e.preventDefault();
         let headersList = {         
@@ -75,7 +93,7 @@ const Projectinputform = () => {
       <li>
       <div className="grid grid-2">
           <input type="tel" placeholder="Phone Number"  value={Phone} 
-          className="input input-bordered input-primary" onChange={(e) => setPhone(e.target.value)} required/> 
+          className="input input-bordered input-primary" onChange={handlePhoneChange} required/> 
           <input type="email" placeholder="Email" value={ProjectData.Client_Email}
           className="input input-bordered input-primary" onChange={(e) => setProjectData({...ProjectData, Client_Email: e.target.value})} required/>  
         </div>
@@ -94,7 +112,7 @@ const Projectinputform = () => {
     </ul>
   </div>
 </form>
-<input type="checkbox" className="modal-toggle" checked={Failed} />
+<input type="checkbox" className="modal-toggle" checked={Failed}  readOnly/>
 <div className="modal modal-bottom sm:modal-middle">
   <div className="modal-box">
     <h3 className="font-bold text-lg text-error">Error!!!</h3>
@@ -104,7 +122,7 @@ const Projectinputform = () => {
     </div>
   </div>
 </div>
-<input type="checkbox" className="modal-toggle" checked={isOpen}   />
+<input type="checkbox" className="modal-toggle" checked={isOpen}  readOnly />
 <div className="modal modal-bottom sm:modal-middle">
   <div className="modal-box">
     <h3 className="font-bold text-lg text-primary">success!!!</h3>
