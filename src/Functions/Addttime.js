@@ -16,7 +16,6 @@ export const AddingTime = async (Date, Agave_green_Project_Number,Employee_Id,To
        } 
        let jake = ""
         await api.request(reqOptions).then(function (response) {
-           console.log(response)
             jake = response
        })
        return jake

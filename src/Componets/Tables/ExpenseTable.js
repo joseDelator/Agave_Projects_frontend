@@ -1,17 +1,18 @@
-import React, {useState, useEffect}from 'react'
+import React, {useState, useEffect, useContext}from 'react'
 import { AiFillPlusCircle, AiFillCamera} from 'react-icons/ai'
 import ExpensePopup from '../PopUps/Expenses_Popup'
 import api from '../../api';
 import PhotosPopup from '../PopUps/PhotosPopup';
 import { datef,dollars } from '../../Functions/DateandDollarFormate';
+import ProjectContext from '../../Context/projectdatacontext';
 const ExpenseTable = (Params) => {
-    const [Expense_data, setExpense_data] = useState([])
     const [isOpen, setisOpen] = useState(false)
     const [numbertodelete, setnumbertodelete] = useState("")
     const [Photpopupopen, setPhotpopupopen] = useState(false)
     const [photourl, setphotourl] = useState("")
-    const [gendata, setgendata] = useState([])
+    const [Delete, setDelete] = useState(false)
     const [page, setpage] = useState(1)
+    const {updateprojectexpense, ExpenseProjectData, expensepage,updateprojectinfo} = useContext(ProjectContext)
     const togglePopup = () => {
       setisOpen(!isOpen);
     }
@@ -24,6 +25,13 @@ const ExpenseTable = (Params) => {
       setPhotpopupopen(true)
      
     }
+    useEffect (() => {
+      updateprojectexpense(page,Params.props)
+    }, [Params.props, page])
+    const deleteentree=(Expense_entree)=>{
+      setnumbertodelete(Expense_entree.Expense_ID)
+      setDelete(true)
+    }
     function Delete_Expense (){
       let headersList = {         
           "Content-Type": "application/json" 
@@ -35,32 +43,16 @@ const ExpenseTable = (Params) => {
          }
          api.request(reqOptions).then(function (response) {
              if (response.data === "Deleted Successfully") {
-                  window.location.reload(false);
+                  updateprojectexpense(page, Params.props)
+                  updateprojectinfo(Params.props)
+                  setDelete(false)
              }
              else{
              }
          })
          } 
-    useEffect (() => {
-        let headersList = {      
-            "Content-Type": "application/json" 
-           }
-           let reqOptions = {
-             url: "ExpensebyID/"+Params.props+"?page="+page,
-             method: "GET",
-             headers: headersList,
-             }
-           const fetch_somethe= async () =>{
-            const reponse = await api.request(reqOptions);
-            const timecard_data = reponse.data;
-            setgendata(timecard_data)
-           setExpense_data(timecard_data.results)
-            }
-
-        fetch_somethe();
-    }, [Params.props, page])
-   
-    const Tablerows = Expense_data.map((Expense_entree, e)=>{
+ 
+    const Tablerows = ExpenseProjectData.map((Expense_entree, e)=>{
         return  <tr key={Expense_entree.Expense_ID}>
         <th>{Expense_entree.Seller_Name}</th>
         <td>{ dollars.format(Expense_entree.Cost)}</td>
@@ -73,7 +65,7 @@ const ExpenseTable = (Params) => {
           </button>
         </td>
         <td  >
-          <label  onClick={e=>setnumbertodelete(Expense_entree.Expense_ID)} htmlFor="my-modal-6"
+          <label  onClick={e=>deleteentree(Expense_entree)}
           className="btn  btn-error btn-outline">Delete</label>
           </td>
       </tr>
@@ -94,34 +86,34 @@ const ExpenseTable = (Params) => {
       </tr>
     </thead>
     <tbody>
-      {Expense_data&&Tablerows}
+      {ExpenseProjectData&&Tablerows}
     </tbody>
   </table>
         
   </div>
-  <div className="btn-group grid grid-cols-2 m-5">
-          <button className={gendata.previous === null ?"btn btn-outline btn-disabled":"btn btn-outline btn-primary "} 
+        <div className={expensepage.previous === null& expensepage.next === null?"hidden":"btn-group grid grid-cols-2 m-5"}>
+          <button className={expensepage.previous === null ?"btn btn-outline btn-disabled":"btn btn-outline btn-primary "} 
           onClick={e=> setpage(page-1)} >Previous page</button>
-          <button className={gendata.next === null ?"btn btn-outline btn-disabled":"btn btn-outline btn-primary "} 
+          <button className={expensepage.next === null ?"btn btn-outline btn-disabled":"btn btn-outline btn-primary "} 
           onClick={e=> setpage(page+1)}>Next</button>
         </div>
         <AiFillPlusCircle className="absolute top-1 right-1 text-secondary" size={40} onClick={togglePopup}/> 
-          <input type="checkbox" htmlFor="my-modal-6" id="my-modal-6" className="modal-toggle"  />
+          <input type="checkbox" className="modal-toggle" checked={Delete} readOnly  />
             <div htmlFor="my-modal-6" className="modal modal-bottom sm:modal-middle">
               <div className="modal-box">
                 <h3 className="font-bold text-lg">Delete?</h3>
                 <p className="py-4">Are you Sure you Want Delete this entree</p>
                 <div className="modal-action">
                   <label className="btn btn-error" onClick={Delete_Expense}>Delete</label>
-                  <label className="btn btn-sm btn-circle absolute right-2 top-2" htmlFor="my-modal-6">x</label>
+                  <label className="btn btn-sm btn-circle absolute right-2 top-2" onClick={e=>setDelete(false)}>x</label>
                 </div>
               </div>
             </div>
             <PhotosPopup 
-          handleClose={togglephotopopup}
-          imgurl={photourl}
-          Opened={Photpopupopen}
-          />
+                handleClose={togglephotopopup}
+                imgurl={photourl}
+                Opened={Photpopupopen}
+            />
              <ExpensePopup
                 content={Params.props}
                 handleClose={togglePopup}

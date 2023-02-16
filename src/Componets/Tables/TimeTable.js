@@ -1,17 +1,17 @@
-import React, {useState, useEffect}from 'react'
+import React, {useState, useEffect, useContext}from 'react'
 import { AiFillPlusCircle, AiFillEdit} from 'react-icons/ai'
 import TimePopup from '../PopUps/Time_Card_Popup'
 import TimeEditPopup from '../PopUps/Time_Card_Edit_Popup'
 import api from '../../api'
 import { datef } from '../../Functions/DateandDollarFormate'
+import ProjectContext from '../../Context/projectdatacontext'
 
 export const TimeTable = (Params) => {
-    const [Time_data, setTime_data] = useState([])
     const [timeEntree, settimeEntree] = useState([])
     const [isOpen, setisOpen] = useState(false)
     const [page, setpage] = useState(1)
-    const [gendata, setgendata] = useState([])
     const [isEditOpen, setisEditOpen] = useState(false)
+    const {TimeCardtabledata, updatetimecardproject,pagesdata}=useContext(ProjectContext)
     const togglePopup = () => {
       setisOpen(!isOpen);
     }
@@ -19,22 +19,8 @@ export const TimeTable = (Params) => {
       setisEditOpen(!isEditOpen)
     }
     useEffect (() => {
-        let headersList = {       
-            "Content-Type": "application/json" 
-           }
-           let reqOptions = {
-             url: "TimeCardbyID/"+Params.props+"?page="+page,
-             method: "GET",
-             headers: headersList,             
-           }
-           const fetch_somethe= async()=>{
-            const reponse = await api.request(reqOptions);
-            const timecard_data = reponse
-            setgendata(timecard_data.data)
-            setTime_data(timecard_data.data.results)
-           }
-        fetch_somethe();
-    }, [ Params.prefix,Params.props, page])
+        updatetimecardproject(page,Params.props)
+    }, [Params.props, page])
    
     function Payed_employee (Time_Entree,e){
       Time_Entree.Been_Payed = !Time_Entree.Been_Payed
@@ -58,8 +44,7 @@ export const TimeTable = (Params) => {
            if (response.data === 'Updated Successfully') {
             e.target.checked=Time_Entree.Been_Payed
            }
-           else{
-           }
+        
        }) 
     };
 
@@ -67,7 +52,7 @@ export const TimeTable = (Params) => {
       settimeEntree(timecard_entree);
       setisEditOpen(true)
     }
-    const Tablerows = Time_data.map((timecard_entree)=>{
+    const Tablerows = TimeCardtabledata.map((timecard_entree)=>{
         return  <tr key={timecard_entree.TimeCard_ID}>
         <th >{timecard_entree.Employee_info}</th>
         <td >{timecard_entree.Total_Time}</td>
@@ -108,7 +93,7 @@ export const TimeTable = (Params) => {
               </tr>
             </thead>
             <tbody>
-                {Time_data&&Tablerows}
+                {TimeCardtabledata&&Tablerows}
             </tbody> 
         </table>
         {isEditOpen&&
@@ -120,9 +105,9 @@ export const TimeTable = (Params) => {
         }
         
             </div>
-            <div className="btn-group grid grid-cols-2 m-5">
-          <button className={gendata.previous === null ?"btn btn-outline btn-disabled":"btn btn-outline btn-primary "} onClick={e=> setpage(page-1)} >Previous page</button>
-          <button className={gendata.next === null ?"btn btn-outline btn-disabled":"btn btn-outline btn-primary "} onClick={e=> setpage(page+1)}>Next</button>
+            <div className={pagesdata.previous === null& pagesdata.next === null?"hidden":"btn-group grid grid-cols-2 m-5"}>
+          <button className={pagesdata.previous === null ?"btn btn-outline btn-disabled":"btn btn-outline btn-primary "} onClick={e=> setpage(page-1)} >Previous page</button>
+          <button className={pagesdata.next === null ?"btn btn-outline btn-disabled":"btn btn-outline btn-primary "} onClick={e=> setpage(page+1)}>Next</button>
         </div>
              <TimePopup
               content={Params.props}

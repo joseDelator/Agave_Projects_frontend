@@ -56,7 +56,7 @@ const GeneralExpenseTable = (Params) => {
             "Content-Type": "application/json" 
            }
            let reqOptions = {
-            url: "GeneralExpensesByDateRange"+"?page="+page,
+            url: "GeneralExpensesByDateRange?page="+page,
             method: "POST",
             headers: headersList,
             data:JSON.stringify({

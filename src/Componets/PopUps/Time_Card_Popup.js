@@ -1,22 +1,23 @@
-import React, {useState}from 'react'
+import {useState, useContext}from 'react'
 import {GiTimeBomb} from 'react-icons/gi'
 import Dropdrownemployee from '../dropdrownemployee'
 import { AddingTime } from '../../Functions/Addttime'
+import ProjectContext from '../../Context/projectdatacontext'
+import EmployeeContext from '../../Context/EmployeeContext'
 const TimePopup = (props) => {
     const [Total_Time, setTotal_Time] = useState("")
     const [Date, setDate] = useState('')
     const [Failed, setFailed] = useState(false);
-    const [Employee_Id, setEmployee_Id] = useState("")
-  const changeParentState = (newState) => {
-    setEmployee_Id(newState);
-  };
+    const{ SelectEmployee} = useContext(EmployeeContext)
+    const {updatetimecardproject,updateprojectinfo}=useContext(ProjectContext)
     function Add_Time (e){
         e.preventDefault();
            //input new time card entree and responce with popup
-           AddingTime(Date, props.content,Employee_Id,Total_Time).then( function(responce){
-            console.log(responce)
+           AddingTime(Date, props.content,SelectEmployee,Total_Time).then( function(responce){
             if ( responce.data === "Added Successfully") {
-              window.location.reload(false);
+              updatetimecardproject(1,props.content)
+              updateprojectinfo(props.content)
+              props.handleClose()
           }
           else{
             setFailed(true)
@@ -34,8 +35,8 @@ const TimePopup = (props) => {
       <div className=" flex w-full items-center justify-center">      
       <GiTimeBomb size={40} className="text-primary justify-self-center "/>
       </div>
-        <Dropdrownemployee  parentState={Employee_Id} 
-          changeParentState={changeParentState} />
+        <Dropdrownemployee 
+         />
         <div className="form-control">
           <label className="label">
             <span className="label-text">Date</span>
@@ -50,7 +51,7 @@ const TimePopup = (props) => {
             <span className="label-text"> Hours</span>
         </label>
           <input type="number" placeholder="Time" name="Total Time" 
-          value={Total_Time} pattern="[0-9]" min=".01" max="24"  step=".01"
+          value={Total_Time} pattern="[0-9]" min=".01" max="24"  step=".01" 
           onChange={(e) => setTotal_Time(e.target.value)} required className="input input-bordered input-primary" />
           <label className="input-group">
         </label>
@@ -61,9 +62,10 @@ const TimePopup = (props) => {
       </form>
           </div>
        
-      </div>
+    
+</div>
 
-{/* error popuo */}    
+{/* error popup*/}    
       
 <input type="checkbox" className="modal-toggle" checked={Failed} readOnly/>
 <div className="modal modal-bottom sm:modal-middle">
@@ -78,6 +80,6 @@ const TimePopup = (props) => {
          
       </div>
     )
-}
 
+    }
 export default TimePopup

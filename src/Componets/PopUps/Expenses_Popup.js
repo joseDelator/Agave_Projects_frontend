@@ -1,9 +1,9 @@
-import React, {useState}from 'react'
+import React, {useState, useContext}from 'react'
 import {RiMoneyDollarCircleLine} from 'react-icons/ri'
 import api from '../../api'
 import { useForm } from "react-hook-form";
 import Spiner from '../Spiner'
-
+import ProjectContext from '../../Context/projectdatacontext';
 
 const ExpensePopup = (props) => {
     const [Photo, setPhoto] = useState('')
@@ -13,6 +13,7 @@ const ExpensePopup = (props) => {
     const [Desription, setDesription] = useState("")
     const [Failed, setFailed] = useState(false)
     const { handleSubmit, formState } = useForm();
+    const {updateprojectexpense, updateprojectinfo} = useContext(ProjectContext)
     const { isSubmitting } = formState;
  function Add_Expense(){
         let headersList = {
@@ -33,8 +34,9 @@ const ExpensePopup = (props) => {
                   }
                  return api.request(reqOptions,).then(function (response) {
                     if (response.data === 'Added Successfully') {
-                        setFailed(false)
-                        window.location.reload(false);
+                        updateprojectexpense(1,props.content) 
+                        updateprojectinfo(props.content)
+                        props.handleClose()
                     }
                     else{
                       setFailed(true)

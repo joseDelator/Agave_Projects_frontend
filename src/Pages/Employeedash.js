@@ -9,7 +9,7 @@ import { TimeTableEmployee } from '../Componets/Tables/TimeTableEmployee'
 import EditEmployee from '../Componets/PopUps/EditEmployeePopup'
 import { dollars } from '../Functions/DateandDollarFormate'
 import DataContext from '../Context/datacontext'
-  
+import EmployeeContext from '../Context/EmployeeContext'
 function EmployeeDash() {
     const [Project_data, setProject_data] = useState([])
     const [Employee_ID, setEmployee_ID] = useState("1")
@@ -17,6 +17,7 @@ function EmployeeDash() {
     const [isEditOpen, setisEditOpen] = useState(false)
     const {Totalowed, setTotalowed} = useContext(DataContext) 
     const {Salary, setSalary} = useContext(DataContext)
+    const{ SelectEmployee} = useContext(EmployeeContext)
     const togglePopup = () => {
       setisOpen(!isOpen);
     }
@@ -28,7 +29,7 @@ function EmployeeDash() {
             "Content-Type": "application/json" 
            }
            let reqOptions = {
-             url: "Employee/"+Employee_ID,
+             url: "Employee/"+SelectEmployee,
              method: "GET",
              headers: headersList,  
            }
@@ -39,7 +40,7 @@ function EmployeeDash() {
             setSalary(reponse.data.Salary)
            }
         fetch_somethe();
-    }, [Employee_ID])
+    }, [SelectEmployee])
     const changeState = (newState) => {
       setEmployee_ID(newState);
     };
@@ -50,8 +51,7 @@ function EmployeeDash() {
     return (
        <div className="grid-container" >
   <main className="main place-items-center" >
-    <Dropdrownemployee  parentState={Employee_ID} 
-    changeParentState={changeState} />
+    <Dropdrownemployee />
     <div className=" grid main-header sm:grid-cols-2 gap-4 rounded-2xl"> 
     <div className="stats shadow">
       <div className="stat place-items-center ">
@@ -63,7 +63,7 @@ function EmployeeDash() {
     <div className="stats shadow">
       <div className="stat place-items-center ">
         <div className="stat-title">Employee ID</div>
-        <div className="stat-value">{Employee_ID}</div>
+        <div className="stat-value">{SelectEmployee}</div>
       </div>
     </div>
 
@@ -109,7 +109,7 @@ function EmployeeDash() {
           <div className="stat bg-neutral place-items-center">
             <div className="stat-titleb text-primary ">Total Owed</div>
             <div className="stat-value text-error">{dollars.format(Totalowed)}</div>
-            <div className="stat-desc">{"thats "+Math.round(Totalowed/2.29)+" cokes bottels"}</div>
+            <div className="stat-desc">{"thats"+Math.round(Totalowed/2.29)+" cokes bottels"}</div>
           </div>
         </div>
       </div>
@@ -123,10 +123,10 @@ function EmployeeDash() {
         </div>
       </div>
     </div>
-    <div className="main-cards" key={Employee_ID}>
+    <div className="main-cards" key={SelectEmployee}>
       <div className="card">
         <TimeTableEmployee 
-        props={Employee_ID}  
+        props={SelectEmployee}  
         prefix={"Employeetimecard/"} 
         />
         </div>

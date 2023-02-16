@@ -1,6 +1,5 @@
-import React, {useState, useEffect, use}from 'react'
+import React, {useState, useEffect}from 'react'
 import { AiFillPlusCircle, AiFillEdit} from 'react-icons/ai'
-import TimeEditPopup from '../PopUps/Time_Card_Edit_Popup'
 import api from '../../api'
 import { dollars } from '../../Functions/DateandDollarFormate'
 import StatusMarker from '../StatusMarker'
@@ -45,7 +44,7 @@ export const PhaseTable = (Params) => {
       setisEditOpen(true)
     }
     const Tablerows = Time_data.map((timecard_entree)=>{
-        return  <tr key={timecard_entree.Phase_ID}>
+        return <tr key={timecard_entree.Phase_ID}>
         <th >{timecard_entree.Phase_ID}</th>
         <td >{dollars.format(timecard_entree.Allocated_Amount)}</td>
         <td >{timecard_entree.Phase_description}</td>
@@ -61,6 +60,7 @@ export const PhaseTable = (Params) => {
         </td>
         
         </tr>
+       
     })
     return (
     <div  className='w-full'>
@@ -91,11 +91,11 @@ export const PhaseTable = (Params) => {
         }
         
  </div>
-             <PhasePopup
-              content={Params.props}
-              handleClose={togglePopup}
-              Opened = {isOpen}
-              />
+      <PhasePopup
+         content={Params.props}
+         handleClose={togglePopup}
+         Opened = {isOpen}
+        />
       </div>
     )
 }

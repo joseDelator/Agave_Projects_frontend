@@ -1,19 +1,18 @@
-import React, {useState,}from 'react'
+import React, {useState,useContext}from 'react'
 import Dropdrownemployee from '../dropdrownemployee'
 import {GiTimeBomb} from 'react-icons/gi'
 import api from '../../api'
+import ProjectContext from '../../Context/projectdatacontext'
+import EmployeeContext from '../../Context/EmployeeContext'
 const TimeEditPopup = (props) => {
     const [Total_Time, setTotal_Time] = useState(props.TC.Total_Time)
     const [Date, setDate] = useState(props.TC.Date)
-    const [isOpen, setIsOpen] = useState(false);
     const [Failed, setFailed] = useState(false);
-    const [Employee_Id, setEmployee_Id] = useState(props.TC.Employee_ID)
-    const changeParentState = (newState) => {
-      setEmployee_Id(newState);
-    };
-  const togglePopup = () => {
-    setIsOpen(!isOpen);
-  } 
+    const{ SelectEmployee, setSelectEmployee} = useContext(EmployeeContext)
+    const {updatetimecardproject,updateprojectinfo}=useContext(ProjectContext)
+    setSelectEmployee(props.TC.Employee_ID)
+    
+ 
     function Add_Time (e){
         e.preventDefault();
         let headersList = {         
@@ -26,7 +25,7 @@ const TimeEditPopup = (props) => {
              data:JSON.stringify({
                 "TimeCard_ID": props.TC.TimeCard_ID, 
                 "Project_Number_ID_Time" : props.TC.Project_Number_ID_Time,
-                "Employee_ID" : Employee_Id,
+                "Employee_ID" : SelectEmployee,
                 "Date" : Date,
                 "Total_Time" : Total_Time,
                 "Been_Payed": props.TC.Been_Payed
@@ -34,12 +33,14 @@ const TimeEditPopup = (props) => {
            }
            api.request(reqOptions).then(function (response) {
                if (response.data === "Updated Successfully") {
-                   setFailed(false)
-                    window.location.reload(false);
+                  setFailed(false)
+                  updatetimecardproject(1,props.TC.Project_Number_ID_Time)
+                  updateprojectinfo(props.TC.Project_Number_ID_Time)
+                  props.handleClose()
+              
                }
                else{
                  setFailed(true)
-                 togglePopup()
                }
            })
            }
@@ -55,12 +56,12 @@ const TimeEditPopup = (props) => {
                }
                api.request(reqOptions).then(function (response) {
                    if (response.data === "Deleted Successfully") {
-                       setFailed(false)
-                        window.location.reload(false);
+                    updatetimecardproject(1,props.TC.Project_Number_ID_Time)
+                    updateprojectinfo(props.TC.Project_Number_ID_Time)
+                    props.handleClose()
                    }
                    else{
                      setFailed(true)
-                    
                    }
                })
                } 
@@ -74,8 +75,7 @@ const TimeEditPopup = (props) => {
         <div className=" flex w-full items-center justify-center">      
         <GiTimeBomb size={40} className="text-primary justify-self-center "/>
         </div>
-        <Dropdrownemployee  parentState={Employee_Id} 
-          changeParentState={changeParentState} />
+        <Dropdrownemployee />
         <div className="form-control">
           <label className="label">
             <span className="label-text">Date</span>

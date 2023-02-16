@@ -1,7 +1,8 @@
-import {React,useState, useEffect} from 'react'
+import { useEffect, useContext} from 'react'
 import api from '../api'
-const Dropdrownemployee = ({changeParentState ,parentState}) => {
-    const [Employeelist, setEmployeelist] = useState([])
+import EmployeeContext from '../Context/EmployeeContext'
+const Dropdrownemployee = () => {
+  const{EmployeeList, setEmployeeList, setSelectEmployee, SelectEmployee} = useContext(EmployeeContext)
   useEffect (() => {
     let headersList = {       
         "Content-Type": "application/json" 
@@ -14,20 +15,21 @@ const Dropdrownemployee = ({changeParentState ,parentState}) => {
        const fetch_somethe= async()=>{
         const reponse = await api.request(reqOptions)
         const Employeedata = reponse.data;
-       setEmployeelist(Employeedata)
+       setEmployeeList(Employeedata)
        }
         fetch_somethe();
     }, [])
-    const dropdownrows = Employeelist.map((Employee)=>{
+    const dropdownrows = EmployeeList.map((Employee)=>{
         return <option key={Employee.Employee_ID}value={Employee.Employee_ID}>
           {Employee.Employee_First_Name}</option>
     })
     return (
         <div>
-        <select className="select select-primary w-full  text-secondary mt-5 max-w-md" value= {parentState} select 
-        onChange={(e) => changeParentState(e.target.value)}>
+        <select className="select select-primary w-full  
+        text-secondary mt-5 max-w-md" value= {SelectEmployee} select 
+        onChange={(e) => setSelectEmployee(e.target.value)}>
         <option  value="0" onChange>select Employee</option>
-        {Employeelist&&dropdownrows}
+        {EmployeeList&&dropdownrows}
         </select>
         </div>
     )
