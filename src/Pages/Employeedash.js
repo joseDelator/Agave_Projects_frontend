@@ -35,8 +35,6 @@ function EmployeeDash() {
            }
            const fetch_somethe= async () =>{
             const reponse = await api.request(reqOptions);
-            const funfact = await axios.request("http://numbersapi.com/"+Math.round(reponse.data.Total_hours_Worked))
-            setFunfact(funfact.data)
             setProject_data(reponse.data)
             setTotalowed(reponse.data.Total_Unpaid_Amount)
             
@@ -117,7 +115,7 @@ function EmployeeDash() {
           <div className="stat bg-neutral place-items-center">
             <div className="stat-titleb text-primary ">Total hours work</div>
             <div className="stat-value text-secondary">{Project_data.Total_hours_Worked}</div>
-            <div className="stat-desc flex-wrap max-w-full overflow-auto">{Funfact}  </div>
+            <div className="stat-desc flex-wrap max-w-full overflow-auto"> this is a total for the full year</div>
           </div>
         </div>
       </div>
