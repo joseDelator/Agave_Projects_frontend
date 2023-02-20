@@ -6,6 +6,7 @@ import { AiFillEdit } from 'react-icons/ai'
 import Datepicker from "react-tailwindcss-datepicker";
 import { datef } from '../../Functions/DateandDollarFormate'
 import DataContext from '../../Context/datacontext'
+import TimeEditPopupEmployee from '../PopUps/Time_Card_Edit_Popup_Employee'
 
 export const TimeTableEmployee = (Params) => {
     // all time card data for tiem range
@@ -147,7 +148,14 @@ export const TimeTableEmployee = (Params) => {
               content={Params.props}
               handleClose={togglePopup}
             />}  
-              
+              {
+            isEditOpen &&
+            <TimeEditPopupEmployee
+              TC = {timeEntree}  
+              handleClose={toggeledit}
+              Opened = {isEditOpen}
+              />
+            }
 
 
       </div>
