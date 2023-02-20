@@ -1,16 +1,13 @@
 import React, {useState,useContext}from 'react'
 import {GiTimeBomb} from 'react-icons/gi'
 import api from '../../api'
-import ProjectContext from '../../Context/projectdatacontext'
 import EmployeeContext from '../../Context/EmployeeContext'
 const TimeEditPopupEmployee= (props) => {
     const [Total_Time, setTotal_Time] = useState(props.TC.Total_Time)
     const [Date, setDate] = useState(props.TC.Date)
     const [Failed, setFailed] = useState(false);
     const [Project_ID, setProject_ID] = useState(props.TC.Project_Number_ID_Time)
-    const{ SelectEmployee} = useContext(EmployeeContext)
-    const {updatetimecardproject,updateprojectinfo}=useContext(ProjectContext)
- 
+    const{ SelectEmployee, updateemployeetimcarddata,updateEmployeeinfo } = useContext(EmployeeContext)
     function Add_Time (e){
         e.preventDefault();
         let headersList = {         
@@ -21,7 +18,7 @@ const TimeEditPopupEmployee= (props) => {
              method: "PUT",
              headers: headersList,
              data:JSON.stringify({
-                "TimeCard_ID": Project_ID, 
+                "TimeCard_ID": props.TC.TimeCard_ID, 
                 "Project_Number_ID_Time" :Project_ID,
                 "Employee_ID" : SelectEmployee,
                 "Date" : Date,
@@ -31,9 +28,8 @@ const TimeEditPopupEmployee= (props) => {
            }
            api.request(reqOptions).then(function (response) {
                if (response.data === "Updated Successfully") {
-                  setFailed(false)
-                  updatetimecardproject(1,props.TC.Project_Number_ID_Time)
-                  updateprojectinfo(props.TC.Project_Number_ID_Time)
+                  updateemployeetimcarddata(SelectEmployee)
+                  updateEmployeeinfo()
                   props.handleClose()
               
                }
@@ -54,8 +50,8 @@ const TimeEditPopupEmployee= (props) => {
                }
                api.request(reqOptions).then(function (response) {
                    if (response.data === "Deleted Successfully") {
-                    updatetimecardproject(1,props.TC.Project_Number_ID_Time)
-                    updateprojectinfo(props.TC.Project_Number_ID_Time)
+                    updateemployeetimcarddata( SelectEmployee)
+                    updateEmployeeinfo()
                     props.handleClose()
                    }
                    else{

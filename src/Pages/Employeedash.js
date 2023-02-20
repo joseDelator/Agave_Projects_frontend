@@ -12,12 +12,9 @@ import DataContext from '../Context/datacontext'
 import EmployeeContext from '../Context/EmployeeContext'
 import axios from 'axios'
 function EmployeeDash() {
-    const [Project_data, setProject_data] = useState([])
     const [isOpen, setisOpen] = useState(false)
     const [isEditOpen, setisEditOpen] = useState(false)
-    const [Funfact, setFunfact] = useState('')
-    const {Totalowed, setTotalowed} = useContext(DataContext) 
-    const{ SelectEmployee} = useContext(EmployeeContext)
+    const{ SelectEmployee,updateEmployeeinfo,EmployeeData} = useContext(EmployeeContext)
     const togglePopup = () => {
       setisOpen(!isOpen);
     }
@@ -25,23 +22,9 @@ function EmployeeDash() {
       setisEditOpen(!isEditOpen);
     }
     useEffect (() => {
-        let headersList = {           
-            "Content-Type": "application/json" 
-           }
-           let reqOptions = {
-             url: "Employee/"+SelectEmployee,
-             method: "GET",
-             headers: headersList,  
-           }
-           const fetch_somethe= async () =>{
-            const reponse = await api.request(reqOptions);
-            setProject_data(reponse.data)
-            setTotalowed(reponse.data.Total_Unpaid_Amount)
-            
-           }
-        fetch_somethe();
+      updateEmployeeinfo()
     }, [SelectEmployee])
-    if(Project_data.length === 0){  
+    if(EmployeeData.length === 0){  
         return <Spiner/>
         ; 
     }else{
@@ -53,8 +36,8 @@ function EmployeeDash() {
     <div className="stats shadow">
       <div className="stat place-items-center ">
         <div className="stat-title">Name</div>
-        <div className="stat-value">{Project_data.Employee_First_Name}</div>
-        <div className="stat-desc text-secondary">Last Name: {Project_data.Employee_Last_Name}</div>
+        <div className="stat-value">{EmployeeData.Employee_First_Name}</div>
+        <div className="stat-desc text-secondary">Last Name: {EmployeeData.Employee_Last_Name}</div>
       </div>
     </div>
     <div className="stats shadow">
@@ -85,7 +68,7 @@ function EmployeeDash() {
             {isEditOpen&& <EditEmployee
             handleClose={toggleEditPopup}
             Opened={isEditOpen}
-            Employee={Project_data}
+            Employee={EmployeeData}
             />
 
             } 
@@ -96,8 +79,8 @@ function EmployeeDash() {
         <div className="stats shadow w-full">
           <div className="stat bg-neutral place-items-center">
             <div className="stat-titleb text-primary ">Salary</div>
-            <div className="stat-value text-secondary">{dollars.format(Project_data.Salary)}</div>
-            <div className="stat-desc">{"thats "+dollars.format(Project_data.Salary/60)+" a minute"}</div>
+            <div className="stat-value text-secondary">{dollars.format(EmployeeData.Salary)}</div>
+            <div className="stat-desc">{"thats "+dollars.format(EmployeeData.Salary/60)+" a minute"}</div>
           </div>
         </div>
       </div>
@@ -105,8 +88,8 @@ function EmployeeDash() {
         <div className="stats shadow w-full">
           <div className="stat bg-neutral place-items-center flex-wrap max-w-full">
             <div className="stat-titleb text-primary ">Total Owed</div>
-            <div className="stat-value text-error">{dollars.format(Totalowed)}</div>
-            <div className="stat-desc">{"thats "+Math.round(Totalowed/Project_data.Salary)+" hours"}</div>
+            <div className="stat-value text-error">{dollars.format(EmployeeData.Total_Unpaid_Amount)}</div>
+            <div className="stat-desc">{"thats "+EmployeeData.Total_Unpaid_Amount/EmployeeData.Salary+" hours"}</div>
           </div>
         </div>
       </div>
@@ -114,7 +97,7 @@ function EmployeeDash() {
         <div className="stats shadow w-full">
           <div className="stat bg-neutral place-items-center">
             <div className="stat-titleb text-primary ">Total hours work</div>
-            <div className="stat-value text-secondary">{Project_data.Total_hours_Worked}</div>
+            <div className="stat-value text-secondary">{EmployeeData.Total_hours_Worked}</div>
             <div className="stat-desc flex-wrap max-w-full overflow-auto"> this is a total for the full year</div>
           </div>
         </div>

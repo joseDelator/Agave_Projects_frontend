@@ -1,17 +1,18 @@
 import React, {useState, useEffect, useContext}from 'react'
 import TimePopup from '../PopUps/Time_Card_Popup'
-import TimeEditPopup from '../PopUps/Time_Card_Edit_Popup'
 import api from '../../api'
 import { AiFillEdit } from 'react-icons/ai'
 import Datepicker from "react-tailwindcss-datepicker";
-import { datef } from '../../Functions/DateandDollarFormate'
+import { datef, Lastmonth,options } from '../../Functions/DateandDollarFormate';
 import DataContext from '../../Context/datacontext'
+import EmployeeContext from '../../Context/EmployeeContext';
 import TimeEditPopupEmployee from '../PopUps/Time_Card_Edit_Popup_Employee'
 
+
 export const TimeTableEmployee = (Params) => {
-    // all time card data for tiem range
-    const [Time_data, setTime_data] = useState([])
+    // all time card data for time range
     const {Totalowed, setTotalowed} = useContext(DataContext)
+    const {updateemployeetimcarddata, updateEmployeeinfo, Employee_timecard_Data,DateRange,setDateRange}  = useContext(EmployeeContext)
     const {Salary, setSalary} = useContext(DataContext) 
     // selected time entree for edite popup
     const [timeEntree, settimeEntree] = useState([])
@@ -19,14 +20,6 @@ export const TimeTableEmployee = (Params) => {
     const [isOpen, setisOpen] = useState(false)
     const [isEditOpen, setisEditOpen] = useState(false)
     //setting starting date
-    const Today= new Date()
-    const Lastmonth= new Date().setDate(Today.getDate()-30)
-    const options = { year: 'numeric', month: 'numeric', day: 'numeric' };
-    const [DateRange, setDateRange] = useState({
-      startDate: new Date(Lastmonth).toLocaleDateString('en-CA', options),
-      endDate: new Date().toLocaleDateString('en-CA', options)
-  });
-
     const togglePopup = () => {
       setisOpen(!isOpen);
     }
@@ -38,24 +31,9 @@ export const TimeTableEmployee = (Params) => {
     };
    
     useEffect (() => {
-        let headersList = {       
-            "Content-Type": "application/json" 
-           }
-           let reqOptions = {
-             url: Params.prefix+Params.props,
-             method: "POST",
-             headers: headersList,
-             data:JSON.stringify({
-              "Start": DateRange.startDate,
-              "End":DateRange.endDate
-            }),             
-           }
-           const fetch_somethe= async()=>{
-            const reponse = await api.request(reqOptions);
-            const timecard_data = reponse.data;
-           setTime_data(timecard_data)
-           }
-        fetch_somethe();
+      updateemployeetimcarddata(Params.props)
+      updateEmployeeinfo()
+       
     }, [ Params.prefix,Params.props, DateRange])
    
     function Payed_employee (Time_Entree,e){
@@ -79,13 +57,7 @@ export const TimeTableEmployee = (Params) => {
        api.request(reqOptions).then(function (response) {
            if (response.data === 'Updated Successfully') {
             e.target.checked=Time_Entree.Been_Payed
-            if(Time_Entree.Been_Payed){
-              setTotalowed(Totalowed-(Salary*Time_Entree.Total_Time))
-            }
-            
-           else{
-            setTotalowed(Totalowed+(Salary*Time_Entree.Total_Time))
-           }
+            updateEmployeeinfo()
           }
        }) 
     };
@@ -93,7 +65,7 @@ export const TimeTableEmployee = (Params) => {
       settimeEntree(timecard_entree);
       setisEditOpen(true)
     }
-    const Tablerows = Time_data.map((timecard_entree)=>{
+    const Tablerows = Employee_timecard_Data.map((timecard_entree)=>{
       return  <tr key={timecard_entree.TimeCard_ID}>
       <th>{timecard_entree.Project_Number_ID_Time}</th>
       <td>{timecard_entree.Total_Time}</td>
@@ -140,7 +112,7 @@ export const TimeTableEmployee = (Params) => {
               </tr>
             </thead>
             <tbody>
-                {Time_data&&Tablerows}
+                {Employee_timecard_Data&&Tablerows}
             </tbody> 
             </table>
             </div>

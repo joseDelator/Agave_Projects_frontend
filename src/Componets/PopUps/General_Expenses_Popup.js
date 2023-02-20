@@ -111,7 +111,7 @@ const GeneralExpensePopup = (props) => {
                 <label className="label">
                     <span className="label-text">files</span>
                 </label>
-                <input type="file" accept="image/*, .pdf"
+                <input type="file" accept="image/*"
                     className="file-input file-input-bordered file-input-secondary w-full " 
                     onChange={(e) => setPhoto(e.target.files[0])} required />
                     <label className="input-group">
