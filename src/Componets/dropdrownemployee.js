@@ -26,9 +26,8 @@ const Dropdrownemployee = () => {
     return (
         <div>
         <select className="select select-primary w-full  
-        text-secondary mt-5 max-w-md" value= {SelectEmployee} select 
+        text-secondary mt-5 max-w-md" value= {SelectEmployee} 
         onChange={(e) => setSelectEmployee(e.target.value)}>
-        <option  value="0" onChange>select Employee</option>
         {EmployeeList&&dropdownrows}
         </select>
         </div>

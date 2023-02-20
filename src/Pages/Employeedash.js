@@ -10,13 +10,13 @@ import EditEmployee from '../Componets/PopUps/EditEmployeePopup'
 import { dollars } from '../Functions/DateandDollarFormate'
 import DataContext from '../Context/datacontext'
 import EmployeeContext from '../Context/EmployeeContext'
+import axios from 'axios'
 function EmployeeDash() {
     const [Project_data, setProject_data] = useState([])
-    const [Employee_ID, setEmployee_ID] = useState("1")
     const [isOpen, setisOpen] = useState(false)
     const [isEditOpen, setisEditOpen] = useState(false)
+    const [Funfact, setFunfact] = useState('')
     const {Totalowed, setTotalowed} = useContext(DataContext) 
-    const {Salary, setSalary} = useContext(DataContext)
     const{ SelectEmployee} = useContext(EmployeeContext)
     const togglePopup = () => {
       setisOpen(!isOpen);
@@ -35,15 +35,14 @@ function EmployeeDash() {
            }
            const fetch_somethe= async () =>{
             const reponse = await api.request(reqOptions);
-            setProject_data( reponse.data)
+            const funfact = await axios.request("http://numbersapi.com/"+Math.round(reponse.data.Total_hours_Worked))
+            setFunfact(funfact.data)
+            setProject_data(reponse.data)
             setTotalowed(reponse.data.Total_Unpaid_Amount)
-            setSalary(reponse.data.Salary)
+            
            }
         fetch_somethe();
     }, [SelectEmployee])
-    const changeState = (newState) => {
-      setEmployee_ID(newState);
-    };
     if(Project_data.length === 0){  
         return <Spiner/>
         ; 
@@ -106,10 +105,10 @@ function EmployeeDash() {
       </div>
       <div className="overviewcard">
         <div className="stats shadow w-full">
-          <div className="stat bg-neutral place-items-center">
+          <div className="stat bg-neutral place-items-center flex-wrap max-w-full">
             <div className="stat-titleb text-primary ">Total Owed</div>
             <div className="stat-value text-error">{dollars.format(Totalowed)}</div>
-            <div className="stat-desc">{"thats"+Math.round(Totalowed/2.29)+" cokes bottels"}</div>
+            <div className="stat-desc">{"thats "+Math.round(Totalowed/Project_data.Salary)+" hours"}</div>
           </div>
         </div>
       </div>
@@ -118,7 +117,7 @@ function EmployeeDash() {
           <div className="stat bg-neutral place-items-center">
             <div className="stat-titleb text-primary ">Total hours work</div>
             <div className="stat-value text-secondary">{Project_data.Total_hours_Worked}</div>
-            <div className="stat-desc">{Project_data.Total_hours_Worked-2} than Emperor Mo was in power </div>
+            <div className="stat-desc flex-wrap max-w-full overflow-auto">{Funfact}  </div>
           </div>
         </div>
       </div>

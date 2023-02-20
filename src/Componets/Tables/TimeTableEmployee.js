@@ -147,14 +147,7 @@ export const TimeTableEmployee = (Params) => {
               content={Params.props}
               handleClose={togglePopup}
             />}  
-              {
-            isEditOpen &&
-            <TimeEditPopup
-              TC = {timeEntree}  
-              handleClose={toggeledit}
-              Opened = {isEditOpen}
-              />
-            }
+              
 
 
       </div>

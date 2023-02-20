@@ -5,12 +5,14 @@ import TimeEditPopup from '../PopUps/Time_Card_Edit_Popup'
 import api from '../../api'
 import { datef } from '../../Functions/DateandDollarFormate'
 import ProjectContext from '../../Context/projectdatacontext'
+import EmployeeContext from '../../Context/EmployeeContext'
 
 export const TimeTable = (Params) => {
     const [timeEntree, settimeEntree] = useState([])
     const [isOpen, setisOpen] = useState(false)
     const [page, setpage] = useState(1)
     const [isEditOpen, setisEditOpen] = useState(false)
+    const{ SelectEmployee, setSelectEmployee} = useContext(EmployeeContext)
     const {TimeCardtabledata, updatetimecardproject,pagesdata}=useContext(ProjectContext)
     const togglePopup = () => {
       setisOpen(!isOpen);
@@ -50,6 +52,7 @@ export const TimeTable = (Params) => {
 
    const openedit =(timecard_entree)=>{
       settimeEntree(timecard_entree);
+      setSelectEmployee(timecard_entree.Employee_ID)
       setisEditOpen(true)
     }
     const Tablerows = TimeCardtabledata.map((timecard_entree)=>{
@@ -82,7 +85,7 @@ export const TimeTable = (Params) => {
     <AiFillPlusCircle className="absolute top-1 right-1 text-secondary" size={40} onClick={togglePopup}/>
         <h2 className="H2 self-center">Work Hours </h2>
         <div className="overflow-x-auto">
-        <table className="table table-zebra w-full">
+        <table className="table table-zebra w-full  ">
             <thead>
               <tr className="text-secondary">
                 <th>Name</th>
@@ -92,7 +95,7 @@ export const TimeTable = (Params) => {
                 <th>Edit</th>
               </tr>
             </thead>
-            <tbody>
+          <tbody>
                 {TimeCardtabledata&&Tablerows}
             </tbody> 
         </table>
@@ -103,11 +106,15 @@ export const TimeTable = (Params) => {
           Opened = {isEditOpen}
          />
         }
-        
-            </div>
-            <div className={pagesdata.previous === null& pagesdata.next === null?"hidden":"btn-group grid grid-cols-2 m-5"}>
-          <button className={pagesdata.previous === null ?"btn btn-outline btn-disabled":"btn btn-outline btn-primary "} onClick={e=> setpage(page-1)} >Previous page</button>
-          <button className={pagesdata.next === null ?"btn btn-outline btn-disabled":"btn btn-outline btn-primary "} onClick={e=> setpage(page+1)}>Next</button>
+         </div>
+          <div className={pagesdata.previous === null& pagesdata.next === null?
+            "hidden":"btn-group grid grid-cols-2 m-5"}>
+          <button className={pagesdata.previous === null ?
+          "btn btn-outline btn-disabled":"btn btn-outline btn-primary"} 
+          onClick={e=> setpage(page-1)} >Previous page</button>
+          <button className={pagesdata.next === null ?
+          "btn btn-outline btn-disabled":"btn btn-outline btn-primary"} 
+          onClick={e=> setpage(page+1)}>Next</button>
         </div>
              <TimePopup
               content={Params.props}

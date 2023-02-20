@@ -10,7 +10,7 @@ const TimeEditPopup = (props) => {
     const [Failed, setFailed] = useState(false);
     const{ SelectEmployee, setSelectEmployee} = useContext(EmployeeContext)
     const {updatetimecardproject,updateprojectinfo}=useContext(ProjectContext)
-    setSelectEmployee(props.TC.Employee_ID)
+    //setSelectEmployee(props.TC.Employee_ID)
     
  
     function Add_Time (e){

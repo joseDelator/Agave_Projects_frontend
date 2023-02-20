@@ -45,6 +45,7 @@ const ExpenseTable = (Params) => {
              if (response.data === "Deleted Successfully") {
                   updateprojectexpense(page, Params.props)
                   updateprojectinfo(Params.props)
+                  setpage(1)
                   setDelete(false)
              }
              else{
@@ -74,7 +75,7 @@ const ExpenseTable = (Params) => {
     <div className="container">
         <h2 className="H2">Project Expenses</h2>
         <div className="overflow-x-auto">
-        <table className="table table-zebra w-full">
+        <table className="table table-zebra w-full ">
     <thead>
       <tr className="text-secondary">
         <th>Seller Name</th>

@@ -107,7 +107,7 @@ const GeneralExpenseTable = (Params) => {
             />
         <h2 className="H2">General Expenses</h2>
         <div className=" overflow-auto ">
-                <table className="table table-zebra  w-full z-0 ">
+                <table className="table table-zebra  w-full z-0  h-96 ">
             <thead>
               <tr className="text-secondary">
                 <th>Seller Name</th>
