@@ -1,6 +1,6 @@
 import { createContext, useState,} from "react";
 import api from "../api";
-import { Lastmonth, options } from "../Functions/DateandDollarFormate";
+import { Lastmonth, thistoday,} from "../Functions/DateandDollarFormate";
 const EmployeeContext = createContext({});
 
 export const EmployeeProvider = ({ children }) => {
@@ -9,8 +9,8 @@ export const EmployeeProvider = ({ children }) => {
     const [Employee_timecard_Data, setEmployee_timecard_Data] = useState([])
     const [EmployeeData, setEmployeeData] = useState([])
     const [DateRange, setDateRange] = useState({
-        startDate: new Date(Lastmonth).toLocaleDateString('en-CA', options),
-        endDate: new Date().toLocaleDateString('en-CA', options)
+        startDate: Lastmonth,
+        endDate: thistoday,
     });
     //to update employee data
     const updateemployeetimcarddata=(Params)=>{

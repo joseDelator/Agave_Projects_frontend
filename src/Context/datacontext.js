@@ -8,8 +8,6 @@ export const DataProvider = ({ children }) => {
     let [authTokens, setAuthTokens] = useState(()=> localStorage.getItem('authTokens') ? JSON.parse(localStorage.getItem('authTokens')) : null)
     let [user, setUser] = useState(()=> localStorage.getItem('authTokens') ? jwt_decode(localStorage.getItem('authTokens')) : null)
     let [loading, setLoading] = useState(true)
-    const [Totalowed, setTotalowed] = useState(0)
-    const [Salary, setSalary] = useState(0)
     const history = useNavigate()
 let loginUser = async(e)=>{
     e.preventDefault();
@@ -69,10 +67,6 @@ let loginUser = async(e)=>{
     }
     let contexData = {
         user:user,
-        Totalowed:Totalowed,
-        setTotalowed:setTotalowed,
-        Salary:Salary,
-        setSalary:setSalary, 
         authTokens:authTokens,
         loginUser:loginUser,
         logoutUser:logoutUser,

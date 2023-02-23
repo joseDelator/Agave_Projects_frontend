@@ -3,17 +3,12 @@ import TimePopup from '../PopUps/Time_Card_Popup'
 import api from '../../api'
 import { AiFillEdit } from 'react-icons/ai'
 import Datepicker from "react-tailwindcss-datepicker";
-import { datef, Lastmonth,options } from '../../Functions/DateandDollarFormate';
-import DataContext from '../../Context/datacontext'
+import { datef } from '../../Functions/DateandDollarFormate';
 import EmployeeContext from '../../Context/EmployeeContext';
 import TimeEditPopupEmployee from '../PopUps/Time_Card_Edit_Popup_Employee'
-
-
 export const TimeTableEmployee = (Params) => {
     // all time card data for time range
-    const {Totalowed, setTotalowed} = useContext(DataContext)
     const {updateemployeetimcarddata, updateEmployeeinfo, Employee_timecard_Data,DateRange,setDateRange}  = useContext(EmployeeContext)
-    const {Salary, setSalary} = useContext(DataContext) 
     // selected time entree for edite popup
     const [timeEntree, settimeEntree] = useState([])
     //popup toggles
@@ -32,8 +27,6 @@ export const TimeTableEmployee = (Params) => {
    
     useEffect (() => {
       updateemployeetimcarddata(Params.props)
-      updateEmployeeinfo()
-       
     }, [ Params.prefix,Params.props, DateRange])
    
     function Payed_employee (Time_Entree,e){

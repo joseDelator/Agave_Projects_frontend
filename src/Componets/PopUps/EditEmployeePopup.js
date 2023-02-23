@@ -1,12 +1,14 @@
-import React, {useState}from 'react'
+import  {useContext, useState}from 'react'
 import {GiPerson} from 'react-icons/gi'
 import api from '../../api'
+import EmployeeContext from '../../Context/EmployeeContext'
 const EditEmployee = (props) => {
     const [isOpen, setIsOpen] = useState(false);
     const [Failed, setFailed] = useState(false);
     const [FristName, setFristName] = useState(props.Employee.Employee_First_Name)
     const [LastName, setLastName] = useState(props.Employee.Employee_Last_Name)
     const [Salary, setSalary] = useState(props.Employee.Salary)
+    const {updateEmployeeinfo} = useContext(EmployeeContext)
     const togglePopup = () => {
     setIsOpen(!isOpen);
   }  
@@ -29,7 +31,9 @@ const EditEmployee = (props) => {
            api.request(reqOptions).then(function (response) {
                if (response.data === 'Updated Successfully') {
                    setFailed(false)
-                    window.location.reload(false);
+                   updateEmployeeinfo()
+                   props.handleClose()
+                            
                }
                else{
                  setFailed(true)

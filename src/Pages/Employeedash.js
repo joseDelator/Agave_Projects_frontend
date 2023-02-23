@@ -1,17 +1,14 @@
 import React, {useContext, useEffect, useState} from 'react'
 import '../Styles/homedash.scss'
 import Spiner from '../Componets/Spiner'
-import api from '../api'
 import { AiFillPlusCircle, AiFillEdit} from 'react-icons/ai'
 import NewEmployee from '../Componets/PopUps/NewEmployeePopup'
 import Dropdrownemployee from '../Componets/dropdrownemployee'
 import { TimeTableEmployee } from '../Componets/Tables/TimeTableEmployee'
 import EditEmployee from '../Componets/PopUps/EditEmployeePopup'
 import { dollars } from '../Functions/DateandDollarFormate'
-import DataContext from '../Context/datacontext'
 import EmployeeContext from '../Context/EmployeeContext'
-import axios from 'axios'
-function EmployeeDash() {
+const EmployeeDash =()=>{
     const [isOpen, setisOpen] = useState(false)
     const [isEditOpen, setisEditOpen] = useState(false)
     const{ SelectEmployee,updateEmployeeinfo,EmployeeData} = useContext(EmployeeContext)

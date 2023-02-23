@@ -3,7 +3,7 @@ import { AiFillPlusCircle, AiFillCamera} from 'react-icons/ai'
 import api from '../../api';
 import Datepicker from 'react-tailwindcss-datepicker';
 import GeneralExpensePopup from '../PopUps/General_Expenses_Popup';
-import { dollars, datef, Lastmonth,options } from '../../Functions/DateandDollarFormate';
+import { dollars, datef, Lastmonth,thistoday} from '../../Functions/DateandDollarFormate';
 import PhotosPopup from '../PopUps/PhotosPopup';
 
 const GeneralExpenseTable = (Params) => {
@@ -16,8 +16,8 @@ const GeneralExpenseTable = (Params) => {
     const [page, setpage] = useState(1)
     //date range starting state
     const [DateRange, setDateRange] = useState({
-      startDate: new Date(Lastmonth).toLocaleDateString('en-CA', options),
-      endDate: new Date().toLocaleDateString('en-CA', options)
+      startDate:Lastmonth,
+      endDate: thistoday
   });
     const togglePopup = () => {
       setisOpen(!isOpen);
@@ -59,6 +59,7 @@ const GeneralExpenseTable = (Params) => {
             url: "GeneralExpensesByDateRange?page="+page,
             method: "POST",
             headers: headersList,
+           
             data:JSON.stringify({
              "Start": DateRange.startDate,
              "End":DateRange.endDate
