@@ -15,7 +15,8 @@ const ExpensePopup = (props) => {
     const { handleSubmit, formState } = useForm();
     const {updateprojectexpense, updateprojectinfo} = useContext(ProjectContext)
     const { isSubmitting } = formState;
- function Add_Expense(){
+ const Add_Expense = async(e)=>{
+      e.preventDefault()
         let headersList = {
           "Accept": "*/*",
          }
@@ -36,6 +37,11 @@ const ExpensePopup = (props) => {
                     if (response.data === 'Added Successfully') {
                         updateprojectexpense(1,props.content) 
                         updateprojectinfo(props.content)
+                        setDate("")
+                        setDesription("")
+                        setName("")
+                        setCost("")
+                        e.target[4].value = null
                         props.handleClose()
                     }
                     else{
@@ -50,7 +56,7 @@ const ExpensePopup = (props) => {
         <div className="modal">
           <div className="modal-box relative">
             <label onClick={props.handleClose} className="btn btn-sm btn-circle absolute right-2 top-2" >✕</label>
-            <form className="card-body " onSubmit={ handleSubmit(Add_Expense)}>
+            <form className="card-body " onSubmit={ e=>handleSubmit(Add_Expense(e))}>
               <div className=" flex w-full items-center justify-center">      
               <RiMoneyDollarCircleLine size={40} className="text-primary justify-self-center "/>
               </div>
@@ -59,11 +65,12 @@ const ExpensePopup = (props) => {
                     <span className="label-text">Seller</span>
                   </label>
                   <input type="text" placeholder="Seller" 
-                    onChange={(e) => setName(e.target.value)}required className="input input-bordered input-primary" />
+                    onChange={(e) => setName(e.target.value)} value={Name}
+                    required className="input input-bordered input-primary" />
                 </div>
                 <div className="form-control">
                   <label className="label">
-                    <span className="label-text">date</span>
+                    <span className="label-text">Date</span>
                   </label>
                   <input type="date" value={Date} 
                   onChange={(e) => setDate(e.target.value)} required className="input input-bordered input-primary appearance-none" />
@@ -74,7 +81,7 @@ const ExpensePopup = (props) => {
                 <label className="label">
                     <span className="label-text">Description</span>
                 </label>
-                  <input type="text" placeholder="description" 
+                  <input type="text" placeholder="description" value={Desription}
                   onChange={(e) =>setDesription(e.target.value)} required className="input input-bordered input-primary" />
                   <label className="input-group">
                 </label>
@@ -84,7 +91,7 @@ const ExpensePopup = (props) => {
                     <span className="label-text">Cost</span>
                 </label>
                   <input type="number" step=".01" min=".01" placeholder="Cost" 
-                  onChange={(e) =>setCost(e.target.value)} required className="input input-bordered input-primary" />
+                  onChange={(e) =>setCost(e.target.value)} value={Cost} required className="input input-bordered input-primary" />
                   <label className="input-group">
                 </label>
                 </div>
@@ -93,7 +100,7 @@ const ExpensePopup = (props) => {
                     <span className="label-text">files</span>
                 </label>
                 <input type="file" accept="image/*"
-                    className="file-input file-input-bordered file-input-secondary w-full " 
+                    className="file-input file-input-bordered file-input-secondary w-full" Name="Photo"
                     onChange={(e) => setPhoto(e.target.files[0])} required />
                     <label className="input-group">
                 </label>
