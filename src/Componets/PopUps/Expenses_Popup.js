@@ -15,8 +15,8 @@ const ExpensePopup = (props) => {
     const { handleSubmit, formState } = useForm();
     const {updateprojectexpense, updateprojectinfo} = useContext(ProjectContext)
     const { isSubmitting } = formState;
- const Add_Expense = async(e)=>{
-      e.preventDefault()
+ const Add_Expense = async()=>{
+
         let headersList = {
           "Accept": "*/*",
          }
@@ -41,7 +41,7 @@ const ExpensePopup = (props) => {
                         setDesription("")
                         setName("")
                         setCost("")
-                        e.target[4].value = null
+                       
                         props.handleClose()
                     }
                     else{
@@ -56,7 +56,7 @@ const ExpensePopup = (props) => {
         <div className="modal">
           <div className="modal-box relative">
             <label onClick={props.handleClose} className="btn btn-sm btn-circle absolute right-2 top-2" >✕</label>
-            <form className="card-body " onSubmit={ e=>handleSubmit(Add_Expense(e))}>
+            <form className="card-body " onSubmit={ handleSubmit(Add_Expense)}>
               <div className=" flex w-full items-center justify-center">      
               <RiMoneyDollarCircleLine size={40} className="text-primary justify-self-center "/>
               </div>
@@ -100,7 +100,7 @@ const ExpensePopup = (props) => {
                     <span className="label-text">files</span>
                 </label>
                 <input type="file" accept="image/*"
-                    className="file-input file-input-bordered file-input-secondary w-full" Name="Photo"
+                    className="file-input file-input-bordered file-input-secondary w-full" name="Photo"
                     onChange={(e) => setPhoto(e.target.files[0])} required />
                     <label className="input-group">
                 </label>
