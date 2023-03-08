@@ -39,7 +39,7 @@ const ProjectTable = (Params) => {
     })
     return (
     <div className="container">
-        <select className="select select-primary w-full   " 
+        <select className="select select-primary w-full" 
                     onChange={(e)=>setProjectStatus( e.target.value)}>
                       <option value={"Active"}>
                     Active</option>
@@ -49,7 +49,7 @@ const ProjectTable = (Params) => {
                     Completed</option>
                </select>
         <h2 className="H2"> Projects</h2>
-          <div className=" max-h-80 overflow-x-auto">
+          <div className=" overflow-x-auto">
             <table className="table table-zebra w-full">
               <thead>
               <tr className="text-secondary sticky top-0">

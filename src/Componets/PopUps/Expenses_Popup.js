@@ -1,4 +1,4 @@
-import React, {useState, useContext}from 'react'
+import React, {useState, useContext, useRef}from 'react'
 import {RiMoneyDollarCircleLine} from 'react-icons/ri'
 import api from '../../api'
 import { useForm } from "react-hook-form";
@@ -6,10 +6,11 @@ import Spiner from '../Spiner'
 import ProjectContext from '../../Context/projectdatacontext';
 
 const ExpensePopup = (props) => {
-    const [Photo, setPhoto] = useState('')
+    const [Photo, setPhoto] = useState()
     const [Cost, setCost] = useState("")
     const [Name, setName] = useState("")
     const [Date, setDate] = useState('')
+    const inputRef = useRef(null);
     const [Desription, setDesription] = useState("")
     const [Failed, setFailed] = useState(false)
     const { handleSubmit, formState } = useForm();
@@ -20,6 +21,7 @@ const ExpensePopup = (props) => {
         let headersList = {
           "Accept": "*/*",
          }
+         console.log(Photo)
          let formdata = new FormData();
          formdata.append("Image_Location", Photo);
          formdata.append("Project_Number_ID_Expense", props.content);
@@ -41,7 +43,8 @@ const ExpensePopup = (props) => {
                         setDesription("")
                         setName("")
                         setCost("")
-                       
+                        setPhoto(null)
+                        inputRef.current.value = null;
                         props.handleClose()
                     }
                     else{
@@ -101,7 +104,7 @@ const ExpensePopup = (props) => {
                 </label>
                 <input type="file" accept="image/*"
                     className="file-input file-input-bordered file-input-secondary w-full" name="Photo"
-                    onChange={(e) => setPhoto(e.target.files[0])} required />
+                    onChange={(e) => setPhoto(e)}  ref={inputRef} required />
                     <label className="input-group">
                 </label>
                 </div>

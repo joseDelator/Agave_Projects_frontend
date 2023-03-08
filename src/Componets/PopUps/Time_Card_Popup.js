@@ -17,6 +17,8 @@ const TimePopup = (props) => {
             if ( responce.data === "Added Successfully") {
               updatetimecardproject(1,props.content)
               updateprojectinfo(props.content)
+              setDate('')
+              setTotal_Time('')
               props.handleClose()
           }
           else{
