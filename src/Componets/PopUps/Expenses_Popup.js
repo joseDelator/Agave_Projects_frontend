@@ -104,7 +104,7 @@ const ExpensePopup = (props) => {
                 </label>
                 <input type="file" accept="image/*"
                     className="file-input file-input-bordered file-input-secondary w-full" name="Photo"
-                    onChange={(e) => setPhoto(e)}  ref={inputRef} required />
+                    onChange={(e) => setPhoto(e.target.files[0])}  ref={inputRef} required />
                     <label className="input-group">
                 </label>
                 </div>
