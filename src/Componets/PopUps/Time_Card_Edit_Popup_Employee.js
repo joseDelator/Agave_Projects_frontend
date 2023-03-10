@@ -2,12 +2,14 @@ import React, {useState,useContext}from 'react'
 import {GiTimeBomb} from 'react-icons/gi'
 import api from '../../api'
 import EmployeeContext from '../../Context/EmployeeContext'
+import DataContext from '../../Context/datacontext'
 const TimeEditPopupEmployee= (props) => {
     const [Total_Time, setTotal_Time] = useState(props.TC.Total_Time)
     const [Date, setDate] = useState(props.TC.Date)
     const [Failed, setFailed] = useState(false);
     const [Project_ID, setProject_ID] = useState(props.TC.Project_Number_ID_Time)
     const{ SelectEmployee, updateemployeetimcarddata,updateEmployeeinfo } = useContext(EmployeeContext)
+    const {notify} = useContext(DataContext)
     function Add_Time (e){
         e.preventDefault();
         let headersList = {         
@@ -31,6 +33,7 @@ const TimeEditPopupEmployee= (props) => {
                   updateemployeetimcarddata(SelectEmployee)
                   updateEmployeeinfo()
                   props.handleClose()
+                  notify()
               
                }
                else{

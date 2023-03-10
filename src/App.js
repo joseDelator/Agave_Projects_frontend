@@ -15,6 +15,7 @@ import Nava from './Componets/OnAllPages/Nava'
 import Footer from './Componets/OnAllPages/Footer';
 import GeneralExpenseEnter from './Pages/Genarl_Expense_Enter';
 import { EmployeeProvider } from './Context/EmployeeContext';
+import Toaster from './Componets/Toast';
 function App() {
   return (
     <div>   
@@ -34,6 +35,7 @@ function App() {
               <Route path="/details/employee" element={<PrivateRoute><EmployeeDash/></PrivateRoute>} />
               </Route>
         </Routes>
+        <Toaster/>
         <Footer/>
         </DataProvider>
         </ProjectProvider>

@@ -2,12 +2,14 @@ import { createContext, useState, useEffect } from "react";
 import api from "../api";
 import { useNavigate } from 'react-router-dom'
 import jwt_decode from "jwt-decode";
+import { ToastContainer, toast } from 'react-toastify';
 const DataContext = createContext({});
 
 export const DataProvider = ({ children }) => {
     let [authTokens, setAuthTokens] = useState(()=> localStorage.getItem('authTokens') ? JSON.parse(localStorage.getItem('authTokens')) : null)
     let [user, setUser] = useState(()=> localStorage.getItem('authTokens') ? jwt_decode(localStorage.getItem('authTokens')) : null)
     let [loading, setLoading] = useState(true)
+    const [ToastON, setToastON] = useState(false)
     const history = useNavigate()
 let loginUser = async(e)=>{
     e.preventDefault();
@@ -50,8 +52,6 @@ let loginUser = async(e)=>{
                 'refresh':authTokens?.refresh
             }),
            }
-
-
            api.request(reqOptions).then(function (response) {  
              if (response.status === 200){
                 setAuthTokens(response.data)
@@ -65,11 +65,35 @@ let loginUser = async(e)=>{
                 }
            })
     }
+    const toggloToast =()=>{
+        setToastON(!ToastON)  
+        if(!
+            ToastON){
+            setTimeout(() => {
+                setToastON(!ToastON)
+              }, 3000);
+          
+           console.log("ff") 
+        }
+    }
+    const notify = () => toast.success("Sucess!",{
+        position: "top-left",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+    });
     let contexData = {
         user:user,
         authTokens:authTokens,
         loginUser:loginUser,
         logoutUser:logoutUser,
+        ToastON:ToastON,
+        toggloToast:toggloToast,
+        notify:notify
     }
 
     useEffect(()=> {

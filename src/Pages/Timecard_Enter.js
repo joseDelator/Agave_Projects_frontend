@@ -1,15 +1,16 @@
-import { React, useState} from 'react'
+import { React, useState, useContext} from 'react'
 import {GiTimeBomb} from 'react-icons/gi'
 import Dropdrownemployee from '../Componets/dropdrownemployee'
 import { AddingTime } from '../Functions/Addttime'
+import EmployeeContext from '../Context/EmployeeContext'
 const TimecardEnter = () => {
     const [Agave_green_Project_Number, setAgave_green_Project_Number] = useState('')
     const [Total_Time, setTotal_Time] = useState("")
     const [Date, setDate] = useState('')
     const [isOpen, setIsOpen] = useState(false);
     const [Failed, setFailed] = useState(false);
-    const [Employee_Id, setEmployee_Id] = useState("")
-
+    const [Employee_Id, setEmployee_Id] = useState(1)
+    const{ SelectEmployee} = useContext(EmployeeContext)
   const togglePopup = () => {
     setIsOpen(!isOpen);
   }  
@@ -19,15 +20,16 @@ const changeParentState = (newState) => {
 function Add_Time(e){
         e.preventDefault()
         //input new time card entree and responce with popup
-            AddingTime(Date, Agave_green_Project_Number,Employee_Id,Total_Time).then( function(responce){
+            AddingTime(Date, Agave_green_Project_Number,SelectEmployee,Total_Time).then( function(responce){
               if ( responce.data === "Added Successfully") {
                 setAgave_green_Project_Number("")
                 setDate("")
                 setTotal_Time("")
                 togglePopup()
-                setEmployee_Id(0);
+              
             }
             else{
+              console.log(responce.data)
               setFailed(true)
             }
             })  
@@ -43,8 +45,7 @@ function Add_Time(e){
                 <div className=" flex w-full items-center justify-center">      
                 <GiTimeBomb size={40} className="text-primary justify-self-center "/>
                 </div>
-                  <Dropdrownemployee  parentState={Employee_Id} 
-                    changeParentState={changeParentState}  />
+                  <Dropdrownemployee />
                   <div className="form-control">
                     <label className="label">
                       <span className="label-text">Project Number</span>

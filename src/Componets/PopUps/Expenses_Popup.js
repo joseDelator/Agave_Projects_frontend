@@ -4,7 +4,7 @@ import api from '../../api'
 import { useForm } from "react-hook-form";
 import Spiner from '../Spiner'
 import ProjectContext from '../../Context/projectdatacontext';
-
+import DataContext from '../../Context/datacontext';
 const ExpensePopup = (props) => {
     const [Photo, setPhoto] = useState()
     const [Cost, setCost] = useState("")
@@ -15,6 +15,7 @@ const ExpensePopup = (props) => {
     const [Failed, setFailed] = useState(false)
     const { handleSubmit, formState } = useForm();
     const {updateprojectexpense, updateprojectinfo} = useContext(ProjectContext)
+    const {notify} = useContext(DataContext)
     const { isSubmitting } = formState;
  const Add_Expense = async()=>{
 
@@ -44,6 +45,7 @@ const ExpensePopup = (props) => {
                         setName("")
                         setCost("")
                         setPhoto(null)
+                        notify()
                         inputRef.current.value = null;
                         props.handleClose()
                     }

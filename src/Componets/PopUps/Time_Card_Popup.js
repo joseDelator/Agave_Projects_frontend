@@ -4,12 +4,14 @@ import Dropdrownemployee from '../dropdrownemployee'
 import { AddingTime } from '../../Functions/Addttime'
 import ProjectContext from '../../Context/projectdatacontext'
 import EmployeeContext from '../../Context/EmployeeContext'
+import DataContext from '../../Context/datacontext'
 const TimePopup = (props) => {
     const [Total_Time, setTotal_Time] = useState("")
     const [Date, setDate] = useState('')
     const [Failed, setFailed] = useState(false);
     const{ SelectEmployee} = useContext(EmployeeContext)
     const {updatetimecardproject,updateprojectinfo}=useContext(ProjectContext)
+    const { notify} = useContext(DataContext)
     function Add_Time (e){
         e.preventDefault();
            //input new time card entree and responce with popup
@@ -19,6 +21,7 @@ const TimePopup = (props) => {
               updateprojectinfo(props.content)
               setDate('')
               setTotal_Time('')
+              notify()
               props.handleClose()
           }
           else{

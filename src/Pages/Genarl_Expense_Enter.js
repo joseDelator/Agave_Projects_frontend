@@ -1,10 +1,11 @@
-import {Fragment, React, useState} from 'react'
+import {Fragment, React, useState, useRef} from 'react'
 import { RiMoneyDollarCircleLine } from 'react-icons/ri'
 import { useForm } from 'react-hook-form'
 import Spiner from '../Componets/Spiner'
 import api from '../api'
 const GeneralExpenseEnter = () => {
   const [Expensetype, setExpensetype] = useState("Gas")
+  const inputRef = useRef(null);
   const [Photo, setPhoto] = useState('')
   const [Cost, setCost] = useState("")
   const [Name, setName] = useState("")
@@ -34,7 +35,12 @@ function Add_Expense(){
             }
            return api.request(reqOptions).then(function (response) {
               if (response.data === 'Added Successfully') {
-                  setFailed(false)
+                setDate("")
+                setDesription("")
+                setName("")
+                setCost("")
+                setPhoto(null)
+                inputRef.current.value = null;
                   setIsOpen(true)
               }
               else{
@@ -76,7 +82,7 @@ function Add_Expense(){
                     <span className="label-text">Seller</span>
                   </label>
                   <input type="text" placeholder="Seller" 
-                    onChange={(e) => setName(e.target.value)}required className="input input-bordered input-primary" />
+                    value={Name}onChange={(e) => setName(e.target.value)}required className="input input-bordered input-primary" />
                 </div>
                 <div className="form-control">
                   <label className="label">
@@ -93,7 +99,7 @@ function Add_Expense(){
                     <span className="label-text">Description</span>
                 </label>
                   <input type="text" placeholder="description" 
-                  onChange={(e) =>setDesription(e.target.value)} required className="input input-bordered input-primary" />
+                  onChange={(e) =>setDesription(e.target.value)} value={Desription}required className="input input-bordered input-primary" />
                   <label className="input-group">
                 </label>
                 </div>
@@ -102,7 +108,7 @@ function Add_Expense(){
                     <span className="label-text">Cost</span>
                 </label>
                   <input type="number" step=".01" min=".01" placeholder="Cost" 
-                  onChange={(e) =>setCost(e.target.value)} required className="input input-bordered input-primary" />
+                  onChange={(e) =>setCost(e.target.value)} value={Cost} required className="input input-bordered input-primary" />
                   <label className="input-group">
                 </label>
                 </div>
@@ -112,7 +118,7 @@ function Add_Expense(){
                 </label>
                 <input type="file" accept="image/*, .pdf"
                     className="file-input file-input-bordered file-input-secondary w-full " 
-                    onChange={(e) => setPhoto(e.target.files[0])} required />
+                    onChange={(e) => setPhoto(e.target.files[0])}  ref={inputRef}  required />
                     <label className="input-group">
                 </label>
                 </div>
@@ -143,7 +149,7 @@ function Add_Expense(){
 <div className="modal modal-bottom sm:modal-middle">
   <div className="modal-box">
     <h3 className="font-bold text-lg text-primary">success!!!</h3>
-    <p className="py-4">yor time has be added</p>
+    <p className="py-4">yor Expense has been added</p>
     <div className="modal-action">
       <label  className="btn btn-primary" onClick={(e) =>setIsOpen(false)}>ok</label>
     </div>
