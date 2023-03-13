@@ -18,7 +18,7 @@ const ExpenseTable = (Params) => {
     }
     const togglephotopopup= ()=>{
       setPhotpopupopen(false)
-
+      setphotourl("")
     }
     const OpenPhoto =(Expense_entree)=>{
       setphotourl(Expense_entree.Image_Location)

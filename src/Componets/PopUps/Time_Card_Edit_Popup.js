@@ -32,7 +32,6 @@ const TimeEditPopup = (props) => {
            }
            api.request(reqOptions).then(function (response) {
                if (response.data === "Updated Successfully") {
-                  setFailed(false)
                   updatetimecardproject(1,props.TC.Project_Number_ID_Time)
                   updateprojectinfo(props.TC.Project_Number_ID_Time)
                   props.handleClose()
@@ -100,21 +99,20 @@ const TimeEditPopup = (props) => {
         <div className="form-control mt-3">
           <button className="btn btn-error" onClick={Delete_Time}>Delete</button>
         </div>
- </form>
-</div>
+      </form>
   </div>
-    <input type="checkbox" className="modal-toggle" checked={Failed} readOnly/>
-    <div className="modal modal-bottom sm:modal-middle">
-    <div className="modal-box">
-    <h3 className="font-bold text-lg text-error">Error!!!</h3>
-    <p className="py-4">Please Try Again</p>
-    <div className="modal-action">
-    <label  className="btn btn-primary" onClick={(e) =>setFailed(false)}>ok</label>
-    </div>
-    </div>
-</div>
-    
- </div>
+      </div>
+        <input type="checkbox" className="modal-toggle" checked={Failed} readOnly/>
+        <div className="modal modal-bottom sm:modal-middle">
+        <div className="modal-box">
+        <h3 className="font-bold text-lg text-error">Error!!!</h3>
+        <p className="py-4">Please Try Again</p>
+        <div className="modal-action">
+        <label  className="btn btn-primary" onClick={(e) =>setFailed(false)}>ok</label>
+        </div>
+        </div>
+      </div> 
+  </div>
     )
 }
 

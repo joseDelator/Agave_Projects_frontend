@@ -9,14 +9,11 @@ const TimecardEnter = () => {
     const [Date, setDate] = useState('')
     const [isOpen, setIsOpen] = useState(false);
     const [Failed, setFailed] = useState(false);
-    const [Employee_Id, setEmployee_Id] = useState(1)
     const{ SelectEmployee} = useContext(EmployeeContext)
   const togglePopup = () => {
     setIsOpen(!isOpen);
   }  
-const changeParentState = (newState) => {
-  setEmployee_Id(newState);
-};
+
 function Add_Time(e){
         e.preventDefault()
         //input new time card entree and responce with popup
