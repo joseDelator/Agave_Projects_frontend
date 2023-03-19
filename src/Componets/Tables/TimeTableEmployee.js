@@ -9,10 +9,10 @@ import TimeEditPopupEmployee from '../PopUps/Time_Card_Edit_Popup_Employee'
 import Pagination from '../Pagination';
 export const TimeTableEmployee = (Params) => {
     // all time card data for time range
-    const {updateemployeetimcarddata, updateEmployeeinfo, Employee_timecard_Data,DateRange,setDateRange}  = useContext(EmployeeContext)
+    const {updateemployeetimcarddata, updateEmployeeinfo, GenData,Employee_timecard_Data,DateRange,setDateRange}  = useContext(EmployeeContext)
     // selected time entree for edite popup
     const [timeEntree, settimeEntree] = useState([])
-    const [CurrentPage, setCurrentPage] = useState(2)
+    const [CurrentPage, setCurrentPage] = useState(1)
     //popup toggles
     const [isOpen, setisOpen] = useState(false)
     const [isEditOpen, setisEditOpen] = useState(false)
@@ -111,6 +111,13 @@ export const TimeTableEmployee = (Params) => {
             </tbody> 
             </table>
             </div>
+            
+            <Pagination
+            currentPage={CurrentPage}
+            totalCount={100}
+            pageSize={10}
+            onPageChange={page => setCurrentPage(page)}
+            />
             {isOpen && <TimePopup
               content={Params.props}
               handleClose={togglePopup}

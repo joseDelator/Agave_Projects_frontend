@@ -1,12 +1,11 @@
-import classnames from "classnames";
-import { useMemo } from "react";
+
 import { usePagination, DOTS } from "../hooks/usePagination";
 
 const Pagination = props => {
     const {
       onPageChange,
       totalCount,
-      siblingCount = 2,
+      siblingCount = 1,
       currentPage,
       pageSize,
     } = props;
@@ -34,7 +33,7 @@ const Pagination = props => {
     let lastPage = paginationRange[paginationRange.length - 1];
     return (
       <ul
-        className="btn-group m-2 justif"
+        className="btn-group m-2 justify-center"
       >
          {/* Left navigation arrow */}
         <li className={currentPage === 1?"btn btn-disabled btn-xs":"btn btn-xs"}
@@ -46,12 +45,12 @@ const Pagination = props => {
            
           // If the pageItem is a DOT, render the DOTS unicode character
           if (pageNumber === DOTS) {
-            return <li className="btn btn-disabled btn-xs">&#8230;</li>;
+            return <li key={pageNumber} className="btn btn-disabled btn-xs">&#8230;</li>;
           }
           
           // Render our Page Pills
           return (
-            <li
+            <li key={pageNumber}
               className={pageNumber === currentPage?'btn btn-primary btn-xs':'btn btn-xs'}
               onClick={() => onPageChange(pageNumber)}
             >
@@ -60,7 +59,7 @@ const Pagination = props => {
           );
         })}
         {/*  Right Navigation arrow */}
-        <li
+        <li 
           className={currentPage === lastPage? " btn btn-xs btn-disabled":"btn btn-xs"}
           onClick={onNext}
         >
