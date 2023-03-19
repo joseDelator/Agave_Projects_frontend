@@ -1,7 +1,7 @@
 import axios from 'axios';
 console.log(process.env)
 export default axios.create({
-  baseURL: process.env.REACT_APP_Backend_url
+  baseURL: "https://agaveprojectmangement-production.up.railway.app/"
 });
 
 
