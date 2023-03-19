@@ -96,14 +96,14 @@ const GeneralExpenseTable = (Params) => {
     })
     return (
     <div className="w-full">
-      <AiFillPlusCircle className=" text-secondary m-2 self" size={40} onClick={togglePopup}/> 
+      <AiFillPlusCircle className=" text-secondary m-2 self-end" size={40} onClick={togglePopup}/> 
       <Datepicker
                 inputClassName="font-normal bg-base-100 text-lg dark:bg-base-100 dark:placeholder:text-secondary" 
                 primaryColor={"lime"}
                 useRange={false}  
                 showShortcuts={true} 
                 value={DateRange}
-                className="bg-green z-30"
+                className=" text-primary z-30"
                 onChange={changeState}
             />
         <h2 className="H2">General Expenses</h2>

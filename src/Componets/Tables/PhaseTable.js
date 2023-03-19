@@ -67,7 +67,6 @@ export const PhaseTable = (Params) => {
         <AiFillPlusCircle className=" absolute right-2 top-2 text-secondary" size={40} onClick={togglePopup}/>
         <h2 className="H2 self-center">Project Phases </h2>
         <div className="overflow-x-auto">
-        
         <table className="table table-compact table-zebra w-full">
             <thead>
               <tr className="text-secondary">

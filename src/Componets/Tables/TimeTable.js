@@ -6,6 +6,7 @@ import api from '../../api'
 import { datef } from '../../Functions/DateandDollarFormate'
 import ProjectContext from '../../Context/projectdatacontext'
 import EmployeeContext from '../../Context/EmployeeContext'
+import Pagination from '../Pagination'
 
 export const TimeTable = (Params) => {
     const [timeEntree, settimeEntree] = useState([])
@@ -106,17 +107,17 @@ export const TimeTable = (Params) => {
           Opened = {isEditOpen}
          />
         }
+        
          </div>
-          <div className={pagesdata.previous === null& pagesdata.next === null?
-            "hidden":"btn-group grid grid-cols-2 m-5"}>
-          <button className={pagesdata.previous === null ?
-          "btn btn-outline btn-disabled":"btn btn-outline btn-primary"} 
-          onClick={e=> setpage(page-1)} >Previous page</button>
-          <button className={pagesdata.next === null ?
-          "btn btn-outline btn-disabled":"btn btn-outline btn-primary"} 
-          onClick={e=> setpage(page+1)}>Next</button>
-        </div>
-             <TimePopup
+         {pagesdata.count===undefined?
+        <div>1</div>:
+        <Pagination
+            currentPage={page}
+            totalCount={pagesdata.count}
+            pageSize={10}
+            onPageChange={page => setpage(page)}
+            />}
+              <TimePopup
               content={Params.props}
               handleClose={togglePopup}
               Opened = {isOpen}

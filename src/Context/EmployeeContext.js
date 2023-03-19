@@ -8,6 +8,8 @@ export const EmployeeProvider = ({ children }) => {
     const [SelectEmployee, setSelectEmployee] = useState(1)
     const [Employee_timecard_Data, setEmployee_timecard_Data] = useState([])
     const [EmployeeData, setEmployeeData] = useState([])
+    const [GenData, setGenData] = useState([])
+    const [Employeepage, setEmployeepage] = useState(1)
     const [DateRange, setDateRange] = useState({
         startDate: Lastmonth,
         endDate: thistoday,
@@ -18,7 +20,7 @@ export const EmployeeProvider = ({ children }) => {
             "Content-Type": "application/json" 
            }
            let reqOptions = {
-             url: "Employeetimecard/"+Params,
+             url: "Employeetimecard/"+Params+"?page="+Employeepage,
              method: "POST",
              headers: headersList,
              data:JSON.stringify({
@@ -29,7 +31,8 @@ export const EmployeeProvider = ({ children }) => {
            const fetch_somethe= async()=>{
             const reponse = await api.request(reqOptions);
             const timecard_data = reponse.data;
-            setEmployee_timecard_Data(timecard_data)
+            setGenData(timecard_data)
+            setEmployee_timecard_Data(timecard_data.results)
            }
         fetch_somethe();   
         }

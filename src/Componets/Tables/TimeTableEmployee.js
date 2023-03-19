@@ -6,11 +6,13 @@ import Datepicker from "react-tailwindcss-datepicker";
 import { datef } from '../../Functions/DateandDollarFormate';
 import EmployeeContext from '../../Context/EmployeeContext';
 import TimeEditPopupEmployee from '../PopUps/Time_Card_Edit_Popup_Employee'
+import Pagination from '../Pagination';
 export const TimeTableEmployee = (Params) => {
     // all time card data for time range
     const {updateemployeetimcarddata, updateEmployeeinfo, Employee_timecard_Data,DateRange,setDateRange}  = useContext(EmployeeContext)
     // selected time entree for edite popup
     const [timeEntree, settimeEntree] = useState([])
+    const [CurrentPage, setCurrentPage] = useState(2)
     //popup toggles
     const [isOpen, setisOpen] = useState(false)
     const [isEditOpen, setisEditOpen] = useState(false)
