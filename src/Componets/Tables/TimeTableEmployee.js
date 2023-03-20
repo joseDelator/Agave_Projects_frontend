@@ -1,5 +1,4 @@
 import React, {useState, useEffect, useContext}from 'react'
-import TimePopup from '../PopUps/Time_Card_Popup'
 import api from '../../api'
 import { AiFillEdit } from 'react-icons/ai'
 import Datepicker from "react-tailwindcss-datepicker";
@@ -9,17 +8,14 @@ import TimeEditPopupEmployee from '../PopUps/Time_Card_Edit_Popup_Employee'
 import Pagination from '../Pagination';
 export const TimeTableEmployee = (Params) => {
     // all time card data for time range
-    const {updateemployeetimcarddata, updateEmployeeinfo, GenData,Employee_timecard_Data,DateRange,setDateRange}  = useContext(EmployeeContext)
+    const {updateemployeetimcarddata, updateEmployeeinfo, 
+      GenData,Employee_timecard_Data,DateRange,setDateRange}  = useContext(EmployeeContext)
     // selected time entree for edite popup
     const [timeEntree, settimeEntree] = useState([])
     const [CurrentPage, setCurrentPage] = useState(1)
     //popup toggles
-    const [isOpen, setisOpen] = useState(false)
     const [isEditOpen, setisEditOpen] = useState(false)
     //setting starting date
-    const togglePopup = () => {
-      setisOpen(!isOpen);
-    }
     const toggeledit =() =>{
       setisEditOpen(!isEditOpen)
     }
@@ -28,8 +24,8 @@ export const TimeTableEmployee = (Params) => {
     };
    
     useEffect (() => {
-      updateemployeetimcarddata(Params.props)
-    }, [ Params.prefix,Params.props, DateRange])
+      updateemployeetimcarddata(Params.props, CurrentPage)
+    }, [ Params.prefix,Params.props, DateRange, CurrentPage])
    
     function Payed_employee (Time_Entree,e){
       Time_Entree.Been_Payed = !Time_Entree.Been_Payed
@@ -74,7 +70,8 @@ export const TimeTableEmployee = (Params) => {
         />     
      </td>
      <td >
-          <div className="btn  btn-warning btn-outline" onClick={e => openedit(timecard_entree, e)}>
+          <div className="btn  btn-warning btn-outline" 
+          onClick={e => openedit(timecard_entree, e)}>
           <AiFillEdit size={20} 
         />
         </div>
@@ -86,7 +83,8 @@ export const TimeTableEmployee = (Params) => {
       
     <div  className='container'>
                 <Datepicker
-                inputClassName="font-normal bg-base-100 text-lg dark:bg-base-100 dark:placeholder:text-secondary" 
+                inputClassName="font-normal bg-base-100 text-lg
+                 dark:bg-base-100 dark:placeholder:text-secondary" 
                 primaryColor={"lime"}
                 useRange={false}  
                 showShortcuts={true} 
@@ -111,23 +109,20 @@ export const TimeTableEmployee = (Params) => {
             </tbody> 
             </table>
             </div>
-            
+            {GenData.count===undefined?<></>:   
             <Pagination
             currentPage={CurrentPage}
-            totalCount={100}
+            totalCount={GenData.count}
             pageSize={10}
             onPageChange={page => setCurrentPage(page)}
-            />
-            {isOpen && <TimePopup
-              content={Params.props}
-              handleClose={togglePopup}
-            />}  
+            />} 
               {
             isEditOpen &&
             <TimeEditPopupEmployee
               TC = {timeEntree}  
               handleClose={toggeledit}
               Opened = {isEditOpen}
+              PageNum = {CurrentPage}
               />
             }
 

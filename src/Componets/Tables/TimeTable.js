@@ -105,6 +105,7 @@ export const TimeTable = (Params) => {
           TC = {timeEntree}  
           handleClose={toggeledit}
           Opened = {isEditOpen}
+          pagenum={page}
          />
         }
         
@@ -121,6 +122,7 @@ export const TimeTable = (Params) => {
               content={Params.props}
               handleClose={togglePopup}
               Opened = {isOpen}
+              pagenum={page}
               />
       </div>
     )

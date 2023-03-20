@@ -9,18 +9,20 @@ export const EmployeeProvider = ({ children }) => {
     const [Employee_timecard_Data, setEmployee_timecard_Data] = useState([])
     const [EmployeeData, setEmployeeData] = useState([])
     const [GenData, setGenData] = useState([])
-    const [Employeepage, setEmployeepage] = useState(1)
+    
     const [DateRange, setDateRange] = useState({
         startDate: Lastmonth,
         endDate: thistoday,
     });
     //to update employee data
-    const updateemployeetimcarddata=(Params)=>{
+    const updateemployeetimcarddata=(Params, page)=>{
         let headersList = {       
             "Content-Type": "application/json" 
            }
+           console.log(page)
            let reqOptions = {
-             url: "Employeetimecard/"+Params+"?page="+Employeepage,
+      
+             url: "Employeetimecard/"+Params+"?page="+page,
              method: "POST",
              headers: headersList,
              data:JSON.stringify({
@@ -67,6 +69,7 @@ export const EmployeeProvider = ({ children }) => {
         updateEmployeeinfo:updateEmployeeinfo,
         EmployeeData:EmployeeData,
         setEmployeeData:setEmployeeData,
+        GenData:GenData
 
     }
     return (

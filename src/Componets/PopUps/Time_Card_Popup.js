@@ -17,7 +17,7 @@ const TimePopup = (props) => {
            //input new time card entree and responce with popup
            AddingTime(Date, props.content,SelectEmployee,Total_Time).then( function(responce){
             if ( responce.data === "Added Successfully") {
-              updatetimecardproject(1,props.content)
+              updatetimecardproject(props.pagenum,props.content)
               updateprojectinfo(props.content)
               setDate('')
               setTotal_Time('')

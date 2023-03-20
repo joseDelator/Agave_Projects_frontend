@@ -30,7 +30,7 @@ const TimeEditPopupEmployee= (props) => {
            }
            api.request(reqOptions).then(function (response) {
                if (response.data === "Updated Successfully") {
-                  updateemployeetimcarddata(SelectEmployee)
+                  updateemployeetimcarddata(SelectEmployee, props.PageNum )
                   updateEmployeeinfo()
                   props.handleClose()
                   notify()
@@ -53,7 +53,7 @@ const TimeEditPopupEmployee= (props) => {
                }
                api.request(reqOptions).then(function (response) {
                    if (response.data === "Deleted Successfully") {
-                    updateemployeetimcarddata( SelectEmployee)
+                    updateemployeetimcarddata(SelectEmployee, props.PageNum)
                     updateEmployeeinfo()
                     props.handleClose()
                    }

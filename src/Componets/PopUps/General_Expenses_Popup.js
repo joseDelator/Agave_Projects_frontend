@@ -78,14 +78,16 @@ const GeneralExpensePopup = (props) => {
                     <span className="label-text">Seller</span>
                   </label>
                   <input type="text" placeholder="Seller" 
-                    onChange={(e) => setName(e.target.value)}required className="input input-bordered input-primary" />
+                    onChange={(e) => setName(e.target.value)}required value={Name}
+                     className="input input-bordered input-primary" />
                 </div>
                 <div className="form-control">
                   <label className="label">
                     <span className="label-text">date</span>
                   </label>
                   <input type="date" value={Date} 
-                  onChange={(e) => setDate(e.target.value)} required className="input input-bordered input-primary appearance-none" />
+                  onChange={(e) => setDate(e.target.value)} required 
+                  className="input input-bordered input-primary appearance-none" />
                   <label className="label">
                   </label>
                 </div>
@@ -94,7 +96,8 @@ const GeneralExpensePopup = (props) => {
                     <span className="label-text">Description</span>
                 </label>
                   <input type="text" placeholder="description" 
-                  onChange={(e) =>setDesription(e.target.value)} required className="input input-bordered input-primary" />
+                  onChange={(e) =>setDesription(e.target.value)} value={Desription} required 
+                  className="input input-bordered input-primary" />
                   <label className="input-group">
                 </label>
                 </div>
@@ -103,7 +106,8 @@ const GeneralExpensePopup = (props) => {
                     <span className="label-text">Cost</span>
                 </label>
                   <input type="number" step=".01" min=".01" placeholder="Cost" 
-                  onChange={(e) =>setCost(e.target.value)} required className="input input-bordered input-primary" />
+                  onChange={(e) =>setCost(e.target.value)} value={Cost}
+                  required className="input input-bordered input-primary" />
                   <label className="input-group">
                 </label>
                 </div>

@@ -32,7 +32,7 @@ const TimeEditPopup = (props) => {
            }
            api.request(reqOptions).then(function (response) {
                if (response.data === "Updated Successfully") {
-                  updatetimecardproject(1,props.TC.Project_Number_ID_Time)
+                  updatetimecardproject(props.pagenum,props.TC.Project_Number_ID_Time)
                   updateprojectinfo(props.TC.Project_Number_ID_Time)
                   props.handleClose()
                   notify()
@@ -54,7 +54,7 @@ const TimeEditPopup = (props) => {
                }
                api.request(reqOptions).then(function (response) {
                    if (response.data === "Deleted Successfully") {
-                    updatetimecardproject(1,props.TC.Project_Number_ID_Time)
+                    updatetimecardproject(props.pagenum,props.TC.Project_Number_ID_Time)
                     updateprojectinfo(props.TC.Project_Number_ID_Time)
                     props.handleClose()
                    }

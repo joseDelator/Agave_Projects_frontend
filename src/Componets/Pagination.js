@@ -16,7 +16,7 @@ const Pagination = props => {
       siblingCount,
       pageSize
     });
-  
+    const buttonsyltin = " btn btn-outline btn-xs  sm:btn-sm md:btn-md  "
     // If there are less than 2 times in pagination range we shall not render the component
     if (currentPage === 0 || paginationRange.length < 2) {
       return null;
@@ -33,10 +33,10 @@ const Pagination = props => {
     let lastPage = paginationRange[paginationRange.length - 1];
     return (
       <ul
-        className="btn-group m-2 justify-center"
+        className="btn-group w-full justify-center m-2"
       >
          {/* Left navigation arrow */}
-        <li className={currentPage === 1?"btn btn-disabled btn-xs":"btn btn-xs"}
+        <li className={ currentPage === 1?`${buttonsyltin} btn-disabled `:`${buttonsyltin} btn-primary`}
           onClick={onPrevious}
         >
           «
@@ -45,13 +45,13 @@ const Pagination = props => {
            
           // If the pageItem is a DOT, render the DOTS unicode character
           if (pageNumber === DOTS) {
-            return <li key={pageNumber} className="btn btn-disabled btn-xs">&#8230;</li>;
+            return <li  className={`${buttonsyltin} btn-disabled`}>&#8230;</li>;
           }
           
           // Render our Page Pills
           return (
             <li key={pageNumber}
-              className={pageNumber === currentPage?'btn btn-primary btn-xs':'btn btn-xs'}
+              className={pageNumber === currentPage?`${buttonsyltin} btn-active`:`${buttonsyltin} btn-primary`}
               onClick={() => onPageChange(pageNumber)}
             >
               {pageNumber}
@@ -60,7 +60,7 @@ const Pagination = props => {
         })}
         {/*  Right Navigation arrow */}
         <li 
-          className={currentPage === lastPage? " btn btn-xs btn-disabled":"btn btn-xs"}
+          className={currentPage === lastPage? `${buttonsyltin} btn-disabled`:`${buttonsyltin} btn-primary`}
           onClick={onNext}
         >
           »

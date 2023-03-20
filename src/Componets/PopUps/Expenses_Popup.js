@@ -38,7 +38,7 @@ const ExpensePopup = (props) => {
                   }
                  return api.request(reqOptions,).then(function (response) {
                     if (response.data === 'Added Successfully') {
-                        updateprojectexpense(1,props.content) 
+                        updateprojectexpense(props.pagenum,props.content) 
                         updateprojectinfo(props.content)
                         setDate("")
                         setDesription("")

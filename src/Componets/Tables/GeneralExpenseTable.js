@@ -5,7 +5,7 @@ import Datepicker from 'react-tailwindcss-datepicker';
 import GeneralExpensePopup from '../PopUps/General_Expenses_Popup';
 import { dollars, datef, Lastmonth,thistoday} from '../../Functions/DateandDollarFormate';
 import PhotosPopup from '../PopUps/PhotosPopup';
-
+import Pagination from '../Pagination'
 const GeneralExpenseTable = (Params) => {
     const [Expense_data, setExpense_data] = useState([])
     const [isOpen, setisOpen] = useState(false)
@@ -126,11 +126,14 @@ const GeneralExpenseTable = (Params) => {
           </table>
           
   </div>
-
-  <div className="btn-group grid grid-cols-2 m-5">
-          <button className={gendata.previous === null ?"btn btn-outline btn-disabled":"btn btn-outline btn-primary "} onClick={e=> setpage(page-1)} >Previous page</button>
-          <button className={gendata.next === null ?"btn btn-outline btn-disabled":"btn btn-outline btn-primary "} onClick={e=> setpage(page+1)}>Next</button>
-        </div>
+  {gendata.count===undefined?
+        <div>1</div>:
+        <Pagination
+            currentPage={page}
+            totalCount={gendata.count}
+            pageSize={10}
+            onPageChange={page => setpage(page)}
+            />}
         <PhotosPopup 
           handleClose={togglephotopopup}
           imgurl={photourl}
@@ -141,6 +144,7 @@ const GeneralExpenseTable = (Params) => {
                 handleClose={togglePopup}
                 Opened = {isOpen}
             />
+       
           <input type="checkbox" htmlFor="my-modal-6" id="my-modal-6" className="modal-toggle" readOnly  />
             <div htmlFor="my-modal-6" className="modal modal-bottom sm:modal-middle">
               <div className="modal-box">

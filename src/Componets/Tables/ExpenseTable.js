@@ -1,5 +1,6 @@
 import React, {useState, useEffect, useContext}from 'react'
 import { AiFillPlusCircle, AiFillCamera} from 'react-icons/ai'
+import Pagination from '../Pagination';
 import ExpensePopup from '../PopUps/Expenses_Popup'
 import api from '../../api';
 import PhotosPopup from '../PopUps/PhotosPopup';
@@ -92,12 +93,14 @@ const ExpenseTable = (Params) => {
   </table>
         
   </div>
-        <div className={expensepage.previous === null& expensepage.next === null?"hidden":"btn-group grid grid-cols-2 m-5"}>
-          <button className={expensepage.previous === null ?"btn btn-outline btn-disabled":"btn btn-outline btn-primary "} 
-          onClick={e=> setpage(page-1)} >Previous page</button>
-          <button className={expensepage.next === null ?"btn btn-outline btn-disabled":"btn btn-outline btn-primary "} 
-          onClick={e=> setpage(page+1)}>Next</button>
-        </div>
+  {expensepage.count===undefined?
+        <div>1</div>:
+        <Pagination
+            currentPage={page}
+            totalCount={expensepage.count}
+            pageSize={10}
+            onPageChange={page => setpage(page)}
+            />}
         <AiFillPlusCircle className="absolute top-1 right-1 text-secondary" size={40} onClick={togglePopup}/> 
           <input type="checkbox" className="modal-toggle" checked={Delete} readOnly  />
             <div htmlFor="my-modal-6" className="modal modal-bottom sm:modal-middle">
@@ -119,6 +122,7 @@ const ExpenseTable = (Params) => {
                 content={Params.props}
                 handleClose={togglePopup}
                 Opened = {isOpen}
+                pagenum = {page}
             />
       </div>
     )
