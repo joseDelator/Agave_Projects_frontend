@@ -16,7 +16,10 @@ import { dollars } from '../../Functions/DateandDollarFormate';
          }
          const fetch_somethe= async()=>{
           const reponse = await api.request(reqOptions)
-          const Employeedata = reponse.data;
+          const Employeedata = reponse.data.filter(function(jsonObject) {
+            return jsonObject.Total_Unpaid_Amount != 0;
+        });;
+         console.log(Employeedata)
          setEmployeelist(Employeedata)
          }
           fetch_somethe();
@@ -33,13 +36,13 @@ import { dollars } from '../../Functions/DateandDollarFormate';
         return null;
       };
     return (
-      <ResponsiveContainer width="100%" height="100%">
+      <ResponsiveContainer width="100%" height="100%" >
         <BarChart
           width={10}
            height={40}
           data={Employeelist}
         >
-          <XAxis dataKey="Employee_First_Name" stroke="#6b7280" />
+          <XAxis  dataKey="Employee_First_Name" stroke="#6b7280"/>
           <YAxis  stroke="#6b7280"  />
          <Tooltip content={<CustomTooltip />} cursor={{fill:"#2A303C" }}/>
           <Bar dataKey="Total_Unpaid_Amount" fill="#84cc16" />
