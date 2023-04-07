@@ -8,6 +8,7 @@ import { TimeTableEmployee } from '../Componets/Tables/TimeTableEmployee'
 import EditEmployee from '../Componets/PopUps/EditEmployeePopup'
 import { dollars } from '../Functions/DateandDollarFormate'
 import EmployeeContext from '../Context/EmployeeContext'
+import EmployeeLineGraph from '../Componets/Graphs/EmployeeLineGraph'
 const EmployeeDash =()=>{
     const [isOpen, setisOpen] = useState(false)
     const [isEditOpen, setisEditOpen] = useState(false)
@@ -107,7 +108,7 @@ const EmployeeDash =()=>{
         prefix={"Employeetimecard/"} 
         />
         </div>
-      <div className="card"></div>
+      <div className="card h-96"><EmployeeLineGraph/></div>
     </div>
   </main>
 </div>

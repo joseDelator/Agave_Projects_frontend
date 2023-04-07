@@ -20,4 +20,4 @@ const formater =(date)=>{
 
 export const Lastmonth= formater(-30)
 export const thistoday = formater(0)
-
+export const lastweek  = formater(-7)
